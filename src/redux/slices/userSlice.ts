@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Login } from 'api/auth/auth'
+import { LoginRequest, LoginResponse } from 'api/auth/auth.types'
 import { AppUser } from 'api/user/user.types'
 // import { AppUser, LoginRegisterRequest, LoginRegisterResponse } from 'api/auth/auth.types'
 // import { loginUser, logoutUser, registerUser } from 'api/auth/auth'
@@ -19,10 +21,10 @@ const initialState: UserSlice = {
 //   return response
 // })
 
-// export const login = createAsyncThunk('user/login', async ({ email, password }: LoginRegisterRequest) => {
-//   const response: AppUser = await loginUser(email, password)
-//   return response
-// })
+export const login = createAsyncThunk('user/login', async (request: LoginRequest) => {
+  const response: LoginResponse = await Login(request)
+  return response
+})
 
 // export const logout = createAsyncThunk('user/logout', async () => {
 //   return await logoutUser()
@@ -39,27 +41,27 @@ const userSlice = createSlice({
       state.user = null
     },
   },
-  // extraReducers: builder => {
-  //   builder
-  //     .addCase(register.fulfilled, (state, action: PayloadAction<AppUser>) => {
-  //       state.user = action.payload
-  //     })
-  //     .addCase(register.rejected, (state, action) => {
-  //       state.error = action.error
-  //     })
-  //     .addCase(login.fulfilled, (state, action) => {
-  //       state.user = action.payload
-  //     })
-  //     .addCase(login.rejected, (state, action) => {
-  //       state.error = action.error
-  //     })
-  //     .addCase(logout.fulfilled, (state, action) => {
-  //       state.user = null
-  //     })
-  //     .addCase(logout.rejected, (state, action) => {
-  //       state.error = action.error
-  //     })
-  // },
+  extraReducers: builder => {
+    builder
+      // .addCase(register.fulfilled, (state, action: PayloadAction<AppUser>) => {
+      //   state.user = action.payload
+      // })
+      // .addCase(register.rejected, (state, action) => {
+      //   state.error = action.error
+      // })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload.user
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.error = action.error
+      })
+    // .addCase(logout.fulfilled, (state, action) => {
+    //   state.user = null
+    // })
+    // .addCase(logout.rejected, (state, action) => {
+    //   state.error = action.error
+    // })
+  },
 })
 
 export const { setUser, logOutUser } = userSlice.actions
