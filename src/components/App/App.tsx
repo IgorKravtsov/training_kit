@@ -15,7 +15,7 @@ const App: React.FC = (): React.ReactElement => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setUser({ role: UserRoles.LEARNER } as AppUser))
+    // dispatch(setUser({ role: UserRoles.LEARNER } as AppUser))
   }, [])
 
   return (
