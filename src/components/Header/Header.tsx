@@ -14,16 +14,17 @@ import Button from '@mui/material/Button'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import ToggleButton from '@mui/material/ToggleButton'
 
-// import DrawerList from '../drownerList/DrawerList'
+import DrawerList from 'components/DrownerList/DrawerList'
 import { RouteNames } from '../../routes'
 import { useStyles } from './header.styles'
 import { useAuth } from '../../shared-files/useAuth'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 // import { logout } from 'redux/slices/userSlice'
 import { Container, Divider } from '@mui/material'
-import AuthMenu from './AuthMenu'
-import AnonymusMenu from './AnonymusMenu'
+import AuthMenu from './items/AuthMenu'
+import AnonymusMenu from './items/AnonymusMenu'
 import { UserRoles } from 'api/user/user.types'
+import { DrawerContext } from './items/drawerContext'
 
 const Header: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -36,7 +37,6 @@ const Header: React.FC = (): React.ReactElement => {
 
   const navigatePath = useMemo(() => (role === UserRoles.ANONYMOUS ? RouteNames.WELCOME : RouteNames.HOME), [role])
 
-  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [isDrownerVisible, setIsDrownerVisible] = useState(location.pathname === RouteNames.HOME)
 
   const toggleDrawer = (isOpen: boolean, e?: React.KeyboardEvent | React.MouseEvent) => {
@@ -44,14 +44,6 @@ const Header: React.FC = (): React.ReactElement => {
 
     setIsDrownerVisible(isOpen)
   }
-
-  // const handleMenu = (e: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(e.currentTarget)
-  // }
-
-  // const handleClose = () => {
-  //   setAnchorEl(null)
-  // }
 
   // const handleLogout = async () => {
   //   await dispatch(logout())
@@ -74,9 +66,11 @@ const Header: React.FC = (): React.ReactElement => {
         </>
       </AppBar>
 
-      {/* <SwipeableDrawer open={isDrownerVisible} onClose={() => toggleDrawer(false)} onOpen={() => toggleDrawer(true)}> */}
-      {/* <DrawerList toggleFunc={toggleDrawer} /> */}
-      {/* </SwipeableDrawer> */}
+      <SwipeableDrawer open={isDrownerVisible} onClose={() => toggleDrawer(false)} onOpen={() => toggleDrawer(true)}>
+        <DrawerContext.Provider value={{ toggleFunc: toggleDrawer }}>
+          <DrawerList />
+        </DrawerContext.Provider>
+      </SwipeableDrawer>
     </>
   )
 }

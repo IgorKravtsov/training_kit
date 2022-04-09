@@ -2,10 +2,11 @@ import React from 'react'
 import { useStyles } from './error.styles'
 import { useNavigate } from 'react-router-dom'
 
-import Error from 'components/Error/Error'
 import Button from '@mui/material/Button'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import Grid from '@mui/material/Grid'
+
+import Error from 'components/Error/Error'
 
 const ErrorPage: React.FC = (): React.ReactElement => {
   const classes = useStyles()

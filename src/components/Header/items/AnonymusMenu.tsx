@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStyles } from './header.styles'
+import { useStyles } from '../header.styles'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'

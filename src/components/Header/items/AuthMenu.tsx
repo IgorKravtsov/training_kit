@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 // import { logout } from 'redux/slices/userSlice'
-import { useAuth } from '../../shared-files/useAuth'
+import { useAuth } from '../../../shared-files/useAuth'
 
 const AuthMenu: React.FC = (): React.ReactElement => {
   const { isAuth, user } = useAuth()
