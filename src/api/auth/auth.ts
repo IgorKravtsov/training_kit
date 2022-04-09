@@ -9,3 +9,7 @@ export const Login = async (request: LoginRequest): Promise<LoginResponse> => {
 export const Register = async (request: RegisterRequest): Promise<RegisterResponse> => {
   return Promise.resolve({ user: mocked_user })
 }
+
+export const Logout = async (): Promise<{ user: null }> => {
+  return Promise.resolve({ user: null })
+}

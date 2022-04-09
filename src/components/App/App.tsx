@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './App.css'
 // import { onAuthStateChanged } from 'firebase/auth'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
@@ -13,10 +13,6 @@ import { UserRoles, AppUser } from 'api/user/user.types'
 
 const App: React.FC = (): React.ReactElement => {
   const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    // dispatch(setUser({ role: UserRoles.LEARNER } as AppUser))
-  }, [])
 
   return (
     <>

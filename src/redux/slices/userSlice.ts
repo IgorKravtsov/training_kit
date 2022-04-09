@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Login } from 'api/auth/auth'
-import { LoginRequest, LoginResponse } from 'api/auth/auth.types'
+import { Login, Logout, Register } from 'api/auth/auth'
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from 'api/auth/auth.types'
 import { AppUser } from 'api/user/user.types'
 // import { AppUser, LoginRegisterRequest, LoginRegisterResponse } from 'api/auth/auth.types'
 // import { loginUser, logoutUser, registerUser } from 'api/auth/auth'
@@ -16,19 +16,19 @@ const initialState: UserSlice = {
   error: null,
 }
 
-// export const register = createAsyncThunk('user/register', async ({ email, password }: LoginRegisterRequest) => {
-//   const response: AppUser = await registerUser(email, password)
-//   return response
-// })
+export const register = createAsyncThunk('user/register', async (request: RegisterRequest) => {
+  const response: RegisterResponse = await Register(request)
+  return response
+})
 
 export const login = createAsyncThunk('user/login', async (request: LoginRequest) => {
   const response: LoginResponse = await Login(request)
   return response
 })
 
-// export const logout = createAsyncThunk('user/logout', async () => {
-//   return await logoutUser()
-// })
+export const logout = createAsyncThunk('user/logout', async () => {
+  return await Logout()
+})
 
 const userSlice = createSlice({
   name: 'user',
@@ -43,24 +43,24 @@ const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      // .addCase(register.fulfilled, (state, action: PayloadAction<AppUser>) => {
-      //   state.user = action.payload
-      // })
-      // .addCase(register.rejected, (state, action) => {
-      //   state.error = action.error
-      // })
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload.user
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.error = action.error
+      })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error
       })
-    // .addCase(logout.fulfilled, (state, action) => {
-    //   state.user = null
-    // })
-    // .addCase(logout.rejected, (state, action) => {
-    //   state.error = action.error
-    // })
+      .addCase(logout.fulfilled, state => {
+        state.user = null
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.error = action.error
+      })
   },
 })
 

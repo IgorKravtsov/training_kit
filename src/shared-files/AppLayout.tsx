@@ -37,8 +37,6 @@ const AppLayout: React.FC = (): React.ReactElement => {
     [UserRoles.ADMIN]: adminRoutes,
   }
 
-  console.log('role', role)
-
   return (
     <Suspense fallback={<LoadingSkeleton />}>
       <Routes>
