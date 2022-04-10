@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,25 +7,20 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
+import Container from '@mui/material/Container'
 
-import DrawerList from 'components/DrownerList/DrawerList'
-import { RouteNames } from '../../routes'
-import { useStyles } from './header.styles'
-import { useAuth } from '../../shared-files/useAuth'
-import { useAppDispatch } from 'redux/hooks/typedHooks'
-// import { logout } from 'redux/slices/userSlice'
-import { Container, Divider } from '@mui/material'
+import DrawerList from 'components/DrawerList/DrawerList'
+
+import { RouteNames } from 'routes'
+import { useAuth } from 'shared-files/useAuth'
+import { UserRoles } from 'api/user/user.types'
+
 import AuthMenu from './items/AuthMenu'
 import AnonymusMenu from './items/AnonymusMenu'
-import { UserRoles } from 'api/user/user.types'
 import { DrawerContext } from './items/drawerContext'
 
 const Header: React.FC = (): React.ReactElement => {
-  const classes = useStyles()
-
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-
   const { isAuth, role } = useAuth()
 
   const navigatePath = useMemo(() => (role === UserRoles.ANONYMOUS ? RouteNames.WELCOME : RouteNames.HOME), [role])
@@ -38,14 +33,10 @@ const Header: React.FC = (): React.ReactElement => {
     setIsDrownerVisible(isOpen)
   }
 
-  // const handleLogout = async () => {
-  //   await dispatch(logout())
-  // }
-
   return (
     <>
       <AppBar position='static'>
-        <>
+        <Container>
           <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }} onClick={() => toggleDrawer(true)}>
               <MenuIcon />
@@ -56,7 +47,7 @@ const Header: React.FC = (): React.ReactElement => {
             </Typography>
             {isAuth ? <AuthMenu /> : <AnonymusMenu />}
           </Toolbar>
-        </>
+        </Container>
       </AppBar>
 
       <SwipeableDrawer open={isDrownerVisible} onClose={() => toggleDrawer(false)} onOpen={() => toggleDrawer(true)}>

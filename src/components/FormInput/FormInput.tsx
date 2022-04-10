@@ -13,7 +13,7 @@ export interface FormInputProps extends Partial<StandardTextFieldProps> {
   className?: string
 }
 
-const FormInput: React.FC<FormInputProps> = ({ name, control, errors, className, label, placeholder, type }): React.ReactElement => {
+const FormInput: React.FC<FormInputProps> = ({ name, control, errors, className, label, placeholder, type, required }): React.ReactElement => {
   return (
     <Controller
       name={name}
@@ -21,17 +21,13 @@ const FormInput: React.FC<FormInputProps> = ({ name, control, errors, className,
       render={({ field }) => (
         <TextField
           {...field}
-          // value={password}
-          // onChange={e => setPassword(e.target.value)}
-          // name='password'
           label={label}
           placeholder={placeholder}
           type={type}
           error={!!errors[name]?.message}
           helperText={errors[name]?.message}
-          // inputRef={register}
           fullWidth
-          // required
+          required={required}
           className={className}
         />
       )}

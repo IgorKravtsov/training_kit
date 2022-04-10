@@ -2,9 +2,9 @@ import { makeStyles } from '@mui/styles'
 
 export const useStyles = makeStyles({
   paper: {
-    padding: 20,
+    // padding: 20,
     minHeight: '70vh',
-    width: 280,
+    // maxWidth: 400,
     margin: '20px auto !important',
   },
   avatar: {

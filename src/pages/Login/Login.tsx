@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { useStyles } from './login.styles'
+import { useNavigate } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { useNavigate } from 'react-router-dom'
+import { RouteNames } from 'routes'
 
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import { RouteNames } from '../../routes'
+
+import AppCard from 'components/AppCard/AppCard'
 import { login, selectUser } from 'redux/slices/userSlice'
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 
@@ -67,7 +68,7 @@ const Login: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      <Paper elevation={10} className={classes.paper}>
+      <AppCard elevation={10} customClass={classes.paper} minWidth={350}>
         <Grid container alignItems='center' direction='column'>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -78,7 +79,7 @@ const Login: React.FC = (): React.ReactElement => {
         </Grid>
 
         <Form isLoading={isLoading} formFeatures={formFeatures} onSubmit={onSubmit} onError={onError} />
-      </Paper>
+      </AppCard>
     </>
   )
 }

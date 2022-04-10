@@ -11,7 +11,7 @@ import { UserRoles } from 'api/user/user.types'
 import { MenuItem } from 'shared-files/interfaces/menuItem'
 
 import DrowerListItem from './DrawerListItem'
-import { anonymousList } from './list-items/listItems'
+import { adminList, anonymousList, learnerList, trainerList } from './list-items/listItems'
 
 export interface DrownerListProps {}
 
@@ -22,6 +22,9 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
 
   const sidebar: { [x: string]: MenuItem[] } = {
     [UserRoles.ANONYMOUS]: anonymousList,
+    [UserRoles.LEARNER]: learnerList,
+    [UserRoles.TRAINER]: trainerList,
+    [UserRoles.ADMIN]: adminList,
   }
 
   useEffect(() => {

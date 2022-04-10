@@ -8,15 +8,17 @@ const Welcome = React.lazy(() => import('./pages/Welcome/Welcome'))
 const MyTrainings = React.lazy(() => import('./pages/MyTrainings/MyTrainings'))
 const VisitDashboard = React.lazy(() => import('./pages/VisitDashboard/VisitDashboard'))
 const Characteristics = React.lazy(() => import('./pages/Characteristics/Characteristics'))
+const Cabinet = React.lazy(() => import('./pages/Cabinet/Cabinet'))
 
 export enum RouteNames {
-  HOME = '/',
-  WELCOME = '/welcome',
+  WELCOME = '/',
+  HOME = '/welcome',
   LOGIN = '/login',
   REGISTER = '/register',
   MY_TRAININGS = '/my-trainings',
   VISIT_DASHBOARD = '/visit-dashboard',
   CHARACTERISTICS = '/characteristics',
+  CABINET = '/user',
 }
 
 export const anonymousRoutes: React.ReactNode[] = [
@@ -31,7 +33,8 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.REGISTER} path={RouteNames.REGISTER} element={<Register />} />,
   <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS} element={<MyTrainings />} />,
   <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
-  <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS} element={<Characteristics />} />,
+  <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS} element={<Characteristics />}></Route>,
+  <Route key={RouteNames.CABINET} path={RouteNames.CABINET} element={<Cabinet />} />,
 ]
 
 export const trainerRoutes: React.ReactNode[] = [

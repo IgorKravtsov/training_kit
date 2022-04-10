@@ -9,8 +9,9 @@ import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+
+import AppCard from 'components/AppCard/AppCard'
 import Form from './components/Form'
 
 const Register: React.FC = (): React.ReactElement => {
@@ -19,8 +20,12 @@ const Register: React.FC = (): React.ReactElement => {
   const [isLoading, setIsLoading] = useState(false)
 
   const validationSchema = yup.object({
+    firstName: yup.string().trim().required('Це поле має бути заповнено'),
+    lastName: yup.string().trim().required('Це поле має бути заповнено'),
     email: yup.string().email('Це не є правильною поштою').required('Це поле має бути заповнено'),
+    organization: yup.mixed().required(),
     password: yup.string().min(6, 'Мінімальне кол-во символів - 6').required('Це поле має бути заповнено'),
+    confirmPass: yup.string().oneOf([yup.ref('password'), null], 'Це поле має співпадати з полем паролю'),
   })
   type SubmitData = yup.InferType<typeof validationSchema>
 
@@ -28,13 +33,17 @@ const Register: React.FC = (): React.ReactElement => {
     resolver: yupResolver(validationSchema),
   })
 
-  const onSubmit = (data: SubmitData) => {}
+  const onSubmit = (data: SubmitData) => {
+    console.log('===DATA===', data)
+  }
 
-  const onError = (error: any) => {}
+  const onError = (error: any) => {
+    console.log('===ERROR===', error)
+  }
 
   return (
     <>
-      <Paper elevation={10} className={classes.paper}>
+      <AppCard elevation={10} customClass={classes.paper} maxWidth={400}>
         <Grid container alignItems='center' direction='column'>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -45,7 +54,7 @@ const Register: React.FC = (): React.ReactElement => {
         </Grid>
 
         <Form isLoading={isLoading} formFeatures={formFeatures} onSubmit={onSubmit} onError={onError} />
-      </Paper>
+      </AppCard>
     </>
   )
 }
