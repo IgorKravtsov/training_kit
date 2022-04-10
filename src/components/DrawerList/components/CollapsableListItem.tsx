@@ -1,14 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { RouteNames } from 'routes'
 
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-
+import Divider from '@mui/material/Divider'
 import Collapse from '@mui/material/Collapse'
+import List from '@mui/material/List'
+
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import List from '@mui/material/List'
 
 import { MenuItem } from 'shared-files/interfaces/menuItem'
 import { DrawerContext } from 'components/Header/items/drawerContext'
@@ -44,10 +46,13 @@ const CollapsableListItem: React.FC<CollapsableListItemProps> = ({ item }): Reac
         <List component='div' disablePadding>
           {items &&
             items.map(innerItem => (
-              <ListItemButton sx={{ pl: 4 }} onClick={() => handleInnerClick(innerItem.link)}>
-                <ListItemIcon>{innerItem.icon}</ListItemIcon>
-                <ListItemText primary={innerItem.name} />
-              </ListItemButton>
+              <>
+                {innerItem.link === RouteNames.CHARACTERISTICS + '/add' ? <Divider /> : null}
+                <ListItemButton sx={{ pl: 4 }} onClick={() => handleInnerClick(innerItem.link)}>
+                  <ListItemIcon>{innerItem.icon}</ListItemIcon>
+                  <ListItemText primary={innerItem.name} />
+                </ListItemButton>
+              </>
             ))}
         </List>
       </Collapse>

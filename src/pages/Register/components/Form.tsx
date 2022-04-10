@@ -46,7 +46,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
 
   return (
     <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit} onError={onError}>
-      <Stack spacing={1}>
+      <Stack spacing={1.5}>
         <Grid container direction='row' spacing={1}>
           <Grid item xs={12} sm={6}>
             <FormInput name='firstName' control={control} errors={errors} label="Ім'я" placeholder="Уведіть ім'я..." />
@@ -88,14 +88,6 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
         />
 
         <FormDatePicker name='birthday' control={control} errors={errors} label='Ваша дата народження' placeholder='Оберіть організацію...' />
-
-        {/* <MobileDatePicker
-          label='Date mobile'
-          inputFormat='dd MMM yyyy'
-          value={value}
-          onChange={handleChange}
-          renderInput={params => <TextField {...params} />}
-        /> */}
 
         <FormControlLabel
           control={<Checkbox value={isShowPass} onChange={e => setIsShowPass(e.target.checked)} color='primary' />}

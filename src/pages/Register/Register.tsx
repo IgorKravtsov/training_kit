@@ -1,21 +1,30 @@
 import React, { useState } from 'react'
 import { useStyles } from './register.styles'
+import { useNavigate } from 'react-router-dom'
+import { RouteNames } from 'routes'
 
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import { useAppDispatch } from 'redux/hooks/typedHooks'
 
 import AppCard from 'components/AppCard/AppCard'
 import Form from './components/Form'
+import { register } from 'redux/slices/userSlice'
+import { error } from 'redux/slices/snackbarSlice'
+import { RegisterRequest } from 'api/auth/auth.types'
+import { UserRoles } from 'api/user/user.types'
 
 const Register: React.FC = (): React.ReactElement => {
   const classes = useStyles()
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -24,7 +33,7 @@ const Register: React.FC = (): React.ReactElement => {
     lastName: yup.string().trim().required('Це поле має бути заповнено'),
     email: yup.string().email('Це не є правильною поштою').required('Це поле має бути заповнено'),
     organization: yup.mixed().required('Це поле має бути обрано'),
-    birthday: yup.mixed(),
+    birthday: yup.date().required('Це поле має бути заповнено'),
     password: yup.string().min(6, 'Мінімальне кол-во символів - 6').required('Це поле має бути заповнено'),
     confirmPass: yup
       .string()
@@ -35,14 +44,39 @@ const Register: React.FC = (): React.ReactElement => {
 
   const formFeatures = useForm({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      birthday: new Date(),
+    },
   })
-
-  const onSubmit = (data: SubmitData) => {
-    console.log('===DATA===', data)
-  }
 
   const onError = (error: any) => {
     console.log('===ERROR===', error)
+  }
+
+  const onSubmit = (data: SubmitData) => {
+    const request: RegisterRequest = {
+      ...data,
+      role: UserRoles.LEARNER,
+    }
+
+    setIsLoading(true)
+    setTimeout(async () => {
+      const response = (await dispatch(register(request))) as any
+      // console.log('===response===', response)
+
+      if (response?.meta.requestStatus !== 'rejected') {
+        navigate(RouteNames.HOME)
+      } else {
+        const message = response?.error?.message
+
+        dispatch(
+          error({
+            message: message || 'Помилка серверу',
+          })
+        )
+      }
+      setIsLoading(false)
+    }, 1000)
   }
 
   return (

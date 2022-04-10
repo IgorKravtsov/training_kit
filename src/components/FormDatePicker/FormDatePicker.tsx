@@ -35,12 +35,11 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field }) => (
           <MobileDatePicker
+            {...field}
             label={label}
             inputFormat='dd MMMM yyyy'
-            value={value}
-            onChange={onChange}
             maxDate={new Date()}
             renderInput={params => (
               <TextField

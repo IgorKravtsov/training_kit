@@ -2,6 +2,11 @@ import React, { useEffect } from 'react'
 
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
+import Divider from '@mui/material/Divider'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import LogoutIcon from '@mui/icons-material/ExitToApp'
 
 import { useAuth } from 'shared-files/useAuth'
 import { useAppSelector } from 'redux/hooks/typedHooks'
@@ -12,6 +17,7 @@ import { MenuItem } from 'shared-files/interfaces/menuItem'
 
 import DrowerListItem from './DrawerListItem'
 import { adminList, anonymousList, learnerList, trainerList } from './list-items/listItems'
+import { logout } from 'redux/slices/userSlice'
 
 export interface DrownerListProps {}
 
@@ -37,6 +43,17 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
         {drawerList.map(item => (
           <DrowerListItem key={item.id} item={item} />
         ))}
+        {role !== UserRoles.ANONYMOUS && (
+          <>
+            <Divider />
+            <ListItemButton onClick={() => dispatch(logout)}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Вийти'} />
+            </ListItemButton>
+          </>
+        )}
       </List>
     </Box>
   )
