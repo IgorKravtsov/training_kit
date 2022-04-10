@@ -21,6 +21,7 @@ import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoad
 import { GetOrganizations } from 'api/organization/organization'
 import { TextField } from '@mui/material'
 import FormDatePicker from 'components/FormDatePicker/FormDatePicker'
+import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>
@@ -57,23 +58,26 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
         </Grid>
 
         <FormInput name='email' control={control} errors={errors} label='Пошта' placeholder='Уведіть пошту...' />
-        <FormInput
+
+        <FormPasswordInput
           name='password'
           control={control}
           errors={errors}
           label='Пароль'
           placeholder='Уведіть пароль...'
-          className={classes.password}
-          type={!isShowPass ? 'password' : 'text'}
+          id='password'
+          handleClickShowPassword={() => setIsShowPass(prevState => !prevState)}
+          visiblePassword={isShowPass}
         />
-        <FormInput
+
+        <FormPasswordInput
           name='confirmPass'
           control={control}
           errors={errors}
-          label='Підтвердіть пароль'
           placeholder='Підтвердіть пароль...'
-          className={classes.password}
-          type={!isShowPass ? 'password' : 'text'}
+          id='confirmPass'
+          handleClickShowPassword={() => setIsShowPass(prevState => !prevState)}
+          visiblePassword={isShowPass}
         />
 
         <FormLoadingAutocomplete

@@ -62,7 +62,6 @@ const Register: React.FC = (): React.ReactElement => {
     setIsLoading(true)
     setTimeout(async () => {
       const response = (await dispatch(register(request))) as any
-      // console.log('===response===', response)
 
       if (response?.meta.requestStatus !== 'rejected') {
         navigate(RouteNames.HOME)
