@@ -71,7 +71,11 @@ const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
           />
         )}
       />
-      {errors[name]?.message && <FormHelperText id={id}>{errors[name]?.message}</FormHelperText>}
+      {errors[name]?.message && (
+        <FormHelperText style={{ color: '#d32f2f', marginLeft: '14px' }} id={id}>
+          {errors[name]?.message}
+        </FormHelperText>
+      )}
     </>
   )
 }

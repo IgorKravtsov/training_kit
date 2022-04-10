@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: any) => ({
   paper: {
     padding: 20,
     minHeight: '70vh',
@@ -12,6 +12,7 @@ export const useStyles = makeStyles({
   },
   btn: {
     margin: '45px 0 30px 0 !important',
+    // backgroundColor: ,
   },
   title: {
     margin: '20px 0 !important',
@@ -22,4 +23,4 @@ export const useStyles = makeStyles({
   forgotPass: {
     marginTop: '25px !important',
   },
-})
+}))

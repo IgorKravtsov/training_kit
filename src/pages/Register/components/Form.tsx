@@ -10,18 +10,14 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
 
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-// import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
-
 import FormInput from 'components/FormInput/FormInput'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
-// import FormAutocomplete from 'components/FormAutocomplete/FormAutocomplete'
 import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
-import { GetOrganizations } from 'api/organization/organization'
-import { TextField } from '@mui/material'
 import FormDatePicker from 'components/FormDatePicker/FormDatePicker'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
+
+import { GetOrganizations } from 'api/organization/organization'
+import { useTheme } from '@mui/styles'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>
@@ -93,11 +89,6 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
 
         <FormDatePicker name='birthday' control={control} errors={errors} label='Ваша дата народження' placeholder='Оберіть організацію...' />
 
-        <FormControlLabel
-          control={<Checkbox value={isShowPass} onChange={e => setIsShowPass(e.target.checked)} color='primary' />}
-          label={'Показати пароль'}
-        />
-
         <LoadingButton
           loading={isLoading}
           loadingPosition='start'
@@ -108,7 +99,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           fullWidth
           endIcon={<SendIcon />}
         >
-          Увійти
+          Зареєструватися
         </LoadingButton>
       </Stack>
     </FormWrapper>

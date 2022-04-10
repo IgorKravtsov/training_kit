@@ -36,7 +36,7 @@ const Header: React.FC = (): React.ReactElement => {
   return (
     <>
       <AppBar position='static'>
-        <Container>
+        <>
           <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }} onClick={() => toggleDrawer(true)}>
               <MenuIcon />
@@ -47,7 +47,7 @@ const Header: React.FC = (): React.ReactElement => {
             </Typography>
             {isAuth ? <AuthMenu /> : <AnonymusMenu />}
           </Toolbar>
-        </Container>
+        </>
       </AppBar>
 
       <SwipeableDrawer open={isDrownerVisible} onClose={() => toggleDrawer(false)} onOpen={() => toggleDrawer(true)}>

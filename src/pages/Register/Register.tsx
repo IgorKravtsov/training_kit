@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Grid from '@mui/material/Grid'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 
 import AppCard from 'components/AppCard/AppCard'
@@ -82,9 +82,7 @@ const Register: React.FC = (): React.ReactElement => {
     <>
       <AppCard elevation={10} customClass={classes.paper} maxWidth={400}>
         <Grid container alignItems='center' direction='column'>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <Avatar className={classes.avatar}>{/* <LockOutlinedIcon /> */}</Avatar>
           <Typography variant='h5' className={classes.title}>
             Зареєструватися
           </Typography>

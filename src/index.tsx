@@ -1,21 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import './config/firebase.config'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import './index.scss'
 import App from './components/App/App'
-import { ThemeProvider } from '@mui/styles'
-// import { theme } from './styles/theme'
+import { ThemeProvider } from '@mui/material'
+// import { StyledEngineProvider } from '@mui/material/styles'
 import { store } from 'redux/store'
+import { theme } from 'styles/theme'
 
 ReactDOM.render(
   <Router>
-    {/* <ThemeProvider theme={theme}> */}
     <Provider store={store}>
-      <App />
+      {/* <StyledEngineProvider injectFirst> */}
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+      {/* </StyledEngineProvider> */}
     </Provider>
-    {/* </ThemeProvider> */}
   </Router>,
   document.getElementById('root')
 )

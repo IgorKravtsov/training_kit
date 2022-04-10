@@ -11,3 +11,11 @@ export type Organization = {
 export interface GetOrganizationsResponse {
   organizations: Organization[]
 }
+
+export interface GetOrganizationByEmailRequest {
+  email: string
+}
+
+export interface GetOrganizationByEmailResponse {
+  organizations: Organization[]
+}

@@ -46,7 +46,7 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
         {role !== UserRoles.ANONYMOUS && (
           <>
             <Divider />
-            <ListItemButton onClick={() => dispatch(logout)}>
+            <ListItemButton onClick={() => dispatch(logout())}>
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>

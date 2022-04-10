@@ -14,6 +14,7 @@ export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   }
   className?: string
   options: AutocompleteOption[]
+  customNoOptionsText?: string
 }
 
 const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
@@ -27,6 +28,8 @@ const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
   required,
   options,
   id,
+  customNoOptionsText,
+  disabled,
 }): React.ReactElement => {
   return (
     <Controller
@@ -39,6 +42,9 @@ const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
           options={options}
           className={className}
           onChange={(_, data) => onChange(data)}
+          loadingText='Завантаження'
+          noOptionsText={customNoOptionsText || 'Немає даних'}
+          disabled={disabled}
           renderInput={(parametrs: AutocompleteRenderInputParams) => (
             <TextField
               {...parametrs}
