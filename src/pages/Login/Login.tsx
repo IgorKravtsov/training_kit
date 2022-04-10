@@ -50,15 +50,17 @@ const Login: React.FC = (): React.ReactElement => {
 
     setIsLoading(true)
     setTimeout(async () => {
-      const response = await dispatch(login({ email, password }))
+      const response = (await dispatch(login({ email, password }))) as any
       // console.log('===response===', response)
 
       if (response?.meta.requestStatus !== 'rejected') {
         navigate(RouteNames.HOME)
       } else {
+        const message = response?.error?.message
+
         dispatch(
           error({
-            message: userError || 'Помилка серверу',
+            message: message || 'Помилка серверу',
           })
         )
       }

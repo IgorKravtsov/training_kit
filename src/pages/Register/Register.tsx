@@ -23,9 +23,13 @@ const Register: React.FC = (): React.ReactElement => {
     firstName: yup.string().trim().required('Це поле має бути заповнено'),
     lastName: yup.string().trim().required('Це поле має бути заповнено'),
     email: yup.string().email('Це не є правильною поштою').required('Це поле має бути заповнено'),
-    organization: yup.mixed().required(),
+    organization: yup.mixed().required('Це поле має бути обрано'),
+    birthday: yup.mixed(),
     password: yup.string().min(6, 'Мінімальне кол-во символів - 6').required('Це поле має бути заповнено'),
-    confirmPass: yup.string().oneOf([yup.ref('password'), null], 'Це поле має співпадати з полем паролю'),
+    confirmPass: yup
+      .string()
+      .oneOf([yup.ref('password'), null], 'Це поле має співпадати з полем паролю')
+      .required('Це поле має бути заповнено'),
   })
   type SubmitData = yup.InferType<typeof validationSchema>
 
