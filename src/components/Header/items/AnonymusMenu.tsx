@@ -1,6 +1,5 @@
 import React from 'react'
-import { useStyles } from '../header.styles'
-import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 import Typography from '@mui/material/Typography'
 import Breadcrumbs from '@mui/material/Breadcrumbs'
@@ -11,9 +10,6 @@ import LoginIcon from '@mui/icons-material/Login'
 import { RouteNames } from 'routes'
 
 const AnonymusMenu: React.FC = (): React.ReactElement => {
-  const classes = useStyles()
-
-  const navigate = useNavigate()
   const location = useLocation()
 
   return (
@@ -21,7 +17,7 @@ const AnonymusMenu: React.FC = (): React.ReactElement => {
       <Link color='inherit' to={RouteNames.LOGIN} style={{ textDecoration: 'none' }}>
         <Typography
           sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
-          color={location.pathname === RouteNames.LOGIN ? '#FFF' : 'text.primary'}
+          color={location.pathname === RouteNames.LOGIN ? 'text.primary' : 'text.secondary'}
         >
           <LoginIcon sx={{ mr: 0.5 }} fontSize='inherit' />
           Увійти
@@ -30,21 +26,13 @@ const AnonymusMenu: React.FC = (): React.ReactElement => {
       <Link color='inherit' to={RouteNames.REGISTER} style={{ textDecoration: 'none' }}>
         <Typography
           sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
-          color={location.pathname === RouteNames.REGISTER ? '#FFF' : 'text.primary'}
+          color={location.pathname === RouteNames.REGISTER ? 'text.primary' : 'text.secondary'}
         >
           <VpnKeyIcon sx={{ mr: 0.5 }} fontSize='inherit' />
           Зареєструватися
         </Typography>
       </Link>
     </Breadcrumbs>
-    // <ToggleButtonGroup className={classes.registerLoginSection} value={location.pathname} exclusive>
-    //   <ToggleButton onClick={() => navigate(RouteNames.LOGIN)} value={RouteNames.LOGIN}>
-    //     Увійти
-    //   </ToggleButton>
-    //   <ToggleButton onClick={() => navigate(RouteNames.REGISTER)} value={RouteNames.REGISTER}>
-    //     Зареєструватися
-    //   </ToggleButton>
-    // </ToggleButtonGroup>
   )
 }
 

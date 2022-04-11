@@ -93,7 +93,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           loading={isLoading}
           loadingPosition='start'
           type='submit'
-          color='primary'
+          color='secondary'
           variant='contained'
           className={classes.btn}
           fullWidth
