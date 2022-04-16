@@ -8,6 +8,7 @@ import { selectUser, setUser } from 'redux/slices/userSlice'
 
 import { LanguageType } from 'shared-files/enums/LanguageType.enum'
 import { LocalStorageKey, UserRoles } from 'shared-files/enums'
+import { hideLoading, showLoading } from 'redux/slices/loadingIndicator'
 
 export type AuthContextState = {
   user: Partial<AppUser> | null
@@ -22,9 +23,13 @@ export const useAuthProvider = (): AuthContextState => {
 
   const getLoggedInUser = async () => {
     const token = localStorage.getItem(LocalStorageKey.RefreshToken)
-    const userResponse = await RefreshAuth(token)
-    setUserLanguage(userResponse?.lang || LanguageType.Ukrainian)
-    userResponse && dispatch(setUser(userResponse))
+    dispatch(showLoading())
+    setTimeout(async () => {
+      const userResponse = await RefreshAuth(token)
+      setUserLanguage(userResponse?.lang || LanguageType.Ukrainian)
+      userResponse && dispatch(setUser(userResponse))
+      dispatch(hideLoading())
+    }, 3000)
   }
 
   const setUserLanguage = (lang: LanguageType) => {
@@ -42,7 +47,7 @@ export const useAuthProvider = (): AuthContextState => {
   }
 
   useEffect(() => {
-    getLoggedInUser()
+    !user && getLoggedInUser()
   }, [])
 
   return {
