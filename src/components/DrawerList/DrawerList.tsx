@@ -66,7 +66,7 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
             id: generateId(),
             name: 'Додати характеристику',
             icon: <AddCircleIcon />,
-            link: RouteNames.CHARACTERISTICS + '/add',
+            link: RouteNames.ADD_CHARACTERISTIC,
           },
         ],
       },
