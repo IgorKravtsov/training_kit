@@ -1,7 +1,7 @@
-import { UserRoles } from 'api/user/user.types'
 import { useMemo } from 'react'
 import { useAppSelector } from 'redux/hooks/typedHooks'
 import { selectUser } from 'redux/slices/userSlice'
+import { UserRoles } from 'shared-files/enums'
 
 export const useAuth = () => {
   const { user, error } = useAppSelector(selectUser)

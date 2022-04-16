@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStyles } from '../login.styles'
 
 import { UseFormReturn } from 'react-hook-form'
@@ -6,12 +6,18 @@ import { UseFormReturn } from 'react-hook-form'
 import LoadingButton from '@mui/lab/LoadingButton'
 import SendIcon from '@mui/icons-material/Send'
 import Stack from '@mui/material/Stack'
-import FormControlLabel from '@mui/material/FormControlLabel'
+// import FormControlLabel from '@mui/material/FormControlLabel'
 
 import FormInput from 'components/FormInput/FormInput'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 import FormAutocomplete from 'components/FormAutocomplete/FormAutocomplete'
+import { isEmail } from 'utils/isEmail'
+import { GetOrganizationByEmailRequest, Organization } from 'api/organization/organization.types'
+import { GetOrganizationByEmail } from 'api/organization/organization'
+import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
+import { useAppDispatch } from 'redux/hooks/typedHooks'
+import { error } from 'redux/slices/snackbarSlice'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>
@@ -24,8 +30,10 @@ export interface FormProps {
 
 const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading = false }): React.ReactElement => {
   const classes = useStyles()
+  const dispatch = useAppDispatch()
 
   const [isShowPass, setIsShowPass] = useState(false)
+  const [organizationsOfUser, setOrganizationsOfUser] = useState<Organization[]>([])
 
   const {
     control,
@@ -36,10 +44,36 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
 
   watch(['email', 'password'])
 
+  const getOrganizationsByEmail = async () => {
+    //TODO: Поменять этот откровенный пи***!
+    const email = getValues()?.email || ''
+    if (isEmail(email)) {
+      try {
+        return await GetOrganizationByEmail({ email })
+        // setOrganizationsOfUser(res.organizations)
+      } catch (err: any) {
+        dispatch(
+          error({
+            message: err.message,
+          })
+        )
+        // setOrganizationsOfUser([])
+      }
+    }
+  }
+
   return (
     <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit} onError={onError}>
       <Stack spacing={1.5}>
-        <FormInput name='email' control={control} errors={errors} label='Пошта' placeholder='Уведіть пошту...' />
+        <FormInput
+          name='email'
+          control={control}
+          errors={errors}
+          label='Пошта'
+          placeholder='Уведіть пошту...'
+          color={organizationsOfUser.length > 0 ? 'success' : 'primary'}
+          // onBlur={e => getOrganizationsByEmail(e.target.value)}
+        />
 
         <FormPasswordInput
           id='password'
@@ -52,15 +86,16 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           visiblePassword={isShowPass}
         />
 
-        <FormAutocomplete
+        <FormLoadingAutocomplete
           name='organization'
           control={control}
           errors={errors}
-          placeholder='Виберіть організацію...'
-          label='Організація'
-          options={[]}
-          customNoOptionsText='Для оновлення даних введіть Вашу пошту'
-          disabled={!getValues().email}
+          label='Оберіть організацію'
+          placeholder='Оберіть організацію...'
+          getFunc={getOrganizationsByEmail}
+          responseKey={'organizations'}
+          labelKey={'title'}
+          openText='WJWEIOTJR'
         />
 
         <LoadingButton

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { MenuItem } from 'shared-files/interfaces/menuItem'
+import { MenuItem } from 'shared-files/interfaces'
 import { RootState } from 'redux/store'
 
 interface SidebarState {

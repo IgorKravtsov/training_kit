@@ -9,17 +9,19 @@ import * as yup from 'yup'
 import { RouteNames } from 'routes'
 
 import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Alert from '@mui/material/Alert'
 
 import AppCard from 'components/AppCard/AppCard'
-import { login, selectUser } from 'redux/slices/userSlice'
-import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
+import { login } from 'redux/slices/userSlice'
+import { useAppDispatch } from 'redux/hooks/typedHooks'
+import { error } from 'redux/slices/snackbarSlice'
+import { setOrganization } from 'redux/slices/organizationSlice'
 
 import Form from './components/Form'
-import { error } from 'redux/slices/snackbarSlice'
+import { LocalStorageKey } from 'shared-files/enums'
 
 const Login: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -40,29 +42,20 @@ const Login: React.FC = (): React.ReactElement => {
     resolver: yupResolver(validationSchema),
   })
 
-  // const {
-  //   getValues,
-  //   formState: { errors },
-  // } = formFeatures
-
-  // function getOrganizationsByEmail () {
-  //   if(!errors?.email && getValues().email) {
-
-  //   }
-  // }()
-
   const onError = (e: any) => {
     console.log('===ERROR===', e)
   }
 
   const onSubmit = async (data: SubmitData) => {
-    const { email, password } = data
+    const { email, password, organization } = data
 
     setIsLoading(true)
     setTimeout(async () => {
-      const response = (await dispatch(login({ email, password }))) as any
+      const response = (await dispatch(login({ email, password, organizationId: organization.id }))) as any
 
       if (response?.meta.requestStatus !== 'rejected') {
+        dispatch(setOrganization(organization))
+        localStorage.setItem(LocalStorageKey.RefreshToken, response.payload.refreshToken)
         navigate(RouteNames.HOME)
       } else {
         const message = response?.error?.message
@@ -81,7 +74,9 @@ const Login: React.FC = (): React.ReactElement => {
     <>
       <AppCard elevation={10} customClass={classes.paper} minWidth={350}>
         <Grid container alignItems='center' direction='column'>
-          <Avatar className={classes.avatar}>{/* <LockOutlinedIcon /> */}</Avatar>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
           <Typography variant='h5' className={classes.title}>
             Вхід
           </Typography>
@@ -89,6 +84,11 @@ const Login: React.FC = (): React.ReactElement => {
 
         <Form isLoading={isLoading} formFeatures={formFeatures} onSubmit={onSubmit} onError={onError} />
       </AppCard>
+      <Grid container xs={12}>
+        <Alert style={{ marginLeft: '10px' }} severity='info'>
+          Введіть свою пошту, щоб завантажити організації
+        </Alert>
+      </Grid>
     </>
   )
 }

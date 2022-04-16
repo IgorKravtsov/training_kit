@@ -9,6 +9,23 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox'
 
 import { RouteNames } from 'routes'
 import { generateId } from 'utils/generateId'
+import { CharacteristicType } from 'api/characteristics/characteristic.types'
+
+export const getCharIcon = (type: CharacteristicType) => {
+  switch (type) {
+    case CharacteristicType.Power:
+      return <SportsGymnasticsIcon />
+
+    case CharacteristicType.Endurance:
+      return <SportsKabaddiIcon />
+
+    case CharacteristicType.Speed:
+      return <SportsKabaddiIcon />
+
+    default:
+      return <SportsKabaddiIcon />
+  }
+}
 
 export const anonymousList = [
   {
@@ -32,32 +49,32 @@ export const learnerList = [
     icon: <SportsMartialArtsIcon />,
     link: RouteNames.MY_TRAININGS,
   },
-  {
-    id: generateId(),
-    name: 'Характеристики',
-    icon: <AllInclusiveIcon />,
-    link: RouteNames.CHARACTERISTICS,
-    items: [
-      {
-        id: generateId(),
-        name: 'Швидкість удару',
-        icon: <SportsKabaddiIcon />,
-        link: RouteNames.CHARACTERISTICS + '/some_generated_id_for_impact_speed',
-      },
-      {
-        id: generateId(),
-        name: 'Сила удару',
-        icon: <SportsGymnasticsIcon />,
-        link: RouteNames.CHARACTERISTICS + '/some_generated_id_for_impact_power',
-      },
-      {
-        id: generateId(),
-        name: 'Додати характеристику',
-        icon: <AddCircleIcon />,
-        link: RouteNames.CHARACTERISTICS + '/add',
-      },
-    ],
-  },
+  // {
+  //   id: generateId(),
+  //   name: 'Характеристики',
+  //   icon: <AllInclusiveIcon />,
+  //   link: RouteNames.CHARACTERISTICS,
+  //   items: [
+  //     {
+  //       id: generateId(),
+  //       name: 'Швидкість удару',
+  //       icon: <SportsKabaddiIcon />,
+  //       link: RouteNames.CHARACTERISTICS + '/some_generated_id_for_impact_speed',
+  //     },
+  //     {
+  //       id: generateId(),
+  //       name: 'Сила удару',
+  //       icon: <SportsGymnasticsIcon />,
+  //       link: RouteNames.CHARACTERISTICS + '/some_generated_id_for_impact_power',
+  //     },
+  //     {
+  //       id: generateId(),
+  //       name: 'Додати характеристику',
+  //       icon: <AddCircleIcon />,
+  //       link: RouteNames.CHARACTERISTICS + '/add',
+  //     },
+  //   ],
+  // },
   {
     id: generateId(),
     name: 'Мій кабінет',

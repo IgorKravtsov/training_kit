@@ -1,10 +1,10 @@
 import React from 'react'
-import { useAuth } from 'shared-files/useAuth'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 import Typography from '@mui/material/Typography'
 
 const Home: React.FC = (): React.ReactElement => {
-  const { isAuth } = useAuth()
+  const { isAuth } = useAuthContext()
 
   return (
     <>

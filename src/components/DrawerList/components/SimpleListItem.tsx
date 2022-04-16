@@ -5,7 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 
-import { MenuItem } from 'shared-files/interfaces/menuItem'
+import { MenuItem } from 'shared-files/interfaces'
 import { DrawerContext } from 'components/Header/items/drawerContext'
 
 export interface SimpleListItemProps {

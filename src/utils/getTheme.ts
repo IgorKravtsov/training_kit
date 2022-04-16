@@ -1,6 +1,6 @@
-import { LocalStorageKey } from 'shared-files/enum/LocalStorageKey'
+import { LocalStorageKey, ThemeType } from 'shared-files/enums'
 
 export const getTheme = (): boolean => {
   const theme = localStorage.getItem(LocalStorageKey.Theme) || 'light'
-  return theme === 'dark'
+  return theme === ThemeType.Dark
 }

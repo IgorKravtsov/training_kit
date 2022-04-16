@@ -1,6 +1,7 @@
-import { AppUser, UserRoles } from 'api/user/user.types'
+import { AppUser } from 'api/user/user.types'
 import { LoginRequest } from 'api/auth/auth.types'
-import { generateId } from 'utils/generateId'
+import { generateId } from 'utils'
+import { LanguageType, UserRoles } from 'shared-files/enums'
 
 export const mocked_user: { [x: string]: AppUser } = {
   'superletsplay7@gmail.com': {
@@ -12,6 +13,7 @@ export const mocked_user: { [x: string]: AppUser } = {
     photoURL: 'https://pbs.twimg.com/profile_images/1173161429266030592/lJCNA_JC_400x400.jpg',
     role: UserRoles.ADMIN,
     uid: generateId(),
+    lang: LanguageType.Ukrainian,
   },
   'test@test.com': {
     displayName: 'Test',
@@ -22,6 +24,7 @@ export const mocked_user: { [x: string]: AppUser } = {
     photoURL: 'https://yt3.ggpht.com/ytc/AKedOLS2SrXxxmfcdRRxYPEGIwsFVV0L_JZSNo6hna3H=s900-c-k-c0x00ffffff-no-rj',
     role: UserRoles.ADMIN,
     uid: generateId(),
+    lang: LanguageType.Ukrainian,
   },
 }
 

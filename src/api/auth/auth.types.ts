@@ -1,4 +1,5 @@
-import { AppUser, UserRoles } from 'api/user/user.types'
+import { AppUser } from 'api/user/user.types'
+import { UserRoles } from 'shared-files/enums'
 
 export interface RegisterRequest {
   email: string
@@ -11,13 +12,18 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   user: AppUser
+  accessToken: string
+  refreshToken: string
 }
 
 export interface LoginRequest {
   email: string
   password: string
+  organizationId?: string | number
 }
 
 export interface LoginResponse {
   user: AppUser
+  accessToken: string
+  refreshToken: string
 }

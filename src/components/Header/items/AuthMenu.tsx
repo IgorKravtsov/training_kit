@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RouteNames } from 'routes'
-import { useAuth } from 'shared-files/useAuth'
+import { useAuth } from 'shared-files/old_useAuth'
 
 import IconButton from '@mui/material/IconButton'
 import AccountCircle from '@mui/icons-material/AccountCircle'
@@ -12,9 +12,10 @@ import Avatar from '@mui/material/Avatar'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { logout } from 'redux/slices/userSlice'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 const AuthMenu: React.FC = (): React.ReactElement => {
-  const { user } = useAuth()
+  const { user } = useAuthContext()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -33,6 +34,11 @@ const AuthMenu: React.FC = (): React.ReactElement => {
     navigate(RouteNames.WELCOME)
   }
 
+  const goToPage = (path: string) => {
+    navigate(path)
+    handleClose()
+  }
+
   return (
     <>
       <IconButton
@@ -42,6 +48,7 @@ const AuthMenu: React.FC = (): React.ReactElement => {
         aria-haspopup='true'
         onClick={handleMenu}
         color='inherit'
+        sx={{ ml: 'auto' }}
       >
         {user?.photoURL ? <Avatar src={user?.photoURL} alt='user photo' /> : <AccountCircle />}
       </IconButton>
@@ -60,7 +67,7 @@ const AuthMenu: React.FC = (): React.ReactElement => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>{user?.displayName || user?.email}</MenuItem>
+        <MenuItem onClick={() => goToPage(`${RouteNames.CABINET}/${user?.uid}`)}>{user?.displayName || user?.email}</MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>Вийти</MenuItem>
       </Menu>

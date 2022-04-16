@@ -3,7 +3,7 @@ import React from 'react'
 import CollapsableListItem from './components/CollapsableListItem'
 import SimpleListItem from './components/SimpleListItem'
 
-import { MenuItem } from 'shared-files/interfaces/menuItem'
+import { MenuItem } from 'shared-files/interfaces'
 
 export interface DrowerListItemProps {
   item: MenuItem

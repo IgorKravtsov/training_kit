@@ -13,7 +13,7 @@ const AnonymusMenu: React.FC = (): React.ReactElement => {
   const location = useLocation()
 
   return (
-    <Breadcrumbs aria-label='breadcrumb'>
+    <Breadcrumbs aria-label='breadcrumb' sx={{ ml: 'auto' }}>
       <Link color='inherit' to={RouteNames.LOGIN} style={{ textDecoration: 'none' }}>
         <Typography
           sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}

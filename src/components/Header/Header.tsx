@@ -8,20 +8,26 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import Container from '@mui/material/Container'
+import Avatar from '@mui/material/Avatar'
 
 import DrawerList from 'components/DrawerList/DrawerList'
 
 import { RouteNames } from 'routes'
-import { useAuth } from 'shared-files/useAuth'
-import { UserRoles } from 'api/user/user.types'
+import { useAuth } from 'shared-files/old_useAuth'
+
+import { selectOrganization } from 'redux/slices/organizationSlice'
+import { useAppSelector } from 'redux/hooks/typedHooks'
 
 import AuthMenu from './items/AuthMenu'
 import AnonymusMenu from './items/AnonymusMenu'
 import { DrawerContext } from './items/drawerContext'
+import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+import { UserRoles } from 'shared-files/enums'
 
 const Header: React.FC = (): React.ReactElement => {
   const navigate = useNavigate()
-  const { isAuth, role } = useAuth()
+  const { isAuth, role } = useAuthProvider()
+  const { organization } = useAppSelector(selectOrganization)
 
   const navigatePath = useMemo(() => (role === UserRoles.ANONYMOUS ? RouteNames.WELCOME : RouteNames.HOME), [role])
 
@@ -41,10 +47,19 @@ const Header: React.FC = (): React.ReactElement => {
             <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }} onClick={() => toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
+            {isAuth && organization?.logo ? (
+              <Avatar
+                src={organization.logo}
+                alt='organization logo'
+                sx={{ cursor: 'pointer', width: 50, height: 50 }}
+                onClick={() => navigate(RouteNames.HOME)}
+              />
+            ) : (
+              <Typography variant='h6' component='h6' sx={{ cursor: 'pointer' }} onClick={() => navigate(navigatePath)}>
+                {organization?.title || 'Спорт'}
+              </Typography>
+            )}
 
-            <Typography variant='h6' component='h6' sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => navigate(navigatePath)}>
-              Тренування
-            </Typography>
             {isAuth ? <AuthMenu /> : <AnonymusMenu />}
           </Toolbar>
         </>

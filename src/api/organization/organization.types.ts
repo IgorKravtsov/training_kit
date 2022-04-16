@@ -1,9 +1,7 @@
-// export interface GetOrganizationRequest {
-
-// }
+import { Id } from 'shared-files/types/appId.type'
 
 export type Organization = {
-  id: number | string
+  id: Id
   title: string
   logo?: string
 }

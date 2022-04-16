@@ -1,5 +1,7 @@
+import { Id } from 'shared-files/types/appId.type'
+
 export type MenuItem = {
-  id: string
+  id: Id
   name: string
   icon: React.ReactElement
   link: string

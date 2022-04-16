@@ -1,9 +1,4 @@
-export enum UserRoles {
-  ANONYMOUS = 'anonymous',
-  LEARNER = 'learner',
-  TRAINER = 'trainer',
-  ADMIN = 'admin',
-}
+import { LanguageType, ThemeType, UserRoles } from 'shared-files/enums'
 
 export interface AppUser {
   uid: string
@@ -15,4 +10,6 @@ export interface AppUser {
   displayName: string | null
   birthDate?: Date
   role: UserRoles
+  lang: LanguageType
+  theme?: ThemeType
 }

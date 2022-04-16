@@ -18,7 +18,7 @@ import Form from './components/Form'
 import { register } from 'redux/slices/userSlice'
 import { error } from 'redux/slices/snackbarSlice'
 import { RegisterRequest } from 'api/auth/auth.types'
-import { UserRoles } from 'api/user/user.types'
+import { LocalStorageKey, UserRoles } from 'shared-files/enums'
 
 const Register: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -64,6 +64,7 @@ const Register: React.FC = (): React.ReactElement => {
       const response = (await dispatch(register(request))) as any
 
       if (response?.meta.requestStatus !== 'rejected') {
+        localStorage.setItem(LocalStorageKey.RefreshToken, response.payload.refreshToken)
         navigate(RouteNames.HOME)
       } else {
         const message = response?.error?.message

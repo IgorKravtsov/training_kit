@@ -4,6 +4,7 @@ export const mocked_organizations: Organization[] = [
   {
     id: 1,
     title: 'Karate',
+    logo: 'https://i.pinimg.com/originals/44/c3/b2/44c3b2d58b9c3a94f4ea3f1aa264e249.jpg',
   },
   {
     id: 2,
@@ -28,6 +29,6 @@ export const getOrganizationByEmail = ({ email }: GetOrganizationByEmailRequest)
       return { organizations: mocked_organizations }
 
     default:
-      throw new Error('Неверный email')
+      throw new Error('У такой эл. почты нет организаций')
   }
 }

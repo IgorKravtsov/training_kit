@@ -19,23 +19,30 @@ export interface FormLoadingAutocompleteProps extends Partial<StandardTextFieldP
   request?: any
   labelKey?: string
   responseKey: string
+  loadingText?: string
+  openText?: string
 }
 
-const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = ({
-  name,
-  control,
-  errors,
-  className,
-  label,
-  placeholder,
-  type,
-  required,
-  getFunc,
-  request,
-  labelKey = 'label',
-  responseKey = '',
-  id,
-}): React.ReactElement => {
+const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
+  {
+    name,
+    control,
+    errors,
+    className,
+    label,
+    placeholder,
+    type,
+    required,
+    getFunc,
+    request,
+    labelKey = 'label',
+    responseKey = '',
+    id,
+    loadingText = 'Завантаження...',
+    openText = '',
+  },
+  { ...otherProps }
+): React.ReactElement => {
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<AutocompleteOption[]>([])
   const loading = open && options.length === 0
@@ -85,6 +92,8 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = ({
           loading={loading}
           isOptionEqualToValue={(option, value) => option.label === value.label}
           getOptionLabel={option => option.label}
+          loadingText={loadingText}
+          openText={openText}
           renderInput={(parametrs: AutocompleteRenderInputParams) => (
             <TextField
               {...parametrs}
@@ -94,6 +103,7 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = ({
               type={type}
               placeholder={placeholder}
               required={required}
+              {...otherProps}
               InputProps={{
                 ...parametrs.InputProps,
                 endAdornment: (

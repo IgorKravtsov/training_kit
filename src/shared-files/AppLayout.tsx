@@ -10,14 +10,14 @@ import { clear, selectSnackbar } from 'redux/slices/snackbarSlice'
 
 import LoadingSkeleton from 'components/LoadingSkeleton/LoadingSkeleton'
 
-import { UserRoles } from 'api/user/user.types'
-import { useAuth } from './useAuth'
-import { anonymousRoutes, learnerRoutes, trainerRoutes, adminRoutes, RouteNames } from 'routes'
+import { anonymousRoutes, learnerRoutes, trainerRoutes, adminRoutes } from 'routes'
 
 import ErrorPage from 'pages/Error/Error'
+import { UserRoles } from 'shared-files/enums'
+import { useAuthContext } from './AuthProvider/AuthProvider'
 
 const AppLayout: React.FC = (): React.ReactElement => {
-  const { role } = useAuth()
+  const { role } = useAuthContext()
   const { openSnack, snackType, message } = useAppSelector(selectSnackbar)
 
   const dispatch = useAppDispatch()

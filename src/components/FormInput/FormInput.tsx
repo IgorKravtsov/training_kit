@@ -13,7 +13,17 @@ export interface FormInputProps extends Partial<StandardTextFieldProps> {
   className?: string
 }
 
-const FormInput: React.FC<FormInputProps> = ({ name, control, errors, className, label, placeholder, type, required }): React.ReactElement => {
+const FormInput: React.FC<FormInputProps> = ({
+  name,
+  control,
+  errors,
+  className,
+  label,
+  placeholder,
+  type,
+  required,
+  ...otherProps
+}): React.ReactElement => {
   return (
     <Controller
       name={name}
@@ -21,6 +31,7 @@ const FormInput: React.FC<FormInputProps> = ({ name, control, errors, className,
       render={({ field }) => (
         <TextField
           {...field}
+          {...otherProps}
           label={label}
           placeholder={placeholder}
           type={type}
