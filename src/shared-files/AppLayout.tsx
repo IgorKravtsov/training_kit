@@ -15,6 +15,7 @@ import { anonymousRoutes, learnerRoutes, trainerRoutes, adminRoutes } from 'rout
 import ErrorPage from 'pages/Error/Error'
 import { UserRoles } from 'shared-files/enums'
 import { useAuthContext } from './AuthProvider/AuthProvider'
+import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator'
 
 const AppLayout: React.FC = (): React.ReactElement => {
   const { role } = useAuthContext()
@@ -38,7 +39,7 @@ const AppLayout: React.FC = (): React.ReactElement => {
   }
 
   return (
-    <Suspense fallback={<LoadingSkeleton />}>
+    <Suspense fallback={<LoadingIndicator open={true} />}>
       <Routes>
         {routes[role]}
         <Route path='*' element={<ErrorPage />} />

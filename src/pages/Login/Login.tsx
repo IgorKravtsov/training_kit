@@ -22,6 +22,7 @@ import { setOrganization } from 'redux/slices/organizationSlice'
 
 import Form from './components/Form'
 import { LocalStorageKey } from 'shared-files/enums'
+import { hideLoading, showLoading } from 'redux/slices/loadingIndicator'
 
 const Login: React.FC = (): React.ReactElement => {
   const classes = useStyles()
