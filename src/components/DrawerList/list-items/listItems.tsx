@@ -50,10 +50,10 @@ export const learnerList = [
     link: RouteNames.MY_TRAININGS,
   },
   // {
-  //   id: generateId(),
-  //   name: 'Характеристики',
-  //   icon: <AllInclusiveIcon />,
-  //   link: RouteNames.CHARACTERISTICS,
+  // id: generateId(),
+  // name: 'Характеристики',
+  // icon: <AllInclusiveIcon />,
+  // link: RouteNames.CHARACTERISTICS,
   //   items: [
   //     {
   //       id: generateId(),
@@ -67,12 +67,12 @@ export const learnerList = [
   //       icon: <SportsGymnasticsIcon />,
   //       link: RouteNames.CHARACTERISTICS + '/some_generated_id_for_impact_power',
   //     },
-  //     {
-  //       id: generateId(),
-  //       name: 'Додати характеристику',
-  //       icon: <AddCircleIcon />,
-  //       link: RouteNames.CHARACTERISTICS + '/add',
-  //     },
+  // {
+  //   id: generateId(),
+  //   name: 'Додати характеристику',
+  //   icon: <AddCircleIcon />,
+  //   link: RouteNames.CHARACTERISTICS + '/add',
+  // },
   //   ],
   // },
   {

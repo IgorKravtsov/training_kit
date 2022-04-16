@@ -26,7 +26,7 @@ export const getOrganizationByEmail = ({ email }: GetOrganizationByEmailRequest)
       return { organizations: mocked_organizations }
 
     case 'test@test.com':
-      return { organizations: mocked_organizations }
+      return { organizations: [mocked_organizations[0], mocked_organizations[1]] }
 
     default:
       throw new Error('У такой эл. почты нет организаций')

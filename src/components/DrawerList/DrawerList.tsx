@@ -8,6 +8,8 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import LogoutIcon from '@mui/icons-material/ExitToApp'
+import AddCircleIcon from '@mui/icons-material/AddCircle'
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive'
 
 import { useAuth } from 'shared-files/old_useAuth'
 import { useAppSelector } from 'redux/hooks/typedHooks'
@@ -21,16 +23,16 @@ import { logout } from 'redux/slices/userSlice'
 import ThemeSwitch from './components/ThemeSwitch'
 import { selectTheme, toggleTheme } from 'redux/slices/themeSlice'
 import { saveTheme } from 'utils/saveTheme'
-import { Id } from 'shared-files/types/appId.type'
-import { getUserCharacteristics } from 'api/characteristics/characteristic'
 import { Characteristic } from 'api/characteristics/characteristic.types'
 import { RouteNames } from 'routes'
-import { UserRoles } from 'shared-files/enums'
+import { LocalStorageKey, UserRoles } from 'shared-files/enums'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { generateId } from 'utils'
 
 export interface DrownerListProps {}
 
 const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
-  const { role } = useAuth()
+  const { user, role } = useAuthContext()
   const { drawerList } = useAppSelector(selectSidebar)
   const { darkTheme } = useAppSelector(selectTheme)
   const dispatch = useAppDispatch()
@@ -48,23 +50,42 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
     [UserRoles.ADMIN]: adminList,
   }
 
-  const createSidebar = async (role: UserRoles, userId?: Id) => {
+  const createSidebar = () => {
     if (role === UserRoles.ANONYMOUS) {
       return anonymousList
     }
-    let characteristics: Characteristic[] = []
-    if (userId) {
-      characteristics = await getUserCharacteristics(userId)
-    }
-    return [...sidebar[role]]
+    const characteristics: MenuItem[] = [
+      {
+        id: generateId(),
+        name: 'Характеристики',
+        icon: <AllInclusiveIcon />,
+        link: RouteNames.CHARACTERISTICS,
+        items: [
+          ...transformCharacteristics(user?.characteristics),
+          {
+            id: generateId(),
+            name: 'Додати характеристику',
+            icon: <AddCircleIcon />,
+            link: RouteNames.CHARACTERISTICS + '/add',
+          },
+        ],
+      },
+    ]
+    return [...sidebar[role], ...characteristics]
   }
 
-  const transformCharacteristic = (chars: Characteristic[]): MenuItem[] => {
-    return chars.map(({ id, type, title }) => ({ id, icon: getCharIcon(type), name: title, link: `${RouteNames.CHARACTERISTICS}/${id}` }))
+  const transformCharacteristics = (characteristics?: Characteristic[]): MenuItem[] => {
+    if (!characteristics) return []
+    return characteristics.map(({ id, type, title }) => ({ id, icon: getCharIcon(type), name: title, link: `${RouteNames.CHARACTERISTICS}/${id}` }))
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem(LocalStorageKey.RefreshToken)
+    dispatch(logout())
   }
 
   useEffect(() => {
-    dispatch(setDrawerList(sidebar[role] || sidebar[UserRoles.ANONYMOUS]))
+    dispatch(setDrawerList(createSidebar()))
   }, [role])
 
   return (
@@ -79,7 +100,7 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
         {role !== UserRoles.ANONYMOUS && (
           <>
             <Divider />
-            <ListItemButton onClick={() => dispatch(logout())}>
+            <ListItemButton onClick={handleLogout}>
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>

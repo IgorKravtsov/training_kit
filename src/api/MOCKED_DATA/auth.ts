@@ -2,6 +2,8 @@ import { AppUser } from 'api/user/user.types'
 import { LoginRequest } from 'api/auth/auth.types'
 import { generateId } from 'utils'
 import { LanguageType, UserRoles } from 'shared-files/enums'
+import { mocked_organizations } from './organizations'
+import { mocked_characteristics } from './characteristics'
 
 export const mocked_user: { [x: string]: AppUser } = {
   'superletsplay7@gmail.com': {
@@ -14,17 +16,19 @@ export const mocked_user: { [x: string]: AppUser } = {
     role: UserRoles.ADMIN,
     uid: generateId(),
     lang: LanguageType.Ukrainian,
+    organizations: mocked_organizations,
+    characteristics: mocked_characteristics,
   },
   'test@test.com': {
     displayName: 'Test',
     email: 'test@test.com',
     emailVerified: true,
     isAnonymous: false,
-    phoneNumber: '+380145214643',
     photoURL: 'https://yt3.ggpht.com/ytc/AKedOLS2SrXxxmfcdRRxYPEGIwsFVV0L_JZSNo6hna3H=s900-c-k-c0x00ffffff-no-rj',
     role: UserRoles.ADMIN,
     uid: generateId(),
     lang: LanguageType.Ukrainian,
+    organizations: [mocked_organizations[0], mocked_organizations[1]],
   },
 }
 
