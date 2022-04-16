@@ -20,7 +20,7 @@ export enum RouteNames {
   VISIT_DASHBOARD = '/visit-dashboard',
   CHARACTERISTICS = '/characteristics',
   ADD_CHARACTERISTIC = '/add-characteristic',
-  CABINET = '/user',
+  CABINET = '/cabinet',
 }
 
 export const anonymousRoutes: React.ReactNode[] = [
@@ -33,9 +33,9 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.HOME} path={RouteNames.HOME} element={<Home />} />,
   <Route key={RouteNames.LOGIN} path={RouteNames.LOGIN} element={<Login />} />,
   <Route key={RouteNames.REGISTER} path={RouteNames.REGISTER} element={<Register />} />,
-  <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS} element={<MyTrainings />} />,
+  <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:id'} element={<MyTrainings />} />,
   <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
-  <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC} element={<AddCharacteristic />} />,
+  <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:id'} element={<AddCharacteristic />} />,
   <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:id'} element={<Characteristics />}></Route>,
   <Route key={RouteNames.CABINET} path={RouteNames.CABINET + '/:id'} element={<Cabinet />} />,
 ]
