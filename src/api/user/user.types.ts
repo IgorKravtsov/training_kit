@@ -1,3 +1,4 @@
+import { Abonement } from 'api/abonements/abonements.types'
 import { Characteristic } from 'api/characteristics/characteristic.types'
 import { Organization } from 'api/organization/organization.types'
 import { LanguageType, UserRoles } from 'shared-files/enums'
@@ -19,6 +20,7 @@ export interface AppUser {
   selectedOrganization?: Organization
   characteristics?: Characteristic[]
   trainers?: PublicAppUserDto[]
+  abonements?: Abonement[]
 }
 
 export interface PublicAppUserDto {

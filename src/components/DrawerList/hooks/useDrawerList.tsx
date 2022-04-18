@@ -12,6 +12,8 @@ import AddCircleIcon from '@mui/icons-material/AddCircle'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
+import CardMembershipIcon from '@mui/icons-material/CardMembership'
+import AddCardIcon from '@mui/icons-material/AddCard'
 
 import { useAppSelector, useAppDispatch } from 'redux/hooks/typedHooks'
 import { selectSidebar, setDrawerList } from 'redux/slices/sidebarSlice'
@@ -20,10 +22,11 @@ import { UserRoles } from 'shared-files/enums'
 import { MenuItem } from 'shared-files/interfaces'
 import { generateId } from 'utils'
 import { RouteNames } from 'routes'
-import { Characteristic, CharacteristicType } from 'api/characteristics/characteristic.types'
 import { AppUser } from 'api/user/user.types'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { selectNotification } from 'redux/slices/notificationSlice'
+import { Characteristic, CharacteristicType } from 'api/characteristics/characteristic.types'
+import { Abonement } from 'api/abonements/abonements.types'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const { user, role } = useAuthProvider()
@@ -77,12 +80,6 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
     },
     {
       id: generateId(),
-      name: 'Мій абонемент',
-      icon: <CreditCardIcon />,
-      link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
-    },
-    {
-      id: generateId(),
       name: 'Оповіщення',
       icon: (
         <Badge badgeContent={notificationCount || 0} color='primary'>
@@ -108,6 +105,11 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
     return characteristics.map(({ id, type, title }) => ({ id, icon: getCharIcon(type), name: title, link: `${RouteNames.CHARACTERISTICS}/${id}` }))
   }
 
+  const transformAbonements = (abonements?: Abonement[]) => {
+    if (!abonements) return []
+    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_ABONEMENT}/${id}`, icon: <CardMembershipIcon /> }))
+  }
+
   const createDrawerList = (user: Partial<AppUser> | null, role: UserRoles) => {
     if (role === UserRoles.ANONYMOUS) {
       return anonymousList
@@ -129,7 +131,26 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
         ],
       },
     ]
-    return [...sidebar[role], ...characteristics]
+    const abonement = user?.trainers
+      ? [
+          {
+            id: generateId(),
+            name: 'Мої абонементи',
+            icon: <CreditCardIcon />,
+            link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
+            items: [
+              ...transformAbonements(user.abonements),
+              {
+                id: generateId(),
+                name: 'Додати абонемент',
+                icon: <AddCardIcon />,
+                link: `${RouteNames.ADD_ABONEMENT}/${user?.uid}`,
+              },
+            ],
+          },
+        ]
+      : []
+    return [...sidebar[role], ...abonement, ...characteristics]
   }
 
   useEffect(() => {

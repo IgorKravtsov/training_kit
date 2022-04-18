@@ -4,6 +4,7 @@ import { generateId } from 'utils'
 import { LanguageType, UserRoles } from 'shared-files/enums'
 import { mocked_organizations } from './organizations'
 import { mocked_characteristics } from './characteristics'
+import { mocked_abonements } from './abonements'
 
 const mocked_trainers: PublicAppUserDto[] = [
   {
@@ -33,6 +34,7 @@ export const mocked_user: { [x: string]: AppUser } = {
     characteristics: [mocked_characteristics[0], mocked_characteristics[1]],
     selectedOrganization: mocked_organizations[0],
     trainers: mocked_trainers,
+    abonements: mocked_abonements,
   },
   'test@test.com': {
     displayName: 'Test',

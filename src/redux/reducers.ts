@@ -6,6 +6,8 @@ import { themeReducer } from 'redux/slices/themeSlice'
 import { organizationReducer } from 'redux/slices/organizationSlice'
 import { loadingIndicatorReducer } from 'redux/slices/loadingIndicatorSlice'
 import { notificationReducer } from 'redux/slices/notificationSlice'
+import { abonementReducer } from 'redux/slices/abonementSlice'
+import { gymReducer } from 'redux/slices/gymSlice'
 
 const reducer = combineReducers({
   user: userReducer,
@@ -15,6 +17,8 @@ const reducer = combineReducers({
   organization: organizationReducer,
   loadingIndicator: loadingIndicatorReducer,
   notification: notificationReducer,
+  abonement: abonementReducer,
+  gym: gymReducer,
 })
 
 export default reducer

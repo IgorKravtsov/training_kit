@@ -11,6 +11,7 @@ const Characteristics = React.lazy(() => import('./pages/Characteristics/Charact
 const AddCharacteristic = React.lazy(() => import('./pages/AddCharacteristic/AddCharacteristic'))
 const Cabinet = React.lazy(() => import('./pages/Cabinet/Cabinet'))
 const MyAbonement = React.lazy(() => import('./pages/MyAbonement/MyAbonement'))
+const AddAbonement = React.lazy(() => import('./pages/AddAbonement/AddAbonement'))
 const Notifications = React.lazy(() => import('./pages/Notifications/Notifications'))
 
 export enum RouteNames {
@@ -24,6 +25,7 @@ export enum RouteNames {
   ADD_CHARACTERISTIC = '/add-characteristic',
   CABINET = '/cabinet',
   MY_ABONEMENT = '/my-abonement',
+  ADD_ABONEMENT = '/add-abonement',
   NOTIFICATIONS = '/notifications',
 }
 
@@ -37,13 +39,14 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.HOME} path={RouteNames.HOME} element={<Home />} />,
   <Route key={RouteNames.LOGIN} path={RouteNames.LOGIN} element={<Login />} />,
   <Route key={RouteNames.REGISTER} path={RouteNames.REGISTER} element={<Register />} />,
-  <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:id'} element={<MyTrainings />} />,
+  <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:userId'} element={<MyTrainings />} />,
   <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
-  <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:id'} element={<AddCharacteristic />} />,
+  <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:userId'} element={<AddCharacteristic />} />,
   <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:id'} element={<Characteristics />}></Route>,
-  <Route key={RouteNames.CABINET} path={RouteNames.CABINET + '/:id'} element={<Cabinet />} />,
-  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.MY_ABONEMENT + '/:id'} element={<MyAbonement />} />,
-  <Route key={RouteNames.NOTIFICATIONS} path={RouteNames.NOTIFICATIONS + '/:id'} element={<Notifications />} />,
+  <Route key={RouteNames.CABINET} path={RouteNames.CABINET + '/:userId'} element={<Cabinet />} />,
+  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.MY_ABONEMENT + '/:userId'} element={<MyAbonement />} />,
+  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.ADD_ABONEMENT + '/:userId'} element={<AddAbonement />} />,
+  <Route key={RouteNames.NOTIFICATIONS} path={RouteNames.NOTIFICATIONS + '/:userId'} element={<Notifications />} />,
 ]
 
 export const trainerRoutes: React.ReactNode[] = [
