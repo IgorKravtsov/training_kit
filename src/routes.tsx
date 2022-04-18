@@ -10,6 +10,8 @@ const VisitDashboard = React.lazy(() => import('./pages/VisitDashboard/VisitDash
 const Characteristics = React.lazy(() => import('./pages/Characteristics/Characteristics'))
 const AddCharacteristic = React.lazy(() => import('./pages/AddCharacteristic/AddCharacteristic'))
 const Cabinet = React.lazy(() => import('./pages/Cabinet/Cabinet'))
+const MyAbonement = React.lazy(() => import('./pages/MyAbonement/MyAbonement'))
+const Notifications = React.lazy(() => import('./pages/Notifications/Notifications'))
 
 export enum RouteNames {
   WELCOME = '/',
@@ -21,6 +23,8 @@ export enum RouteNames {
   CHARACTERISTICS = '/characteristics',
   ADD_CHARACTERISTIC = '/add-characteristic',
   CABINET = '/cabinet',
+  MY_ABONEMENT = '/my-abonement',
+  NOTIFICATIONS = '/notifications',
 }
 
 export const anonymousRoutes: React.ReactNode[] = [
@@ -38,6 +42,8 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:id'} element={<AddCharacteristic />} />,
   <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:id'} element={<Characteristics />}></Route>,
   <Route key={RouteNames.CABINET} path={RouteNames.CABINET + '/:id'} element={<Cabinet />} />,
+  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.MY_ABONEMENT + '/:id'} element={<MyAbonement />} />,
+  <Route key={RouteNames.NOTIFICATIONS} path={RouteNames.NOTIFICATIONS + '/:id'} element={<Notifications />} />,
 ]
 
 export const trainerRoutes: React.ReactNode[] = [

@@ -11,7 +11,7 @@ import AppLayout from 'shared-files/AppLayout'
 import { darkTheme, lightTheme } from 'styles/theme'
 import { selectTheme, toggleTheme } from 'redux/slices/themeSlice'
 import { getTheme } from 'utils/getTheme'
-import { selectLoadingIndicator } from 'redux/slices/loadingIndicator'
+import { selectLoadingIndicator } from 'redux/slices/loadingIndicatorSlice'
 
 const App: React.FC = (): React.ReactElement => {
   const theme = useAppSelector(selectTheme)

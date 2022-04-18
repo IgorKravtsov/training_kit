@@ -5,8 +5,8 @@ import { LanguageType, ThemeType, UserRoles } from 'shared-files/enums'
 export interface AppUser {
   uid: string
   email: string | null
-  emailVerified: boolean
-  isAnonymous: boolean
+  emailVerified?: boolean
+  isAnonymous?: boolean
   phoneNumber?: string | null
   photoURL: string | null
   displayName: string | null
@@ -16,5 +16,14 @@ export interface AppUser {
   theme?: ThemeType
   level?: string //Уровень пояса
   organizations?: Organization[]
+  selectedOrganization?: Organization
   characteristics?: Characteristic[]
+  trainers?: PublicAppUserDto[]
+}
+
+export interface PublicAppUserDto {
+  photoURL?: string | null
+  displayName: string | null
+  uid: string
+  email: string | null
 }

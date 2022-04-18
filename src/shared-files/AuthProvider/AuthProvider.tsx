@@ -6,6 +6,7 @@ export const AuthContext = createContext<AuthContextState>({
   user: null,
   isAuth: false,
   role: UserRoles.ANONYMOUS,
+  selectedOrganization: null,
 })
 export const useAuthContext = () => useContext(AuthContext)
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { checkCredits, mocked_user } from 'api/MOCKED_DATA/auth'
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './auth.types'
+import { LoginRequest, LoginResponse, RefreshAuthRequest, RefreshAuthResponse, RegisterRequest, RegisterResponse } from './auth.types'
 import { AppUser } from 'api/user/user.types'
 
 export const Login = async (request: LoginRequest): Promise<LoginResponse> => {
@@ -15,7 +15,10 @@ export const Logout = async (): Promise<{ user: null }> => {
   return Promise.resolve({ user: null })
 }
 
-export const RefreshAuth = async (refreshToken: string | null): Promise<AppUser | undefined> => {
-  if (!refreshToken) return
-  return Promise.resolve(mocked_user['superletsplay7@gmail.com'])
+export const RefreshAuth = async (request: RefreshAuthRequest): Promise<RefreshAuthResponse | undefined> => {
+  if (!request.refreshToken) return
+  return Promise.resolve({
+    user: mocked_user['superletsplay7@gmail.com'],
+    notifications: { count: 1, data: [{ from: 'Trainer', title: 'Some notification' }] },
+  })
 }

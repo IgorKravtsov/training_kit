@@ -13,7 +13,6 @@ import Avatar from '@mui/material/Avatar'
 import DrawerList from 'components/DrawerList/DrawerList'
 
 import { RouteNames } from 'routes'
-import { useAuth } from 'shared-files/old_useAuth'
 
 import { selectOrganization } from 'redux/slices/organizationSlice'
 import { useAppSelector } from 'redux/hooks/typedHooks'
@@ -26,8 +25,8 @@ import { UserRoles } from 'shared-files/enums'
 
 const Header: React.FC = (): React.ReactElement => {
   const navigate = useNavigate()
-  const { isAuth, role } = useAuthProvider()
-  const { organization } = useAppSelector(selectOrganization)
+  const { isAuth, role, selectedOrganization } = useAuthProvider()
+  // const { organization } = useAppSelector(selectOrganization)
 
   const navigatePath = useMemo(() => (role === UserRoles.ANONYMOUS ? RouteNames.WELCOME : RouteNames.HOME), [role])
 
@@ -47,16 +46,16 @@ const Header: React.FC = (): React.ReactElement => {
             <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }} onClick={() => toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
-            {isAuth && organization?.logo ? (
+            {isAuth && selectedOrganization?.logo ? (
               <Avatar
-                src={organization.logo}
+                src={selectedOrganization?.logo}
                 alt='organization logo'
                 sx={{ cursor: 'pointer', width: 50, height: 50 }}
                 onClick={() => navigate(RouteNames.HOME)}
               />
             ) : (
               <Typography variant='h6' component='h6' sx={{ cursor: 'pointer' }} onClick={() => navigate(navigatePath)}>
-                {organization?.title || 'Спорт'}
+                {selectedOrganization?.title || 'Спорт'}
               </Typography>
             )}
 

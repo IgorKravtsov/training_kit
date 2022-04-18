@@ -8,13 +8,16 @@ import { selectUser, setUser } from 'redux/slices/userSlice'
 
 import { LanguageType } from 'shared-files/enums/LanguageType.enum'
 import { LocalStorageKey, UserRoles } from 'shared-files/enums'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicator'
+import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
+import { Organization } from 'api/organization/organization.types'
+import { setNotificationsWithCount } from 'redux/slices/notificationSlice'
 
 export type AuthContextState = {
   user: Partial<AppUser> | null
   isAuth: boolean
   role: UserRoles
   error?: any
+  selectedOrganization: Organization | null
 }
 
 export const useAuthProvider = (): AuthContextState => {
@@ -25,9 +28,14 @@ export const useAuthProvider = (): AuthContextState => {
     const token = localStorage.getItem(LocalStorageKey.RefreshToken)
     dispatch(showLoading())
     setTimeout(async () => {
-      const userResponse = await RefreshAuth(token)
-      setUserLanguage(userResponse?.lang || LanguageType.Ukrainian)
-      userResponse && dispatch(setUser(userResponse))
+      const userResponse = await RefreshAuth({ refreshToken: token })
+      setUserLanguage(userResponse?.user?.lang || LanguageType.Ukrainian)
+      if (userResponse) {
+        dispatch(setUser(userResponse.user))
+        userResponse.notifications &&
+          dispatch(setNotificationsWithCount({ count: userResponse.notifications?.count, notifications: userResponse.notifications?.data }))
+      }
+      // userResponse && dispatch(setUser(userResponse.user))
       dispatch(hideLoading())
     }, 3000)
   }
@@ -55,5 +63,6 @@ export const useAuthProvider = (): AuthContextState => {
     error,
     isAuth: user !== null,
     role: user?.role || UserRoles.ANONYMOUS,
+    selectedOrganization: user?.selectedOrganization || null,
   }
 }

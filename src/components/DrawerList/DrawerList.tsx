@@ -9,7 +9,6 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import LogoutIcon from '@mui/icons-material/ExitToApp'
 
-import { useAuth } from 'shared-files/old_useAuth'
 import { useAppSelector } from 'redux/hooks/typedHooks'
 import { selectSidebar, setDrawerList } from 'redux/slices/sidebarSlice'
 import { useAppDispatch } from 'redux/hooks/typedHooks'

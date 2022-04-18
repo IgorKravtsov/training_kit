@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { CSSTransition, SwitchTransition, TransitionGroup } from 'react-transition-group'
 
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
@@ -22,6 +23,7 @@ const AppLayout: React.FC = (): React.ReactElement => {
   const { openSnack, snackType, message } = useAppSelector(selectSnackbar)
 
   const dispatch = useAppDispatch()
+  const location = useLocation()
 
   const handleClose = () => {
     dispatch(
@@ -40,10 +42,14 @@ const AppLayout: React.FC = (): React.ReactElement => {
 
   return (
     <Suspense fallback={<LoadingIndicator open={true} />}>
-      <Routes>
-        {routes[role]}
-        <Route path='*' element={<ErrorPage />} />
-      </Routes>
+      <TransitionGroup>
+        <CSSTransition timeout={100} classNames='pages' key={location.key}>
+          <Routes>
+            {routes[role]}
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        </CSSTransition>
+      </TransitionGroup>
 
       <Snackbar TransitionComponent={Slide} open={openSnack} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={snackType} sx={{ width: '100%' }}>

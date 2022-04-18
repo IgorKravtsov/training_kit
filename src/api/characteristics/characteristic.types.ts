@@ -11,3 +11,24 @@ export interface Characteristic {
   title: string
   type: CharacteristicType
 }
+
+export interface GetUserCharacteristicsRequest {
+  userId: Id
+}
+
+export interface GetUserCharacteristicsResponse {
+  characteristics: Characteristic[]
+}
+
+export interface GetCharacteristicByIdRequest {
+  characteristicId: Id
+  userId: Id
+}
+
+export interface GetCharacteristicByIdResponse {
+  characteristic: Characteristic
+}
+
+export interface GetAllCharacteristicsResponse {
+  characteristics: Characteristic[]
+}

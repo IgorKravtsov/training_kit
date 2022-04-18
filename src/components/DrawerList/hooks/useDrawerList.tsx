@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 
+import Badge from '@mui/material/Badge'
+
 import RegisterIcon from '@mui/icons-material/VpnKey'
 import LoginIcon from '@mui/icons-material/Login'
 import SportsMartialArtsIcon from '@mui/icons-material/SportsMartialArts'
@@ -8,6 +10,8 @@ import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi'
 import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
+import CreditCardIcon from '@mui/icons-material/CreditCard'
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
 
 import { useAppSelector, useAppDispatch } from 'redux/hooks/typedHooks'
 import { selectSidebar, setDrawerList } from 'redux/slices/sidebarSlice'
@@ -19,10 +23,12 @@ import { RouteNames } from 'routes'
 import { Characteristic, CharacteristicType } from 'api/characteristics/characteristic.types'
 import { AppUser } from 'api/user/user.types'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+import { selectNotification } from 'redux/slices/notificationSlice'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const { user, role } = useAuthProvider()
   const { drawerList } = useAppSelector(selectSidebar)
+  const { notificationCount } = useAppSelector(selectNotification)
   const dispatch = useAppDispatch()
 
   const getCharIcon = (type: CharacteristicType) => {
@@ -59,15 +65,31 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const learnerList = [
     {
       id: generateId(),
+      name: 'Мій кабінет',
+      icon: <AccountBoxIcon />,
+      link: `${RouteNames.CABINET}/${user?.uid}`,
+    },
+    {
+      id: generateId(),
       name: 'Мої тренування',
       icon: <SportsMartialArtsIcon />,
       link: `${RouteNames.MY_TRAININGS}/${user?.uid}`,
     },
     {
       id: generateId(),
-      name: 'Мій кабінет',
-      icon: <AccountBoxIcon />,
-      link: `${RouteNames.CABINET}/${user?.uid}`,
+      name: 'Мій абонемент',
+      icon: <CreditCardIcon />,
+      link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
+    },
+    {
+      id: generateId(),
+      name: 'Оповіщення',
+      icon: (
+        <Badge badgeContent={notificationCount || 0} color='primary'>
+          <NotificationsActiveIcon color='inherit' />
+        </Badge>
+      ),
+      link: `${RouteNames.NOTIFICATIONS}/${user?.uid}`,
     },
   ]
 

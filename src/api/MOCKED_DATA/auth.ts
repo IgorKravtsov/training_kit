@@ -1,9 +1,22 @@
-import { AppUser } from 'api/user/user.types'
+import { AppUser, PublicAppUserDto } from 'api/user/user.types'
 import { LoginRequest } from 'api/auth/auth.types'
 import { generateId } from 'utils'
 import { LanguageType, UserRoles } from 'shared-files/enums'
 import { mocked_organizations } from './organizations'
 import { mocked_characteristics } from './characteristics'
+
+const mocked_trainers: PublicAppUserDto[] = [
+  {
+    displayName: 'Trainer1',
+    email: 'trainer1@gmail.com',
+    uid: generateId(),
+  },
+  {
+    displayName: 'Trainer2',
+    email: 'trainer2@gmail.com',
+    uid: generateId(),
+  },
+]
 
 export const mocked_user: { [x: string]: AppUser } = {
   'superletsplay7@gmail.com': {
@@ -17,7 +30,9 @@ export const mocked_user: { [x: string]: AppUser } = {
     uid: generateId(),
     lang: LanguageType.Ukrainian,
     organizations: mocked_organizations,
-    characteristics: mocked_characteristics,
+    characteristics: [mocked_characteristics[0], mocked_characteristics[1]],
+    selectedOrganization: mocked_organizations[0],
+    trainers: mocked_trainers,
   },
   'test@test.com': {
     displayName: 'Test',
@@ -28,7 +43,7 @@ export const mocked_user: { [x: string]: AppUser } = {
     role: UserRoles.ADMIN,
     uid: generateId(),
     lang: LanguageType.Ukrainian,
-    organizations: [mocked_organizations[0], mocked_organizations[1]],
+    organizations: [mocked_organizations[0]],
   },
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useStyles } from '../login.styles'
 
 import { UseFormReturn } from 'react-hook-form'
@@ -11,9 +11,8 @@ import Stack from '@mui/material/Stack'
 import FormInput from 'components/FormInput/FormInput'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
-import FormAutocomplete from 'components/FormAutocomplete/FormAutocomplete'
 import { isEmail } from 'utils/isEmail'
-import { GetOrganizationByEmailRequest, Organization } from 'api/organization/organization.types'
+import { Organization } from 'api/organization/organization.types'
 import { GetOrganizationByEmail } from 'api/organization/organization'
 import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
@@ -95,7 +94,6 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           getFunc={getOrganizationsByEmail}
           responseKey={'organizations'}
           labelKey={'title'}
-          openText='WJWEIOTJR'
         />
 
         <LoadingButton

@@ -4,7 +4,7 @@ import { Control, Controller, FieldValues } from 'react-hook-form'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { StandardTextFieldProps, AutocompleteRenderInputParams } from '@mui/material'
-import { AutocompleteOption } from 'shared-files/interfaces/autocompleteOption.interface'
+import { AutocompleteOption } from 'shared-files/interfaces'
 
 export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
