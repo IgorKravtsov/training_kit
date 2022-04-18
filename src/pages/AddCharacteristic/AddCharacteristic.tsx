@@ -15,9 +15,9 @@ import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { AutocompleteOption } from 'shared-files/interfaces'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { GetAllCharacteristics } from 'api/characteristics/characteristic'
+import { GetAllCharacteristics } from 'api/characteristic/characteristic'
 import { AppUser } from 'api/user/user.types'
-import { Characteristic } from 'api/characteristics/characteristic.types'
+import { Characteristic } from 'api/characteristic/characteristic.types'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
   const { user } = useAuthProvider()

@@ -5,10 +5,10 @@ import Typography from '@mui/material/Typography'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { useParams } from 'react-router-dom'
 import { Id, PageId } from 'shared-files/types'
-import { Characteristic } from 'api/characteristics/characteristic.types'
+import { Characteristic } from 'api/characteristic/characteristic.types'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { GetCharacteristicById } from 'api/characteristics/characteristic'
+import { GetCharacteristicById } from 'api/characteristic/characteristic'
 
 const Characteristics: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()

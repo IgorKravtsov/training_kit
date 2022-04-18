@@ -1,5 +1,5 @@
 import { Abonement } from 'api/abonements/abonements.types'
-import { Characteristic } from 'api/characteristics/characteristic.types'
+import { Characteristic } from 'api/characteristic/characteristic.types'
 import { Organization } from 'api/organization/organization.types'
 import { LanguageType, UserRoles } from 'shared-files/enums'
 

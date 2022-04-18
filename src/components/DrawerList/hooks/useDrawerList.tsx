@@ -25,7 +25,7 @@ import { RouteNames } from 'routes'
 import { AppUser } from 'api/user/user.types'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { selectNotification } from 'redux/slices/notificationSlice'
-import { Characteristic, CharacteristicType } from 'api/characteristics/characteristic.types'
+import { Characteristic, CharacteristicType } from 'api/characteristic/characteristic.types'
 import { Abonement } from 'api/abonements/abonements.types'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
