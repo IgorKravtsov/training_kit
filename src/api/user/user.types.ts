@@ -1,6 +1,6 @@
 import { Characteristic } from 'api/characteristics/characteristic.types'
 import { Organization } from 'api/organization/organization.types'
-import { LanguageType, ThemeType, UserRoles } from 'shared-files/enums'
+import { LanguageType, UserRoles } from 'shared-files/enums'
 
 export interface AppUser {
   uid: string
@@ -13,7 +13,7 @@ export interface AppUser {
   birthDate?: Date
   role: UserRoles
   lang: LanguageType
-  theme?: ThemeType
+  // theme?: ThemeType
   level?: string //Уровень пояса
   organizations?: Organization[]
   selectedOrganization?: Organization
