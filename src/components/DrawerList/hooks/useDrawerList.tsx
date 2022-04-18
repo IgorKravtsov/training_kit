@@ -144,7 +144,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
                 id: generateId(),
                 name: 'Додати абонемент',
                 icon: <AddCardIcon />,
-                link: `${RouteNames.ADD_ABONEMENT}/${user?.uid}`,
+                link: `${RouteNames.ADD_ABONEMENT}/${user?.uid}/gyms`,
               },
             ],
           },
