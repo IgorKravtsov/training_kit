@@ -17,9 +17,9 @@ import { RouteNames } from 'routes'
 import { selectOrganization } from 'redux/slices/organizationSlice'
 import { useAppSelector } from 'redux/hooks/typedHooks'
 
-import AuthMenu from './items/AuthMenu'
-import AnonymusMenu from './items/AnonymusMenu'
-import { DrawerContext } from './items/drawerContext'
+import AuthMenu from './components/AuthMenu'
+import AnonymusMenu from './components/AnonymusMenu'
+import { DrawerContext } from './components/drawerContext'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { UserRoles } from 'shared-files/enums'
 

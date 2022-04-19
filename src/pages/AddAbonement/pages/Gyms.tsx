@@ -5,7 +5,7 @@ import { getLearnerGyms, selectGym } from 'redux/slices/gymSlice'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { Link } from 'react-router-dom'
-import { RouteNames } from 'routes'
+import { MyAbonementRoutes, RouteNames } from 'routes'
 
 const Gyms: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
@@ -27,14 +27,14 @@ const Gyms: React.FC = (): React.ReactElement => {
   }, [])
 
   return (
-    <div>
+    <>
       {gyms?.map(gym => (
         <>
-          <Link to={`${RouteNames.ADD_ABONEMENT}/${user?.uid}/${gym.id}/abonements`}>{gym.title}</Link>
+          <Link to={`${RouteNames.ADD_ABONEMENT}/${user?.uid}/${gym.id}/${MyAbonementRoutes.ABONEMENTS}`}>{gym.title}</Link>
           <br />
         </>
       ))}
-    </div>
+    </>
   )
 }
 

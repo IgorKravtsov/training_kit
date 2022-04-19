@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStyles } from './error.styles'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import Button from '@mui/material/Button'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
@@ -15,7 +15,14 @@ const ErrorPage: React.FC = (): React.ReactElement => {
     <>
       <Error />
       <Grid container direction='row' alignItems='center' justifyContent='center' xs={12}>
-        <Button variant='outlined' startIcon={<ArrowBackIosNewIcon />} className={classes.btn} onClick={() => navigate(-1)}>
+        <Button
+          color='secondary'
+          variant='outlined'
+          startIcon={<ArrowBackIosNewIcon />}
+          className={classes.btn}
+          onClick={() => navigate(-1)}
+          LinkComponent={Link}
+        >
           Повернутись до останньої сторінки
         </Button>
       </Grid>

@@ -35,6 +35,9 @@ export const lightTheme = createTheme({
       secondary: 'rgba(28,24,24,0.54)',
     },
   },
+  typography: {
+    fontFamily: ['Nunito Sans', 'Sen'].join(', '),
+  },
 })
 
 export const darkTheme = createTheme({
@@ -60,5 +63,8 @@ export const darkTheme = createTheme({
     text: {
       primary: '#E7EBF0',
     },
+  },
+  typography: {
+    fontFamily: ['Nunito Sans', 'Sen'].join(', '),
   },
 })

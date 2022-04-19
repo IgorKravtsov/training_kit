@@ -11,7 +11,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
 import { MenuItem } from 'shared-files/interfaces'
-import { DrawerContext } from 'components/Header/items/drawerContext'
+import { DrawerContext } from 'components/Header/components/drawerContext'
 
 export interface CollapsableListItemProps {
   item: MenuItem

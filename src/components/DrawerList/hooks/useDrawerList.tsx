@@ -21,7 +21,7 @@ import { selectSidebar, setDrawerList } from 'redux/slices/sidebarSlice'
 import { UserRoles } from 'shared-files/enums'
 import { MenuItem } from 'shared-files/interfaces'
 import { generateId } from 'utils'
-import { RouteNames } from 'routes'
+import { MyAbonementRoutes, RouteNames } from 'routes'
 import { AppUser } from 'api/user/user.types'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { selectNotification } from 'redux/slices/notificationSlice'
@@ -144,7 +144,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
                 id: generateId(),
                 name: 'Додати абонемент',
                 icon: <AddCardIcon />,
-                link: `${RouteNames.ADD_ABONEMENT}/${user?.uid}/gyms`,
+                link: `${RouteNames.ADD_ABONEMENT}/${user?.uid}/${MyAbonementRoutes.GYMS}`,
               },
             ],
           },
