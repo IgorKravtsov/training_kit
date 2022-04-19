@@ -40,6 +40,7 @@ const FormInput: React.FC<FormInputProps> = ({
           fullWidth
           required={required}
           className={className}
+          color='secondary'
         />
       )}
     />

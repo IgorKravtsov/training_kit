@@ -26,18 +26,20 @@ export const useAuthProvider = (): AuthContextState => {
 
   const getLoggedInUser = async () => {
     const token = localStorage.getItem(LocalStorageKey.RefreshToken)
-    dispatch(showLoading())
-    setTimeout(async () => {
-      const userResponse = await RefreshAuth({ refreshToken: token })
-      setUserLanguage(userResponse?.user?.lang || LanguageType.Ukrainian)
-      if (userResponse) {
-        dispatch(setUser(userResponse.user))
-        userResponse.notifications &&
-          dispatch(setNotificationsWithCount({ count: userResponse.notifications?.count, notifications: userResponse.notifications?.data }))
-      }
-      // userResponse && dispatch(setUser(userResponse.user))
-      dispatch(hideLoading())
-    }, 3000)
+    if (token) {
+      dispatch(showLoading())
+      setTimeout(async () => {
+        const userResponse = await RefreshAuth({ refreshToken: token })
+        setUserLanguage(userResponse?.user?.lang || LanguageType.Ukrainian)
+        if (userResponse) {
+          dispatch(setUser(userResponse.user))
+          userResponse.notifications &&
+            dispatch(setNotificationsWithCount({ count: userResponse.notifications?.count, notifications: userResponse.notifications?.data }))
+        }
+        // userResponse && dispatch(setUser(userResponse.user))
+        dispatch(hideLoading())
+      }, 3000)
+    }
   }
 
   const setUserLanguage = (lang: LanguageType) => {

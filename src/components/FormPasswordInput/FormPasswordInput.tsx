@@ -56,6 +56,7 @@ const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
             fullWidth
             required={required}
             className={className}
+            color='secondary'
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton
