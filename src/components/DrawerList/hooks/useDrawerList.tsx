@@ -27,6 +27,7 @@ import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { selectNotification } from 'redux/slices/notificationSlice'
 import { Characteristic, CharacteristicType } from 'api/characteristic/characteristic.types'
 import { Abonement } from 'api/abonements/abonements.types'
+import { Gym } from 'api/gym/gym.types'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const { user, role } = useAuthProvider()
@@ -88,9 +89,30 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       ),
       link: `${RouteNames.NOTIFICATIONS}/${user?.uid}`,
     },
+    {
+      id: generateId(),
+      name: 'Додати тренерів',
+      icon: <AccountBoxIcon />,
+      link: `${RouteNames.ASSIGN_TRAINERS}/${user?.uid}`,
+    },
   ]
 
-  const trainerList = [...learnerList]
+  const trainerList = [
+    ...learnerList,
+
+    {
+      id: generateId(),
+      name: 'Створити абонемент',
+      icon: <AccountBoxIcon />,
+      link: `${RouteNames.CREATE_ABONEMENT}/${user?.uid}`,
+    },
+    {
+      id: generateId(),
+      name: 'Додати учнів',
+      icon: <AccountBoxIcon />,
+      link: `${RouteNames.ASSIGN_LEARNERS}/${user?.uid}`,
+    },
+  ]
   const adminList = [...trainerList]
 
   const sidebar: { [x: string]: MenuItem[] } = {
@@ -107,7 +129,12 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
 
   const transformAbonements = (abonements?: Abonement[]) => {
     if (!abonements) return []
-    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_ABONEMENT}/${id}`, icon: <CardMembershipIcon /> }))
+    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_ABONEMENT}/${id}` }))
+  }
+
+  const transformGyms = (abonements?: Gym[]) => {
+    if (!abonements) return []
+    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_GYM}/${user?.uid}/${id}` }))
   }
 
   const createDrawerList = (user: Partial<AppUser> | null, role: UserRoles) => {
@@ -150,7 +177,18 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
           },
         ]
       : []
-    return [...sidebar[role], ...abonement, ...characteristics]
+
+    const gyms = user?.gyms
+      ? [
+          {
+            id: generateId(),
+            name: 'Мої зали',
+            icon: <AccountBoxIcon />,
+            items: [...transformGyms(user.gyms)],
+          },
+        ]
+      : []
+    return [...sidebar[role], ...abonement, ...gyms, ...characteristics]
   }
 
   useEffect(() => {

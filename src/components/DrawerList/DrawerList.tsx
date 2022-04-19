@@ -31,9 +31,9 @@ export interface DrownerListProps {}
 const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
   const { role } = useAuthContext()
   const { darkTheme } = useAppSelector(selectTheme)
+  const dispatch = useAppDispatch()
 
   const { drawerList } = useDrawerList()
-  const dispatch = useAppDispatch()
 
   const changeTheme = () => {
     const newTheme = !darkTheme

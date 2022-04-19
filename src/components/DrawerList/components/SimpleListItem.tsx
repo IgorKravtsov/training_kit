@@ -18,7 +18,7 @@ const SimpleListItem: React.FC<SimpleListItemProps> = ({ item }): React.ReactEle
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate(link)
+    link && navigate(link)
     toggleFunc(false)
   }
 

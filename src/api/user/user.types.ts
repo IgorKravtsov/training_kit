@@ -1,5 +1,6 @@
 import { Abonement } from 'api/abonements/abonements.types'
 import { Characteristic } from 'api/characteristic/characteristic.types'
+import { Gym } from 'api/gym/gym.types'
 import { Organization } from 'api/organization/organization.types'
 import { LanguageType, UserRoles } from 'shared-files/enums'
 
@@ -14,13 +15,13 @@ export interface AppUser {
   birthDate?: Date
   role: UserRoles
   lang: LanguageType
-  // theme?: ThemeType
   level?: string //Уровень пояса
   organizations?: Organization[]
   selectedOrganization?: Organization
   characteristics?: Characteristic[]
   trainers?: PublicAppUserDto[]
   abonements?: Abonement[]
+  gyms?: Gym[]
 }
 
 export interface PublicAppUserDto {

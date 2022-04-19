@@ -45,7 +45,7 @@ const CollapsableListItem: React.FC<CollapsableListItemProps> = ({ item }): Reac
           {items &&
             items.map(innerItem => (
               <>
-                <ListItemButton sx={{ pl: 4 }} onClick={() => handleInnerClick(innerItem.link)}>
+                <ListItemButton sx={{ pl: 4 }} onClick={() => handleInnerClick(innerItem.link || '')}>
                   <ListItemIcon>{innerItem.icon}</ListItemIcon>
                   <ListItemText primary={innerItem.name} />
                 </ListItemButton>

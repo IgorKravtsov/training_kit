@@ -14,7 +14,12 @@ const MyAbonement = React.lazy(() => import('./pages/MyAbonement/MyAbonement'))
 const AddAbonement = React.lazy(() => import('./pages/AddAbonement/AddAbonement'))
 const AddAbonementGyms = React.lazy(() => import('./pages/AddAbonement/pages/Gyms'))
 const AddAbonementAbonements = React.lazy(() => import('./pages/AddAbonement/pages/Abonements'))
+const CreateAbonement = React.lazy(() => import('./pages/CreateAbonement/CreateAbonement'))
 const Notifications = React.lazy(() => import('./pages/Notifications/Notifications'))
+const AddGym = React.lazy(() => import('./pages/AddGym/AddGym'))
+const MyGym = React.lazy(() => import('./pages/MyGym/MyGym'))
+const AssignLearners = React.lazy(() => import('./pages/AssignLearners/AssignLearners'))
+const AssignTrainers = React.lazy(() => import('./pages/AssignTrainers/AssignTrainers'))
 
 export enum RouteNames {
   WELCOME = '/',
@@ -28,7 +33,12 @@ export enum RouteNames {
   CABINET = '/cabinet',
   MY_ABONEMENT = '/my-abonement',
   ADD_ABONEMENT = '/add-abonement',
+  CREATE_ABONEMENT = '/create-abonement',
   NOTIFICATIONS = '/notifications',
+  ADD_GYM = '/add-gym',
+  MY_GYM = '/my-gym',
+  ASSIGN_TRAINERS = '/assign-trainers',
+  ASSIGN_LEARNERS = '/assign-learners',
 }
 
 export enum MyAbonementRoutes {
@@ -57,13 +67,15 @@ export const learnerRoutes: React.ReactNode[] = [
     <Route path={`:gymId/${MyAbonementRoutes.ABONEMENTS}`} element={<AddAbonementAbonements />} />
   </Route>,
   <Route key={RouteNames.NOTIFICATIONS} path={RouteNames.NOTIFICATIONS + '/:userId'} element={<Notifications />} />,
+  <Route key={RouteNames.ASSIGN_TRAINERS} path={RouteNames.ASSIGN_TRAINERS + '/:userId'} element={<AssignTrainers />} />,
 ]
 
 export const trainerRoutes: React.ReactNode[] = [
   ...learnerRoutes,
-  // <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS} element={<MyTrainings />} />,
-  // <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
-  // <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS} element={<Characteristics />} />,
+  <Route key={RouteNames.ADD_GYM} path={RouteNames.ADD_GYM + '/:userId'} element={<AddGym />} />,
+  <Route key={RouteNames.MY_GYM} path={RouteNames.MY_GYM + '/:userId/:gymId'} element={<MyGym />} />,
+  <Route key={RouteNames.CREATE_ABONEMENT} path={RouteNames.CREATE_ABONEMENT + '/:userId'} element={<CreateAbonement />} />,
+  <Route key={RouteNames.ASSIGN_LEARNERS} path={RouteNames.ASSIGN_LEARNERS + '/:userId'} element={<AssignLearners />} />,
 ]
 
 export const adminRoutes: React.ReactNode[] = [
