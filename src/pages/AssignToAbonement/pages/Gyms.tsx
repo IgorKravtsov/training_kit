@@ -30,7 +30,7 @@ const Gyms: React.FC = (): React.ReactElement => {
     <>
       {gyms?.map(gym => (
         <>
-          <Link to={`${RouteNames.ADD_ABONEMENT}/${user?.uid}/${gym.id}/${MyAbonementRoutes.ABONEMENTS}`}>{gym.title}</Link>
+          <Link to={`${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${gym.id}/${MyAbonementRoutes.ABONEMENTS}`}>{gym.title}</Link>
           <br />
         </>
       ))}

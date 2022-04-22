@@ -11,9 +11,9 @@ const Characteristics = React.lazy(() => import('./pages/Characteristics/Charact
 const AddCharacteristic = React.lazy(() => import('./pages/AddCharacteristic/AddCharacteristic'))
 const Cabinet = React.lazy(() => import('./pages/Cabinet/Cabinet'))
 const MyAbonement = React.lazy(() => import('./pages/MyAbonement/MyAbonement'))
-const AddAbonement = React.lazy(() => import('./pages/AddAbonement/AddAbonement'))
-const AddAbonementGyms = React.lazy(() => import('./pages/AddAbonement/pages/Gyms'))
-const AddAbonementAbonements = React.lazy(() => import('./pages/AddAbonement/pages/Abonements'))
+const AssignToAbonement = React.lazy(() => import('./pages/AssignToAbonement/AssignToAbonement'))
+const AssignToAbonementGyms = React.lazy(() => import('./pages/AssignToAbonement/pages/Gyms'))
+const AssignToAbonementAbonements = React.lazy(() => import('./pages/AssignToAbonement/pages/Abonements'))
 const CreateAbonement = React.lazy(() => import('./pages/CreateAbonement/CreateAbonement'))
 const Notifications = React.lazy(() => import('./pages/Notifications/Notifications'))
 const AddGym = React.lazy(() => import('./pages/AddGym/AddGym'))
@@ -32,7 +32,7 @@ export enum RouteNames {
   ADD_CHARACTERISTIC = '/add-characteristic',
   CABINET = '/cabinet',
   MY_ABONEMENT = '/my-abonement',
-  ADD_ABONEMENT = '/add-abonement',
+  ASSIGN_TO_ABONEMENT = '/assign-to-abonement',
   CREATE_ABONEMENT = '/create-abonement',
   NOTIFICATIONS = '/notifications',
   ADD_GYM = '/add-gym',
@@ -62,9 +62,9 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:id'} element={<Characteristics />}></Route>,
   <Route key={RouteNames.CABINET} path={RouteNames.CABINET + '/:userId'} element={<Cabinet />} />,
   <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.MY_ABONEMENT + '/:userId'} element={<MyAbonement />} />,
-  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.ADD_ABONEMENT + '/:userId'} element={<AddAbonement />}>
-    <Route path={MyAbonementRoutes.GYMS} element={<AddAbonementGyms />} />
-    <Route path={`:gymId/${MyAbonementRoutes.ABONEMENTS}`} element={<AddAbonementAbonements />} />
+  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.ASSIGN_TO_ABONEMENT + '/:userId'} element={<AssignToAbonement />}>
+    <Route path={MyAbonementRoutes.GYMS} element={<AssignToAbonementGyms />} />
+    <Route path={`:gymId/${MyAbonementRoutes.ABONEMENTS}`} element={<AssignToAbonementAbonements />} />
   </Route>,
   <Route key={RouteNames.NOTIFICATIONS} path={RouteNames.NOTIFICATIONS + '/:userId'} element={<Notifications />} />,
   <Route key={RouteNames.ASSIGN_TRAINERS} path={RouteNames.ASSIGN_TRAINERS + '/:userId'} element={<AssignTrainers />} />,
