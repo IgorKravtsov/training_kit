@@ -42,14 +42,14 @@ const AppLayout: React.FC = (): React.ReactElement => {
 
   return (
     <Suspense fallback={<LoadingIndicator open={true} />}>
-      <TransitionGroup>
-        <CSSTransition timeout={100} classNames='pages' key={location.key}>
-          <Routes>
-            {routes[role]}
-            <Route path='*' element={<ErrorPage />} />
-          </Routes>
-        </CSSTransition>
-      </TransitionGroup>
+      {/* <TransitionGroup> */}
+      {/* <CSSTransition timeout={100} classNames='pages' key={location.key}> */}
+      <Routes>
+        {routes[role]}
+        <Route path='*' element={<ErrorPage />} />
+      </Routes>
+      {/* </CSSTransition> */}
+      {/* </TransitionGroup> */}
 
       <Snackbar TransitionComponent={Slide} open={openSnack} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={snackType} sx={{ width: '100%' }}>

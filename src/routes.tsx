@@ -5,7 +5,12 @@ const Home = React.lazy(() => import('./pages/Home/Home'))
 const Login = React.lazy(() => import('./pages/Login/Login'))
 const Register = React.lazy(() => import('./pages/Register/Register'))
 const Welcome = React.lazy(() => import('./pages/Welcome/Welcome'))
+
 const MyTrainings = React.lazy(() => import('./pages/MyTrainings/MyTrainings'))
+const MyTrainingsRecent = React.lazy(() => import('./pages/MyTrainings/pages/Recent/Recent'))
+const MyTrainingsTrainingHistory = React.lazy(() => import('./pages/MyTrainings/pages/TrainingHistory/TrainingHistory'))
+const MyTrainingsCreateTrainings = React.lazy(() => import('./pages/MyTrainings/pages/CreateTrainings/CreateTrainings'))
+
 const VisitDashboard = React.lazy(() => import('./pages/VisitDashboard/VisitDashboard'))
 const Characteristics = React.lazy(() => import('./pages/Characteristics/Characteristics'))
 const AddCharacteristic = React.lazy(() => import('./pages/AddCharacteristic/AddCharacteristic'))
@@ -41,6 +46,12 @@ export enum RouteNames {
   ASSIGN_LEARNERS = '/assign-learners',
 }
 
+export enum MyTrainingsRoutes {
+  RECENT = 'recent',
+  TRAINING_HISTORY = 'training-history',
+  CREATE_TRAININGS = 'create-tarinings',
+}
+
 export enum MyAbonementRoutes {
   GYMS = 'gyms',
   ABONEMENTS = 'abonements',
@@ -56,7 +67,11 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.HOME} path={RouteNames.HOME} element={<Home />} />,
   <Route key={RouteNames.LOGIN} path={RouteNames.LOGIN} element={<Login />} />,
   <Route key={RouteNames.REGISTER} path={RouteNames.REGISTER} element={<Register />} />,
-  <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:userId'} element={<MyTrainings />} />,
+  <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:userId'} element={<MyTrainings />}>
+    <Route path={MyTrainingsRoutes.RECENT} element={<MyTrainingsRecent />} />
+    <Route path={MyTrainingsRoutes.TRAINING_HISTORY} element={<MyTrainingsTrainingHistory />} />
+    <Route path={MyTrainingsRoutes.CREATE_TRAININGS} element={<MyTrainingsCreateTrainings />} />
+  </Route>,
   <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
   <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:userId'} element={<AddCharacteristic />} />,
   <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:id'} element={<Characteristics />}></Route>,
