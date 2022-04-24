@@ -22,7 +22,7 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 import { saveTheme } from 'utils/saveTheme'
 
-import { useDrawerList } from './hooks/useDrawerList'
+import { useDrawerList } from './useDrawerList'
 
 interface DrownerListProps {}
 

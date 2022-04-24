@@ -22,7 +22,7 @@ const TrainingListItem: React.FC<TrainingListProps> = ({ training, gymImg }): Re
 
   return (
     <Card elevation={isHovered ? 12 : 6} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <CardMedia component='img' height='240' image={gymImg || noPhoto} alt='green iguana' />
+      <CardMedia component='img' height='180' image={gymImg || noPhoto} alt='green iguana' />
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
           {training.title}
@@ -32,7 +32,7 @@ const TrainingListItem: React.FC<TrainingListProps> = ({ training, gymImg }): Re
         </Typography>
       </CardContent>
       <CardActions>
-        <Button color='secondary' size='medium' disabled={!checkCanVisit(training.trainingTime)}>
+        <Button sx={{ marginLeft: 'auto' }} color='secondary' variant='contained' size='medium' disabled={!checkCanVisit(training.trainingTime)}>
           Відмітити присутність
         </Button>
       </CardActions>

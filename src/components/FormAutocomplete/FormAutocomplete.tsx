@@ -54,7 +54,7 @@ const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
               type={type}
               placeholder={placeholder}
               required={required}
-              color='secondary'
+              color='primary'
             />
           )}
         />

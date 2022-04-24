@@ -103,7 +103,7 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
               type={type}
               placeholder={placeholder}
               required={required}
-              color='secondary'
+              color='primary'
               {...otherProps}
               InputProps={{
                 ...parametrs.InputProps,

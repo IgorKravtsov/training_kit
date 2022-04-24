@@ -15,10 +15,12 @@ import { useAppDispatch } from 'redux/hooks/typedHooks'
 
 import AppCard from 'components/AppCard/AppCard'
 import Form from './components/Form'
+
 import { register } from 'redux/slices/userSlice'
 import { error } from 'redux/slices/snackbarSlice'
-import { RegisterRequest } from 'api/auth/auth.types'
+
 import { LocalStorageKey, UserRoles } from 'shared-files/enums'
+import { RegisterRequest } from 'api/auth/types'
 
 const Register: React.FC = (): React.ReactElement => {
   const classes = useStyles()

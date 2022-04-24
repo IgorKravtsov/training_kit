@@ -3,7 +3,7 @@ import { Theme } from '@mui/material/styles'
 
 export const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
-    paddingBottom: '70px',
+    paddingBottom: '50px',
     textAlign: 'center',
   },
   listWrapper: {

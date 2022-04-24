@@ -23,13 +23,13 @@ export const useStyles = makeStyles((theme: Theme) => ({
         },
         '& + .MuiSwitch-track': {
           opacity: 1,
-          backgroundColor: theme.palette.mode === 'dark' ? theme.palette.secondary.main : '#aab4be',
+          backgroundColor: theme.palette.mode === 'dark' ? theme.palette.primary.main : '#aab4be',
         },
       },
     },
     '& .MuiSwitch-thumb': {
       // backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.primary.main,
       width: 32,
       height: 32,
       '&:before': {

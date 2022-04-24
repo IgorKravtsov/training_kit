@@ -18,6 +18,7 @@ import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 
 import { GetOrganizations } from 'api/organization/organization'
 import { useTheme } from '@mui/styles'
+import { useThemeColor, useThemeColorInverse } from 'shared-files/hooks'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>
@@ -93,7 +94,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           loading={isLoading}
           loadingPosition='start'
           type='submit'
-          color='secondary'
+          color={useThemeColor()}
           variant='contained'
           className={classes.btn}
           fullWidth

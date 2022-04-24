@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+
 import { Id } from 'shared-files/types'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { getUserTrainings, selectTraining } from 'redux/slices/trainingSlice'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
+
 import GymSection from 'pages/MyTrainings/components/GymSection/GymSection'
 
 const Recent: React.FC = (): React.ReactElement => {

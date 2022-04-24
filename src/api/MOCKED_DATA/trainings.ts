@@ -1,5 +1,6 @@
 import { GymTraining, Training } from 'api/training/types'
 import { generateId } from 'utils'
+import { mocked_trainers } from './users'
 
 export const mocked_trainings: Training[] = [
   {
@@ -7,6 +8,7 @@ export const mocked_trainings: Training[] = [
     title: 'Ката (Средняя группа)',
     trainingDate: new Date(),
     trainingTime: '16:30',
+    trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
       address: 'ул. Пушкина 25',
@@ -18,6 +20,7 @@ export const mocked_trainings: Training[] = [
     title: 'Кумите (Средняя группа)',
     trainingDate: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
     trainingTime: '12:00',
+    trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
       address: 'ул. Пушкина 25',
@@ -30,6 +33,7 @@ export const mocked_trainings: Training[] = [
     trainingDate: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
     trainingTime: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
     // trainingTime: '17:00',
+    trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
       address: 'ул. Пушкина 25',
@@ -42,6 +46,7 @@ export const mocked_trainings: Training[] = [
     trainingDate: new Date(),
     trainingTime: new Date(),
     // trainingTime: '17:00',
+    trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
       address: 'ул. Маяковского 12а',
@@ -65,6 +70,7 @@ export const mocked_gym_trainings: GymTraining[] = [
         trainingDate: new Date(),
         // trainingTime: '16:30',
         trainingTime: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+        trainer: mocked_trainers[1],
       },
       {
         id: generateId(),
@@ -72,6 +78,7 @@ export const mocked_gym_trainings: GymTraining[] = [
         trainingDate: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
         // trainingTime: '17:00',
         trainingTime: new Date(),
+        trainer: mocked_trainers[0],
       },
     ],
   },
@@ -89,6 +96,7 @@ export const mocked_gym_trainings: GymTraining[] = [
         trainingDate: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
         // trainingTime: '17:00',
         trainingTime: new Date(),
+        trainer: mocked_trainers[2],
       },
     ],
   },

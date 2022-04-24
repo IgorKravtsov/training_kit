@@ -19,6 +19,7 @@ import FormInput from 'components/FormInput/FormInput'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
+import { useThemeColor } from 'shared-files/hooks'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>
@@ -102,7 +103,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           loading={isLoading}
           loadingPosition='start'
           type='submit'
-          color='secondary'
+          color={useThemeColor()}
           variant='contained'
           className={classes.btn}
           fullWidth

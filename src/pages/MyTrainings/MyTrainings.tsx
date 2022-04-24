@@ -49,7 +49,7 @@ const MyTrainings: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      <Tabs value={value} onChange={handleChange} aria-label='trainings menu' variant='scrollable' textColor='secondary' className={classes.tabs}>
+      <Tabs value={value} onChange={handleChange} aria-label='trainings menu' variant='scrollable' className={classes.tabs}>
         <Tab label={'Ближчі тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.NEAREST}`} />
         <Tab label={'Історія тренуваннь'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.TRAINING_HISTORY}`} />
         <Tab label={'Створити тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.CREATE_TRAININGS}`} />

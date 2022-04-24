@@ -23,48 +23,48 @@ const commonTheme = {
       lineHeight: '40px',
       // letterSpacing: '1px',
     },
-    h2: {
-      fontSize: '23px',
-      fontWeight: 600,
-      lineHeight: '33px',
-      // letterSpacing: '1px',
-    },
-    h3: {
-      fontSize: '20px',
-      fontWeight: 600,
-      lineHeight: '31px',
-      // letterSpacing: '1px',
-    },
-    h4: {
-      fontSize: '20px',
-      fontWeight: 500,
-      lineHeight: '31px',
-      // letterSpacing: '1px',
-    },
-    h5: {
-      fontSize: '16px',
-      fontWeight: 500,
-      lineHeight: '25px',
-      // letterSpacing: '1px',
-    },
-    h6: {
-      fontSize: '13px',
-      fontWeight: 500,
-      lineHeight: '25px',
-      // letterSpacing: '1px',
-    },
-    body1: {
-      fontSize: '14px',
-      lineHeight: '20px',
-      // fontWeight: 500,
-      // letterSpacing: '1px',
-    },
-    body2: {
-      fontSize: '14px',
-      lineHeight: '22px',
-      // fontWeight: 600,
-      // letterSpacing: '1px',
-    },
+    // h2: {
+    //   fontSize: '23px',
+    //   fontWeight: 600,
+    //   lineHeight: '33px',
+    //   // letterSpacing: '1px',
+    // },
+    // h3: {
+    //   fontSize: '20px',
+    //   fontWeight: 600,
+    //   lineHeight: '31px',
+    //   // letterSpacing: '1px',
+    // },
+    // h4: {
+    //   fontSize: '20px',
+    //   fontWeight: 500,
+    //   lineHeight: '31px',
+    //   // letterSpacing: '1px',
+    // },
+    // h5: {
+    //   fontSize: '16px',
+    //   fontWeight: 500,
+    //   lineHeight: '25px',
+    //   // letterSpacing: '1px',
+    // },
+    // h6: {
+    //   fontSize: '13px',
+    //   fontWeight: 500,
+    //   lineHeight: '25px',
+    //   // letterSpacing: '1px',
+    // },
+    // body1: {
+    //   fontSize: '14px',
+    //   lineHeight: '20px',
+    //   // fontWeight: 500,
+    //   // letterSpacing: '1px',
+    // },
+    // body2: {
+    //   fontSize: '14px',
+    //   lineHeight: '22px',
+    //   // fontWeight: 600,
+    //   // letterSpacing: '1px',
+    // },
   },
 }
 
@@ -97,10 +97,12 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#13264c',
+      // main: '#13264c',
+      main: '#90caf9',
     },
     secondary: {
-      main: '#90caf9',
+      // main: '#90caf9',
+      main: '#13264c',
     },
     background: {
       paper: '#0A1929',

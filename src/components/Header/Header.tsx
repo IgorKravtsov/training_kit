@@ -14,14 +14,12 @@ import DrawerList from 'components/DrawerList/DrawerList'
 
 import { RouteNames } from 'routes'
 
-import { selectOrganization } from 'redux/slices/organizationSlice'
-import { useAppSelector } from 'redux/hooks/typedHooks'
-
 import AuthMenu from './components/AuthMenu'
 import AnonymusMenu from './components/AnonymusMenu'
 import { DrawerContext } from './components/drawerContext'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { UserRoles } from 'shared-files/enums'
+import { useThemeColor } from 'shared-files/hooks'
 
 const Header: React.FC = (): React.ReactElement => {
   const navigate = useNavigate()
@@ -40,7 +38,7 @@ const Header: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      <AppBar position='static' color='primary' enableColorOnDark>
+      <AppBar position='static' color={useThemeColor()} enableColorOnDark>
         <>
           <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }} onClick={() => toggleDrawer(true)}>
