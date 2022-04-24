@@ -7,7 +7,7 @@ const Register = React.lazy(() => import('./pages/Register/Register'))
 const Welcome = React.lazy(() => import('./pages/Welcome/Welcome'))
 
 const MyTrainings = React.lazy(() => import('./pages/MyTrainings/MyTrainings'))
-const MyTrainingsRecent = React.lazy(() => import('./pages/MyTrainings/pages/Recent/Recent'))
+const MyTrainingsNearest = React.lazy(() => import('./pages/MyTrainings/pages/Nearest/Nearest'))
 const MyTrainingsTrainingHistory = React.lazy(() => import('./pages/MyTrainings/pages/TrainingHistory/TrainingHistory'))
 const MyTrainingsCreateTrainings = React.lazy(() => import('./pages/MyTrainings/pages/CreateTrainings/CreateTrainings'))
 
@@ -47,7 +47,7 @@ export enum RouteNames {
 }
 
 export enum MyTrainingsRoutes {
-  RECENT = 'recent',
+  NEAREST = 'nearest',
   TRAINING_HISTORY = 'training-history',
   CREATE_TRAININGS = 'create-tarinings',
 }
@@ -68,7 +68,7 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.LOGIN} path={RouteNames.LOGIN} element={<Login />} />,
   <Route key={RouteNames.REGISTER} path={RouteNames.REGISTER} element={<Register />} />,
   <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:userId'} element={<MyTrainings />}>
-    <Route path={MyTrainingsRoutes.RECENT} element={<MyTrainingsRecent />} />
+    <Route path={MyTrainingsRoutes.NEAREST} element={<MyTrainingsNearest />} />
     <Route path={MyTrainingsRoutes.TRAINING_HISTORY} element={<MyTrainingsTrainingHistory />} />
     <Route path={MyTrainingsRoutes.CREATE_TRAININGS} element={<MyTrainingsCreateTrainings />} />
   </Route>,
