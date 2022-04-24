@@ -9,6 +9,7 @@ import { notificationReducer } from 'redux/slices/notificationSlice'
 import { abonementReducer } from 'redux/slices/abonementSlice'
 import { gymReducer } from 'redux/slices/gymSlice'
 import { trainingReducer } from 'redux/slices/trainingSlice'
+import { myTrainingReducer } from 'redux/slices/myTrainingsSlice'
 
 const reducer = combineReducers({
   user: userReducer,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   abonement: abonementReducer,
   gym: gymReducer,
   training: trainingReducer,
+  myTrainings: myTrainingReducer,
 })
 
 export default reducer

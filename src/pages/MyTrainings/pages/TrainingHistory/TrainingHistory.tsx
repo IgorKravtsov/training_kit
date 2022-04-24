@@ -1,23 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useStyles } from './trainingHistory.styles'
+import React, { useEffect, useState } from 'react'
 
 import LinearProgress from '@mui/material/LinearProgress'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 
-import { DataGrid, GridToolbar } from '@mui/x-data-grid'
-import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
-import { getLearnerTrainingHistory, selectTraining } from 'redux/slices/trainingSlice'
+import { DataGrid } from '@mui/x-data-grid'
+import { useAppDispatch } from 'redux/hooks/typedHooks'
 
-import { useTrainingHistory } from './useTrainingHistory'
 import { Id } from 'shared-files/types'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { useTheme } from '@mui/material'
-import { useLocalizationGrid } from './useLocalizationGrid'
-import CustomToolbar from './components/CustomToolbar'
+
+import { useTrainingHistory } from './useTrainingHistory'
+import CustomToolbar from 'pages/MyTrainings/components/CustomToolbar/CustomToolbar'
+import { getLearnerTrainingHistory } from 'redux/slices/myTrainingsSlice'
 
 const TrainingHistory: React.FC = (): React.ReactElement => {
-  const classes = useStyles()
   const { user } = useAuthContext()
   const { columns, rows, localizedText, rowCount } = useTrainingHistory()
 

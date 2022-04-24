@@ -1,15 +1,13 @@
 import React from 'react'
-import { useStyles } from './gymTitle.styles'
 
-import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Divider from '@mui/material/Divider'
+import SectionTitle from 'components/SectionTitle/SectionTitle'
 
 const GymTitle: React.FC = ({ children }): React.ReactElement => {
-  const classes = useStyles()
   return (
     <Container component='section'>
-      <Typography className={classes.title}>{children}</Typography>
+      <SectionTitle underline>{children}</SectionTitle>
       <Divider />
     </Container>
   )

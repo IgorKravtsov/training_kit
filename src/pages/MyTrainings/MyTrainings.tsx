@@ -26,9 +26,9 @@ const MyTrainings: React.FC = (): React.ReactElement => {
   const navigate = useNavigate()
 
   const getTabValue = (locationPathname: string) => {
-    if (locationPathname.endsWith(MyTrainingsRoutes.TRAINING_HISTORY)) {
+    if (locationPathname.includes(MyTrainingsRoutes.TRAINING_HISTORY)) {
       return MyTrainingsPageTabs.TRAINING_HISTORY
-    } else if (locationPathname.endsWith(MyTrainingsRoutes.CREATE_TRAININGS)) {
+    } else if (locationPathname.includes(MyTrainingsRoutes.CREATE_TRAININGS)) {
       return MyTrainingsPageTabs.CREATE_TRAININGS
     } else {
       return MyTrainingsPageTabs.RECENT

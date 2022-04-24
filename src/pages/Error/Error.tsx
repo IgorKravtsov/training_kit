@@ -16,7 +16,7 @@ const ErrorPage: React.FC = (): React.ReactElement => {
       <Error />
       <Grid container direction='row' alignItems='center' justifyContent='center' xs={12}>
         <Button
-          color='secondary'
+          color='primary'
           variant='outlined'
           startIcon={<ArrowBackIosNewIcon />}
           className={classes.btn}

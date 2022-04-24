@@ -70,7 +70,9 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:userId'} element={<MyTrainings />}>
     <Route path={MyTrainingsRoutes.NEAREST} element={<MyTrainingsNearest />} />
     <Route path={MyTrainingsRoutes.TRAINING_HISTORY} element={<MyTrainingsTrainingHistory />} />
-    <Route path={MyTrainingsRoutes.CREATE_TRAININGS} element={<MyTrainingsCreateTrainings />} />
+    <Route path={`${MyTrainingsRoutes.CREATE_TRAININGS}`} element={<MyTrainingsCreateTrainings />} />
+    <Route path={`${MyTrainingsRoutes.CREATE_TRAININGS}/:gymId`} element={<MyTrainingsCreateTrainings />} />
+    <Route path={`${MyTrainingsRoutes.CREATE_TRAININGS}/:gymId/*`} element={<MyTrainingsCreateTrainings />} />
   </Route>,
   <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
   <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:userId'} element={<AddCharacteristic />} />,

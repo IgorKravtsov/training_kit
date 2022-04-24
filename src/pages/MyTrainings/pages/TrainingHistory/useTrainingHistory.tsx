@@ -7,11 +7,12 @@ import { selectTraining } from 'redux/slices/trainingSlice'
 import { Id } from 'shared-files/types'
 import { formatDate, formatTime } from 'utils'
 import { useLocalizationGrid } from './useLocalizationGrid'
+import { selectMyTrainings } from 'redux/slices/myTrainingsSlice'
 
 // export const useTrainingHistory = (learnerTrainingHistory: Training[] | null) => {
 export const useTrainingHistory = () => {
   const classes = useStyles()
-  const { learnerTrainingHistory } = useAppSelector(selectTraining)
+  const { learnerTrainingHistory } = useAppSelector(selectMyTrainings)
   const localizedText = useLocalizationGrid()
 
   interface TrainingHistoryRows {
