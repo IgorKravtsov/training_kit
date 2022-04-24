@@ -10,7 +10,7 @@ export interface LoadingIndicatorProps extends BackdropProps {}
 const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({ ...otherProps }): React.ReactElement => {
   return (
     <Backdrop sx={{ color: theme => theme.palette.secondary.main, zIndex: theme => theme.zIndex.drawer + 1 }} {...otherProps}>
-      <CircularProgress color='inherit' />
+      <CircularProgress color='primary' />
     </Backdrop>
   )
 }

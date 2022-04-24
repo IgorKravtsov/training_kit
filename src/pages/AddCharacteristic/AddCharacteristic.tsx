@@ -20,6 +20,7 @@ import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { GetAllCharacteristics } from 'api/characteristic/characteristic'
 import { Characteristic } from 'api/characteristic/types'
 import { AppUser } from 'api/user/types'
+import { useThemeColor } from 'shared-files/hooks'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
   const { user } = useAuthProvider()
@@ -87,7 +88,7 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
             />
           </Grid>
           <Grid item xs={4} sx={{ mt: 4 }}>
-            <Button type='submit' variant='contained' color='secondary'>
+            <Button type='submit' variant='contained' color={useThemeColor()}>
               Знайти пристрій
             </Button>
           </Grid>

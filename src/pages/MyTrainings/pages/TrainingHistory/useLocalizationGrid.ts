@@ -6,61 +6,62 @@ export const useLocalizationGrid = () => {
     errorOverlayDefaultLabel: 'Трапилась помилка',
 
     // Density selector toolbar button text
-    toolbarDensity: 'Density',
-    toolbarDensityLabel: 'Density',
-    toolbarDensityCompact: 'Compact',
-    toolbarDensityStandard: 'Standard',
-    toolbarDensityComfortable: 'Comfortable',
+    toolbarDensity: 'Розмір',
+    toolbarDensityLabel: 'Розмір',
+    toolbarDensityCompact: 'Компакт',
+    toolbarDensityStandard: 'Стандарт',
+    toolbarDensityComfortable: 'Комфорт',
 
     // Columns selector toolbar button text
-    toolbarColumns: 'Columns',
-    toolbarColumnsLabel: 'Select columns',
+    toolbarColumns: 'Колонки',
+    toolbarColumnsLabel: 'Оберіть колонки',
 
     // Filters toolbar button text
     toolbarFilters: 'Фільтри',
     toolbarFiltersLabel: 'Показати фільтри',
     toolbarFiltersTooltipHide: 'Hide filters',
     toolbarFiltersTooltipShow: 'Показати фільтри',
-    toolbarFiltersTooltipActive: (count: number) => (count !== 1 ? `${count} active filters` : `${count} active filter`),
+    toolbarFiltersTooltipActive: (count: number) => (count !== 1 ? `${count} фільтрів` : `${count} активний фільтр`),
 
     // Export selector toolbar button text
-    toolbarExport: 'Export',
-    toolbarExportLabel: 'Export',
-    toolbarExportCSV: 'Download as CSV',
-    toolbarExportPrint: 'Print',
+    toolbarExport: 'Завантажити',
+    toolbarExportLabel: 'Завантажити',
+    toolbarExportCSV: 'Заватажити як CSV',
+    toolbarExportPrint: 'Друк',
 
     // Columns panel text
-    columnsPanelTextFieldLabel: 'Find column',
-    columnsPanelTextFieldPlaceholder: 'Column title',
+    columnsPanelTextFieldLabel: 'Знайти колонку',
+    columnsPanelTextFieldPlaceholder: 'Назва колонки',
     columnsPanelDragIconLabel: 'Reorder column',
-    columnsPanelShowAllButton: 'Show all',
-    columnsPanelHideAllButton: 'Hide all',
+    columnsPanelShowAllButton: 'Показати всі',
+    columnsPanelHideAllButton: 'Скрити всі',
 
     // Filter panel text
-    filterPanelAddFilter: 'Add filter',
-    filterPanelDeleteIconLabel: 'Delete',
-    filterPanelLinkOperator: 'Logic operator',
-    filterPanelOperators: 'Operator', // TODO v6: rename to filterPanelOperator
-    filterPanelOperatorAnd: 'And',
-    filterPanelOperatorOr: 'Or',
-    filterPanelColumns: 'Columns',
-    filterPanelInputLabel: 'Value',
-    filterPanelInputPlaceholder: 'Filter value',
+    filterPanelAddFilter: 'Додати фільтр',
+    filterPanelDeleteIconLabel: 'Видалити',
+    filterPanelLinkOperator: 'Логічний оператор',
+    filterPanelOperators: 'Оператор', // TODO v6: rename to filterPanelOperator
+    filterPanelOperatorAnd: 'Та',
+    filterPanelOperatorOr: 'Або',
+    filterPanelColumns: 'Колонки',
+    filterPanelInputLabel: 'Значення',
+    filterPanelInputPlaceholder: 'Значення фільтру',
 
     // Filter operators text
-    filterOperatorContains: 'contains',
-    filterOperatorEquals: 'equals',
-    filterOperatorStartsWith: 'starts with',
-    filterOperatorEndsWith: 'ends with',
-    filterOperatorIs: 'is',
-    filterOperatorNot: 'is not',
+    filterOperatorContains: 'Містить',
+    filterOperatorEquals: 'Дорівнює',
+    filterOperatorStartsWith: 'Починається з',
+    filterOperatorEndsWith: 'Закінчується на',
+    filterOperatorIs: 'Є',
+    filterOperatorNot: 'Не є',
     filterOperatorAfter: 'is after',
     filterOperatorOnOrAfter: 'is on or after',
     filterOperatorBefore: 'is before',
     filterOperatorOnOrBefore: 'is on or before',
-    filterOperatorIsEmpty: 'is empty',
-    filterOperatorIsNotEmpty: 'is not empty',
-    filterOperatorIsAnyOf: 'is any of',
+    filterOperatorIsEmpty: 'Нічого не містить',
+    filterOperatorIsNotEmpty: 'Містить щось',
+    filterOperatorIsAnyOf: 'Не нажимати',
+    // filterOperatorIsAnyOf: 'is any of',
 
     // Filter values text
     filterValueAny: 'any',

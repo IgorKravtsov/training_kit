@@ -10,6 +10,7 @@ import Title from 'components/Title/Title'
 import { MyTrainingsRoutes, RouteNames } from 'routes'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import Error from 'components/Error/Error'
+import { UserRoles } from 'shared-files/enums'
 
 enum MyTrainingsPageTabs {
   RECENT = 0,
@@ -48,15 +49,18 @@ const MyTrainings: React.FC = (): React.ReactElement => {
   }
 
   return (
-    <>
+    <div className={classes.wrapper}>
       <Tabs value={value} onChange={handleChange} aria-label='trainings menu' variant='scrollable' className={classes.tabs}>
         <Tab label={'Ближчі тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.NEAREST}`} />
         <Tab label={'Історія тренуваннь'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.TRAINING_HISTORY}`} />
-        <Tab label={'Створити тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.CREATE_TRAININGS}`} />
+        {user.role === UserRoles.TRAINER ||
+          (user.role === UserRoles.ADMIN && (
+            <Tab label={'Створити тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.CREATE_TRAININGS}`} />
+          ))}
       </Tabs>
       <Title>Мої тренування</Title>
       <Outlet />
-    </>
+    </div>
   )
 }
 

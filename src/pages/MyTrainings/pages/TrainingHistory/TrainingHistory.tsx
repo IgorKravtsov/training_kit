@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useStyles } from './trainingHistory.styles'
 
-import Box from '@mui/material/Box'
 import LinearProgress from '@mui/material/LinearProgress'
+import Container from '@mui/material/Container'
+import Card from '@mui/material/Card'
 
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { getLearnerTrainingHistory, selectTraining } from 'redux/slices/trainingSlice'
 
 import { useTrainingHistory } from './useTrainingHistory'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { Id } from 'shared-files/types'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { useTheme } from '@mui/material'
-import CustomToolbar from './components/CustomToolbar'
 import { useLocalizationGrid } from './useLocalizationGrid'
+import CustomToolbar from './components/CustomToolbar'
 
 const TrainingHistory: React.FC = (): React.ReactElement => {
   const classes = useStyles()
   const { user } = useAuthContext()
-  const { learnerTrainingHistory } = useAppSelector(selectTraining)
-  const { columns, rows } = useTrainingHistory()
-  const localizedText = useLocalizationGrid()
-  const theme = useTheme()
+  const { columns, rows, localizedText, rowCount } = useTrainingHistory()
 
   const dispatch = useAppDispatch()
 
@@ -30,35 +27,34 @@ const TrainingHistory: React.FC = (): React.ReactElement => {
 
   const getTrainingHistory = async (learnerId: Id) => {
     setLoading(true)
-    await dispatch(getLearnerTrainingHistory({ learnerId }))
-    setLoading(false)
+    setTimeout(async () => {
+      await dispatch(getLearnerTrainingHistory({ learnerId }))
+      setLoading(false)
+    }, 1000)
   }
 
   useEffect(() => {
     user?.uid && getTrainingHistory(user?.uid)
   }, [])
 
-  useEffect(() => {
-    console.log('===rows===', rows)
-  }, [rows])
-
   return (
-    <Box sx={{ height: 400, bgcolor: 'background.paper' }}>
-      <DataGrid
-        columns={columns}
-        rows={rows}
-        hideFooter
-        loading={loading}
-        localeText={localizedText}
-        components={{
-          Toolbar: CustomToolbar,
-          LoadingOverlay: LinearProgress,
-        }}
-        componentsProps={{
-          panel: { className: classes.panel },
-        }}
-      />
-    </Box>
+    <Container>
+      <Card sx={{ height: 600 }} elevation={4}>
+        <DataGrid
+          columns={columns}
+          rows={rows}
+          hideFooter
+          loading={loading}
+          localeText={localizedText}
+          rowCount={rowCount}
+          rowHeight={80}
+          components={{
+            Toolbar: CustomToolbar,
+            LoadingOverlay: LinearProgress,
+          }}
+        />
+      </Card>
+    </Container>
   )
 }
 

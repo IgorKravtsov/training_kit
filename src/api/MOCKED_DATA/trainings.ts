@@ -7,7 +7,8 @@ export const mocked_trainings: Training[] = [
     id: generateId(),
     title: 'Ката (Средняя группа)',
     trainingDate: new Date(),
-    trainingTime: '16:30',
+    trainingTime: new Date(),
+    // trainingTime: '16:30',
     trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
@@ -19,7 +20,8 @@ export const mocked_trainings: Training[] = [
     id: generateId(),
     title: 'Кумите (Средняя группа)',
     trainingDate: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
-    trainingTime: '12:00',
+    trainingTime: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+    // trainingTime: '12:00',
     trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
