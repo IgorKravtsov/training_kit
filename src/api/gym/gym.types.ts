@@ -4,6 +4,7 @@ export interface Gym {
   id: Id
   title: string
   address: string
+  img?: string
 }
 
 export interface GetLearnerGymsRequest {

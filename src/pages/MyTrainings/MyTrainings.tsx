@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './MyTrainings.styles'
 
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -25,13 +25,12 @@ const MyTrainings: React.FC = (): React.ReactElement => {
   const navigate = useNavigate()
 
   const getTabValue = (locationPathname: string) => {
-    if (locationPathname.endsWith(MyTrainingsRoutes.RECENT)) {
-      return MyTrainingsPageTabs.RECENT
-    } else if (locationPathname.endsWith(MyTrainingsRoutes.TRAINING_HISTORY)) {
+    if (locationPathname.endsWith(MyTrainingsRoutes.TRAINING_HISTORY)) {
       return MyTrainingsPageTabs.TRAINING_HISTORY
-    } else {
-      // navigate(MyTrainingsRoutes.CREATE_TRAININGS)
+    } else if (locationPathname.endsWith(MyTrainingsRoutes.CREATE_TRAININGS)) {
       return MyTrainingsPageTabs.CREATE_TRAININGS
+    } else {
+      return MyTrainingsPageTabs.RECENT
     }
   }
   const [value, setValue] = useState(getTabValue(location.pathname))

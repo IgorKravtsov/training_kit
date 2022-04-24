@@ -8,6 +8,7 @@ import { loadingIndicatorReducer } from 'redux/slices/loadingIndicatorSlice'
 import { notificationReducer } from 'redux/slices/notificationSlice'
 import { abonementReducer } from 'redux/slices/abonementSlice'
 import { gymReducer } from 'redux/slices/gymSlice'
+import { trainingReducer } from 'redux/slices/trainingSlice'
 
 const reducer = combineReducers({
   user: userReducer,
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   notification: notificationReducer,
   abonement: abonementReducer,
   gym: gymReducer,
+  training: trainingReducer,
 })
 
 export default reducer
