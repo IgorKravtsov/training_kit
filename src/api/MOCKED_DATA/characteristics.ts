@@ -1,4 +1,4 @@
-import { Characteristic, CharacteristicType } from 'api/characteristic/characteristic.types'
+import { Characteristic, CharacteristicType } from 'api/characteristic/types'
 import { generateId } from 'utils/generateId'
 
 export const mocked_characteristics: Characteristic[] = [

@@ -1,5 +1,5 @@
-import { GetOrganizationByEmailRequest, GetOrganizationByEmailResponse, GetOrganizationsResponse } from './organization.types'
 import { getOrganizationByEmail, mocked_organizations } from '../MOCKED_DATA/organizations'
+import { GetOrganizationByEmailRequest, GetOrganizationByEmailResponse, GetOrganizationsResponse } from './types'
 
 export const GetOrganizations = (): Promise<GetOrganizationsResponse> => {
   return Promise.resolve({ organizations: mocked_organizations })

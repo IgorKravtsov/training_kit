@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { AppUser } from 'api/user/user.types'
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { getUserAbonements, selectAbonement } from 'redux/slices/abonementSlice'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
+import { AppUser } from 'api/user/types'
 
 const Abonements: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()

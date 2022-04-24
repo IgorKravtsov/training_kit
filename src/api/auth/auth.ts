@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { checkCredits, mocked_user } from 'api/MOCKED_DATA/auth'
-import { LoginRequest, LoginResponse, RefreshAuthRequest, RefreshAuthResponse, RegisterRequest, RegisterResponse } from './auth.types'
-import { AppUser } from 'api/user/user.types'
+import { LoginRequest, LoginResponse, RefreshAuthRequest, RefreshAuthResponse, RegisterRequest, RegisterResponse } from './types'
 
 export const Login = async (request: LoginRequest): Promise<LoginResponse> => {
   return Promise.resolve({ accessToken: 'MOCKED_accessToken', refreshToken: 'MOCKED_refreshToken', ...checkCredits(request) })

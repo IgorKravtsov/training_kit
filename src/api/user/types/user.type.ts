@@ -1,8 +1,9 @@
-import { Abonement } from 'api/abonements/abonements.types'
-import { Characteristic } from 'api/characteristic/characteristic.types'
-import { Gym } from 'api/gym/gym.types'
-import { Organization } from 'api/organization/organization.types'
+import { Abonement } from 'api/abonements/types'
+import { Characteristic } from 'api/characteristic/types'
+import { Gym } from 'api/gym/types'
+import { Organization } from 'api/organization/types'
 import { LanguageType, UserRoles } from 'shared-files/enums'
+import { PublicAppUserDto } from './publicUserDto.type'
 
 export interface AppUser {
   uid: string
@@ -22,11 +23,4 @@ export interface AppUser {
   trainers?: PublicAppUserDto[]
   abonements?: Abonement[]
   gyms?: Gym[]
-}
-
-export interface PublicAppUserDto {
-  photoURL?: string | null
-  displayName: string | null
-  uid: string
-  email: string | null
 }

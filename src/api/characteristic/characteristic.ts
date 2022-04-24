@@ -1,13 +1,11 @@
-import { Id } from 'shared-files/types/appId.type'
+import { mocked_characteristics } from '../MOCKED_DATA/characteristics'
 import {
-  Characteristic,
   GetAllCharacteristicsResponse,
   GetCharacteristicByIdRequest,
   GetCharacteristicByIdResponse,
   GetUserCharacteristicsRequest,
   GetUserCharacteristicsResponse,
-} from './characteristic.types'
-import { mocked_characteristics } from '../MOCKED_DATA/characteristics'
+} from './types'
 
 export const GetUserCharacteristics = async (request: GetUserCharacteristicsRequest): Promise<GetUserCharacteristicsResponse> => {
   return Promise.resolve({ characteristics: mocked_characteristics })

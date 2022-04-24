@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Title from 'components/Title/Title'
-import { Training } from 'api/training/training.types'
 import { Id } from 'shared-files/types'
-import { GetUserTrainings } from 'api/training/training'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { getUserTrainings, selectTraining } from 'redux/slices/trainingSlice'

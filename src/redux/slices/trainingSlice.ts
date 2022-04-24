@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { GetUserTrainings } from 'api/training/training'
-import { GetUserTrainingsRequest, GetUserTrainingsResponse, GymTraining } from 'api/training/training.types'
+import { GetUserTrainingsRequest, GetUserTrainingsResponse, GymTraining } from 'api/training/types'
 import { RootState } from 'redux/store'
 
 interface TrainingState {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { RefreshAuth } from 'api/auth/auth'
-import { AppUser } from 'api/user/user.types'
+import { AppUser } from 'api/user/types/user.type'
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { selectUser, setUser } from 'redux/slices/userSlice'
@@ -9,8 +9,8 @@ import { selectUser, setUser } from 'redux/slices/userSlice'
 import { LanguageType } from 'shared-files/enums/LanguageType.enum'
 import { LocalStorageKey, UserRoles } from 'shared-files/enums'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { Organization } from 'api/organization/organization.types'
 import { setNotificationsWithCount } from 'redux/slices/notificationSlice'
+import { Organization } from 'api/organization/types'
 
 export type AuthContextState = {
   user: Partial<AppUser> | null

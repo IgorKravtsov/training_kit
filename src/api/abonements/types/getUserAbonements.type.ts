@@ -1,9 +1,5 @@
 import { Id } from 'shared-files/types'
-
-export interface Abonement {
-  id: Id
-  title: string
-}
+import { Abonement } from './abonement.type'
 
 export interface GetUserAbonementsRequest {
   trainers: Id[]

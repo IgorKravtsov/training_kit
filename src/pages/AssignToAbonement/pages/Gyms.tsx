@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { AppUser } from 'api/user/user.types'
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { getLearnerGyms, selectGym } from 'redux/slices/gymSlice'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { Link } from 'react-router-dom'
 import { MyAbonementRoutes, RouteNames } from 'routes'
+import { AppUser } from 'api/user/types'
 
 const Gyms: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()

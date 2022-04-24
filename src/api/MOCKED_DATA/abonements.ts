@@ -1,4 +1,4 @@
-import { Abonement } from 'api/abonements/abonements.types'
+import { Abonement } from 'api/abonements/types'
 import { generateId } from 'utils'
 
 export const mocked_abonements: Abonement[] = [

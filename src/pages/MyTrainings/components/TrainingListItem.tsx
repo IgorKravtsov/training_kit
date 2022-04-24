@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
-import { Training } from 'api/training/training.types'
+import { Training } from 'api/training/types/training.type'
 import { formatDate, formatTime, checkCanVisit } from 'utils'
 
 import noPhoto from 'assets/images/no-image.png'

@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Login, Logout, Register } from 'api/auth/auth'
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from 'api/auth/auth.types'
-import { AppUser } from 'api/user/user.types'
-// import { AppUser, LoginRegisterRequest, LoginRegisterResponse } from 'api/auth/auth.types'
-// import { loginUser, logoutUser, registerUser } from 'api/auth/auth'
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from 'api/auth/types'
+import { AppUser } from 'api/user/types'
 import { RootState } from 'redux/store'
 
 interface UserSlice {

@@ -18,17 +18,19 @@ import AddReactionIcon from '@mui/icons-material/AddReaction'
 
 import { useAppSelector, useAppDispatch } from 'redux/hooks/typedHooks'
 import { selectSidebar, setDrawerList } from 'redux/slices/sidebarSlice'
+import { selectNotification } from 'redux/slices/notificationSlice'
 
 import { UserRoles } from 'shared-files/enums'
 import { MenuItem } from 'shared-files/interfaces'
+import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+
 import { generateId } from 'utils'
 import { MyAbonementRoutes, RouteNames } from 'routes'
-import { AppUser } from 'api/user/user.types'
-import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
-import { selectNotification } from 'redux/slices/notificationSlice'
-import { Characteristic, CharacteristicType } from 'api/characteristic/characteristic.types'
-import { Abonement } from 'api/abonements/abonements.types'
-import { Gym } from 'api/gym/gym.types'
+
+import { Characteristic, CharacteristicType } from 'api/characteristic/types'
+import { Abonement } from 'api/abonements/types'
+import { Gym } from 'api/gym/types'
+import { AppUser } from 'api/user/types'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const { user, role } = useAuthProvider()

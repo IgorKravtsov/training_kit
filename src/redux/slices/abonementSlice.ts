@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { GetUserAbonements } from 'api/abonements/abonements'
-import { Abonement, GetUserAbonementsRequest, GetUserAbonementsResponse } from 'api/abonements/abonements.types'
+import { Abonement, GetUserAbonementsRequest, GetUserAbonementsResponse } from 'api/abonements/types'
 import { RootState } from 'redux/store'
 
 interface AbonementState {

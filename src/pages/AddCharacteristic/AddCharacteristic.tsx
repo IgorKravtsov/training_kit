@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -11,13 +10,16 @@ import Grid from '@mui/material/Grid'
 
 import FormAutocomplete from 'components/FormAutocomplete/FormAutocomplete'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
+
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 import { AutocompleteOption } from 'shared-files/interfaces'
+
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
+
 import { GetAllCharacteristics } from 'api/characteristic/characteristic'
-import { AppUser } from 'api/user/user.types'
-import { Characteristic } from 'api/characteristic/characteristic.types'
+import { Characteristic } from 'api/characteristic/types'
+import { AppUser } from 'api/user/types'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
   const { user } = useAuthProvider()

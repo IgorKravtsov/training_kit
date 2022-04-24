@@ -1,4 +1,4 @@
-import { Gym } from 'api/gym/gym.types'
+import { Gym } from 'api/gym/types'
 import { generateId } from 'utils'
 
 export const mocked_gyms: Gym[] = [

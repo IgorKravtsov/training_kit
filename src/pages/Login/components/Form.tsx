@@ -6,17 +6,19 @@ import { UseFormReturn } from 'react-hook-form'
 import LoadingButton from '@mui/lab/LoadingButton'
 import SendIcon from '@mui/icons-material/Send'
 import Stack from '@mui/material/Stack'
-// import FormControlLabel from '@mui/material/FormControlLabel'
+
+import { isEmail } from 'utils/isEmail'
+
+import { GetOrganizationByEmail } from 'api/organization/organization'
+import { Organization } from 'api/organization/types'
+
+import { useAppDispatch } from 'redux/hooks/typedHooks'
+import { error } from 'redux/slices/snackbarSlice'
 
 import FormInput from 'components/FormInput/FormInput'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
-import { isEmail } from 'utils/isEmail'
-import { Organization } from 'api/organization/organization.types'
-import { GetOrganizationByEmail } from 'api/organization/organization'
 import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
-import { useAppDispatch } from 'redux/hooks/typedHooks'
-import { error } from 'redux/slices/snackbarSlice'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>

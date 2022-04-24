@@ -1,11 +1,11 @@
-import { AppUser, PublicAppUserDto } from 'api/user/user.types'
-import { LoginRequest } from 'api/auth/auth.types'
 import { generateId } from 'utils'
 import { LanguageType, UserRoles } from 'shared-files/enums'
 import { mocked_organizations } from './organizations'
 import { mocked_characteristics } from './characteristics'
 import { mocked_abonements } from './abonements'
 import { mocked_gyms } from './gym'
+import { AppUser, PublicAppUserDto } from 'api/user/types'
+import { LoginRequest } from 'api/auth/types'
 
 const mocked_trainers: PublicAppUserDto[] = [
   {

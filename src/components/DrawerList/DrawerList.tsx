@@ -10,23 +10,21 @@ import ListItemText from '@mui/material/ListItemText'
 import LogoutIcon from '@mui/icons-material/ExitToApp'
 
 import { useAppSelector } from 'redux/hooks/typedHooks'
-import { selectSidebar, setDrawerList } from 'redux/slices/sidebarSlice'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
-import { MenuItem } from 'shared-files/interfaces'
+import { logout } from 'redux/slices/userSlice'
+import { selectTheme, toggleTheme } from 'redux/slices/themeSlice'
 
 import DrowerListItem from './DrawerListItem'
-import { logout } from 'redux/slices/userSlice'
 import ThemeSwitch from './components/ThemeSwitch'
-import { selectTheme, toggleTheme } from 'redux/slices/themeSlice'
-import { saveTheme } from 'utils/saveTheme'
-import { Characteristic } from 'api/characteristic/characteristic.types'
-import { RouteNames } from 'routes'
+
 import { LocalStorageKey, UserRoles } from 'shared-files/enums'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { generateId } from 'utils'
+
+import { saveTheme } from 'utils/saveTheme'
+
 import { useDrawerList } from './hooks/useDrawerList'
 
-export interface DrownerListProps {}
+interface DrownerListProps {}
 
 const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
   const { role } = useAuthContext()

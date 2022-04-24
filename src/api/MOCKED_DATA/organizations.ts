@@ -1,4 +1,4 @@
-import { GetOrganizationByEmailRequest, GetOrganizationByEmailResponse, Organization } from 'api/organization/organization.types'
+import { GetOrganizationByEmailRequest, Organization } from 'api/organization/types'
 
 export const mocked_organizations: Organization[] = [
   {

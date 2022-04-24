@@ -4,9 +4,9 @@ import { useStyles } from './gymSection.styles'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 
-import { GymTraining } from 'api/training/training.types'
 import GymTitle from '../GymTitle'
 import TrainingListItem from '../TrainingListItem'
+import { GymTraining } from 'api/training/types'
 
 interface GymSectionProps {
   gymTraining: GymTraining
