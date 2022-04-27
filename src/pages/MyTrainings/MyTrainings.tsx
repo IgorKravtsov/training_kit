@@ -53,10 +53,9 @@ const MyTrainings: React.FC = (): React.ReactElement => {
       <Tabs value={value} onChange={handleChange} aria-label='trainings menu' variant='scrollable' className={classes.tabs}>
         <Tab label={'Ближчі тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.NEAREST}`} />
         <Tab label={'Історія тренуваннь'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.TRAINING_HISTORY}`} />
-        {user.role === UserRoles.TRAINER ||
-          (user.role === UserRoles.ADMIN && (
-            <Tab label={'Створити тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.CREATE_TRAININGS}`} />
-          ))}
+        {(user.role === UserRoles.TRAINER || user.role === UserRoles.ADMIN) && (
+          <Tab label={'Створити тренування'} component={Link} to={`${RouteNames.MY_TRAININGS}/${user.uid}/${MyTrainingsRoutes.CREATE_TRAININGS}`} />
+        )}
       </Tabs>
       <Title>Мої тренування</Title>
       <Outlet />

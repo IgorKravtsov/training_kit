@@ -88,7 +88,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
           labelKey={'title'}
         />
 
-        <FormDatePicker name='birthday' control={control} errors={errors} label='Ваша дата народження' placeholder='Оберіть організацію...' />
+        <FormDatePicker name='birthday' control={control} errors={errors} label='Ваша дата народження' placeholder='Дата народження...' />
 
         <LoadingButton
           loading={isLoading}

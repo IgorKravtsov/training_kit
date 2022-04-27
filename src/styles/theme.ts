@@ -109,7 +109,7 @@ export const darkTheme = createTheme({
       default: '#0A1929',
     },
     error: {
-      main: '#b70e04',
+      main: '#d81409',
     },
     success: {
       main: '#1cd221',

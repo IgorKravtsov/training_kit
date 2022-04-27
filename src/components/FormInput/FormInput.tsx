@@ -6,7 +6,7 @@ import { StandardTextFieldProps } from '@mui/material'
 
 export interface FormInputProps extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<FieldValues, any>
+  control: Control<any, any>
   errors: {
     [x: string]: any
   }

@@ -8,6 +8,8 @@ import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
 import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
+import Badge from '@mui/material/Badge'
+import NotificationsIcon from '@mui/icons-material/Notifications'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { logout } from 'redux/slices/userSlice'
@@ -40,6 +42,11 @@ const AuthMenu: React.FC = (): React.ReactElement => {
 
   return (
     <>
+      {/* <IconButton size='large' aria-label='show 17 new notifications' color='inherit'>
+        <Badge badgeContent={17} color='error'>
+          <NotificationsIcon />
+        </Badge>
+      </IconButton> */}
       <IconButton
         size='large'
         aria-label='account of current user'

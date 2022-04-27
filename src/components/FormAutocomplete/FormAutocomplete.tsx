@@ -8,7 +8,7 @@ import { AutocompleteOption } from 'shared-files/interfaces'
 
 export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<FieldValues, any>
+  control: Control<any, any>
   errors: {
     [x: string]: any
   }

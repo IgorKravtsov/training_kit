@@ -12,48 +12,22 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { Id } from 'shared-files/types'
 
 import { CreateTrainingsContext } from './CreateTrainingsContext'
+import { useStepper } from './useStepper'
 
 import SectionTitle from 'components/SectionTitle/SectionTitle'
 import CreateTrainingStepper from 'pages/MyTrainings/components/CreateTrainingStepper/CreateTrainingStepper'
 import GymList from 'pages/MyTrainings/components/GymList/GymList'
-import { Step } from 'pages/MyTrainings/interfaces'
-import { MyTrainingsRoutes, RouteNames } from 'routes'
+import ChooseCreationMode from 'pages/MyTrainings/components/ChooseCreationMode/ChooseCreationMode'
+import CreateTrainingSection from 'pages/MyTrainings/components/CreateTrainingSection/CreateTrainingSection'
 
 const CreateTrainings: React.FC = (): React.ReactElement => {
   const classes = useStyles()
+  const { trainerGyms } = useAppSelector(selectMyTrainings)
   const { user } = useAuthContext()
-  const { trainerGyms, selectedGymId, selectedCreationType } = useAppSelector(selectMyTrainings)
   const dispatch = useAppDispatch()
 
-  const steps: Step[] = [
-    {
-      label: 'Оберіть зал',
-      url: `${RouteNames.MY_TRAININGS}/${user?.uid || '-'}/${MyTrainingsRoutes.CREATE_TRAININGS}`,
-    },
-    {
-      label: 'Як Ви хочете створити тренування',
-      url: `${RouteNames.MY_TRAININGS}/${user?.uid || '-'}/${MyTrainingsRoutes.CREATE_TRAININGS}/${selectedGymId || '-'}`,
-    },
-    {
-      label: 'Створіть тренування',
-      url: `${RouteNames.MY_TRAININGS}/${user?.uid || '-'}/${MyTrainingsRoutes.CREATE_TRAININGS}/${selectedGymId || '-'}/${
-        selectedCreationType || '-'
-      }`,
-    },
-  ]
-  const [activeStep, setActiveStep] = useState(0)
-
-  const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1)
-  }
-
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1)
-  }
-
-  const handleReset = () => {
-    setActiveStep(0)
-  }
+  const stepperContext = useStepper()
+  const { steps, activeStep } = stepperContext
 
   const getServerData = async (trainerId: Id) => {
     dispatch(showLoading())
@@ -67,11 +41,13 @@ const CreateTrainings: React.FC = (): React.ReactElement => {
 
   return (
     <Container sx={{ textAlign: 'center', pb: 10 }}>
-      <CreateTrainingsContext.Provider value={{ activeStep, setActiveStep, handleBack, handleNext, handleReset, steps }}>
+      <CreateTrainingsContext.Provider value={stepperContext}>
         <CreateTrainingStepper />
         <SectionTitle className={classes.sectionTitle}>{steps[activeStep].label}</SectionTitle>
         <Divider sx={{ mb: 4 }} />
         {activeStep === 0 && <GymList gyms={trainerGyms} />}
+        {activeStep === 1 && <ChooseCreationMode />}
+        {activeStep === 2 && <CreateTrainingSection />}
       </CreateTrainingsContext.Provider>
     </Container>
   )

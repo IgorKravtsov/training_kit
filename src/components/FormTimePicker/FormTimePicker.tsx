@@ -6,7 +6,7 @@ import { StandardTextFieldProps } from '@mui/material'
 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
+import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 
 import { ru } from 'date-fns/locale'
 
@@ -19,7 +19,7 @@ export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   className?: string
 }
 
-const FormDatePicker: React.FC<FormAutocompleteProps> = ({
+const FormTimePicker: React.FC<FormAutocompleteProps> = ({
   name,
   control,
   errors,
@@ -36,16 +36,14 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <MobileDatePicker
+          <TimePicker
             {...field}
             label={label}
-            inputFormat='dd MMMM yyyy'
-            maxDate={new Date()}
             renderInput={params => (
               <TextField
                 {...params}
-                fullWidth
                 id={id}
+                fullWidth
                 helperText={errors[name]?.message}
                 label={label}
                 error={!!errors[name]?.message}
@@ -62,4 +60,4 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
   )
 }
 
-export default FormDatePicker
+export default FormTimePicker

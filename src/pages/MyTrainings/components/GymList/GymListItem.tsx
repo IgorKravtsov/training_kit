@@ -12,6 +12,8 @@ import noPhoto from 'assets/images/no-image.png'
 import { CreateTrainingsContext } from 'pages/MyTrainings/pages/CreateTrainings/CreateTrainingsContext'
 import { MyTrainingsRoutes, RouteNames } from 'routes'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useAppDispatch } from 'redux/hooks'
+import { setSelectedGym } from 'redux/slices/myTrainingsSlice'
 
 import { Gym } from 'api/gym/types'
 
@@ -23,8 +25,14 @@ const GymListItem: React.FC<GymListItemProps> = ({ gym }): React.ReactElement =>
   const { handleNext } = useContext(CreateTrainingsContext)
   const { user } = useAuthContext()
   const [isHovered, setIsHovered] = useState(false)
+  const dispatch = useAppDispatch()
 
   const url = useMemo(() => `${RouteNames.MY_TRAININGS}/${user?.uid}/${MyTrainingsRoutes.CREATE_TRAININGS}/${gym.id}`, [user, gym])
+
+  const handleClick = () => {
+    dispatch(setSelectedGym(gym.id))
+    handleNext()
+  }
 
   return (
     <Card elevation={isHovered ? 12 : 6} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -38,7 +46,7 @@ const GymListItem: React.FC<GymListItemProps> = ({ gym }): React.ReactElement =>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button sx={{ marginLeft: 'auto' }} color='primary' variant='outlined' size='medium' to={url} component={Link} onClick={handleNext}>
+        <Button sx={{ marginLeft: 'auto' }} color='primary' variant='outlined' size='medium' to={url} component={Link} onClick={handleClick}>
           Обрати
         </Button>
       </CardActions>

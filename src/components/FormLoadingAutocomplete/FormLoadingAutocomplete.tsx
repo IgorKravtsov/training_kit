@@ -10,7 +10,7 @@ import { AutocompleteOption } from 'shared-files/interfaces/autocompleteOption.i
 
 export interface FormLoadingAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<FieldValues, any>
+  control: Control<any, any>
   errors: {
     [x: string]: any
   }
