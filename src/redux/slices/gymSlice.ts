@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { GetLearnerGyms } from 'api/gym/gym'
-import { GetLearnerGymsRequest, GetLearnerGymsResponse, Gym } from 'api/gym/types'
+import { GetLearnerGyms, GetTrainerGyms } from 'api/gym/gym'
+import { GetLearnerGymsRequest, GetLearnerGymsResponse, GetTrainerGymsRequest, GetTrainerGymsResponse, Gym } from 'api/gym/types'
 import { RootState } from 'redux/store'
 
 interface GymState {
@@ -13,6 +13,11 @@ const initialState: GymState = {
 
 export const getLearnerGyms = createAsyncThunk('gym/getLearnerGyms', async (request: GetLearnerGymsRequest) => {
   const response: GetLearnerGymsResponse = await GetLearnerGyms(request)
+  return response
+})
+
+export const getTrainerGyms = createAsyncThunk('gym/getTrainerGyms', async (request: GetTrainerGymsRequest) => {
+  const response: GetTrainerGymsResponse = await GetTrainerGyms(request)
   return response
 })
 

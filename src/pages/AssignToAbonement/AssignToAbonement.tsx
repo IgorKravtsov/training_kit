@@ -1,12 +1,12 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-import Typography from '@mui/material/Typography'
+import Title from 'components/Title/Title'
 
 const AddAbonement: React.FC = (): React.ReactElement => {
   return (
     <>
-      <Typography variant='h1'>Add abonement</Typography>
+      <Title>Підписатися на абонімент</Title>
       <Outlet />
     </>
   )

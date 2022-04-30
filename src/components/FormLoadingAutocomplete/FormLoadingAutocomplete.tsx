@@ -21,6 +21,7 @@ export interface FormLoadingAutocompleteProps extends Partial<StandardTextFieldP
   responseKey: string
   loadingText?: string
   openText?: string
+  multiple?: boolean
 }
 
 const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
@@ -40,6 +41,7 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
     id,
     loadingText = 'Завантаження...',
     openText = '',
+    multiple,
   },
   { ...otherProps }
 ): React.ReactElement => {
@@ -78,6 +80,7 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
       control={control}
       render={({ field: { onChange, value } }) => (
         <Autocomplete
+          multiple={multiple}
           disablePortal
           id={id}
           options={options}

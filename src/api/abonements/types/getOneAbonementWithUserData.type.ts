@@ -3,6 +3,7 @@ import { AbonementWithUserData } from './abonement.type'
 
 export interface GetOneAbonementRequest {
   abonementId: Id
+  userId: Id
 }
 
 export interface GetOneAbonementResponse {

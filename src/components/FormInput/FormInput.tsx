@@ -37,7 +37,7 @@ const FormInput: React.FC<FormInputProps> = ({
           type={type}
           error={!!errors[name]?.message}
           helperText={errors[name]?.message}
-          fullWidth
+          // fullWidth
           required={required}
           className={className}
           color='primary'

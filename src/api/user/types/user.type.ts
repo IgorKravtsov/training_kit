@@ -17,6 +17,7 @@ export interface AppUser {
   birthDate?: Date
   role: UserRoles
   lang: LanguageType
+  prefferedCurrency?: string // Предпочитаемая валюта - в перспективе
   level?: string //Уровень пояса
   organizations?: Organization[]
   selectedOrganization?: Organization

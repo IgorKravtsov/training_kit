@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useStyles } from './myAbonement.styles'
-import { Card, Container, Fade, Grid, Modal, Typography } from '@mui/material'
+import { Card, Container, Fade, Grid, Modal } from '@mui/material'
 import Title from 'components/Title/Title'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import AbonementListItem from './components/AbonementList/AbonementListItem'
@@ -27,11 +27,11 @@ const MyAbonement: React.FC = (): React.ReactElement => {
     setOpen(false)
   }
 
-  const getOneAbonementData = async (abonementId: Id) => {
+  const getOneAbonementData = async (userId: Id, abonementId: Id) => {
     setIsLoading(true)
     setTimeout(async () => {
       try {
-        const response = await GetOneAbonementWithUserData({ abonementId })
+        const response = await GetOneAbonementWithUserData({ abonementId, userId })
         setSelectedAbonement(response.abonementWithUserData)
       } catch (err: any) {
         dispatch(error({ message: err.message }))
@@ -43,7 +43,7 @@ const MyAbonement: React.FC = (): React.ReactElement => {
 
   const openAbonement = (abonementId: Id) => {
     handleOpen()
-    getOneAbonementData(abonementId)
+    user?.uid && getOneAbonementData(user?.uid, abonementId)
   }
   return (
     <>

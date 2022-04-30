@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     height: '90vh',
   },
   card: {
-    padding: '60px',
+    padding: '40px',
     height: '80vh',
     width: '40vw',
     marginTop: '30px',
