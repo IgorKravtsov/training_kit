@@ -13,6 +13,7 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { useTrainingHistory } from './useTrainingHistory'
 import CustomToolbar from 'pages/MyTrainings/components/CustomToolbar/CustomToolbar'
 import { getLearnerTrainingHistory } from 'redux/slices/myTrainingsSlice'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const TrainingHistory: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
@@ -27,7 +28,7 @@ const TrainingHistory: React.FC = (): React.ReactElement => {
     setTimeout(async () => {
       await dispatch(getLearnerTrainingHistory({ learnerId }))
       setLoading(false)
-    }, 1000)
+    }, SERVER_DELAY_TIME)
   }
 
   useEffect(() => {

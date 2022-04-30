@@ -18,6 +18,7 @@ import * as api from 'api/training/training'
 import { useAppDispatch } from 'redux/hooks'
 import { error, success } from 'redux/slices/snackbarSlice'
 import { CreateTrainingsContext } from 'pages/MyTrainings/pages/CreateTrainings/CreateTrainingsContext'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const CreateOneTraining: React.FC = (): React.ReactElement => {
   const { handleReset } = useContext(CreateTrainingsContext)
@@ -56,7 +57,7 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
         dispatch(error({ message: err.message }))
       }
       setIsLoading(false)
-    }, 1000)
+    }, SERVER_DELAY_TIME)
   }
 
   return (

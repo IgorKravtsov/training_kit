@@ -25,7 +25,7 @@ import { MenuItem } from 'shared-files/interfaces'
 import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
 
 import { generateId } from 'utils'
-import { MyAbonementRoutes, RouteNames } from 'routes'
+import { AssignToAbonementRoutes, RouteNames } from 'routes'
 
 import { Characteristic, CharacteristicType } from 'api/characteristic/types'
 import { Abonement } from 'api/abonements/types'
@@ -126,7 +126,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
 
   const transformAbonements = (abonements?: Abonement[]) => {
     if (!abonements) return []
-    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_ABONEMENT}/${id}` }))
+    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_ABONEMENT}/${user?.uid}/${id}` }))
   }
 
   const transformGyms = (abonements?: Gym[]) => {
@@ -143,7 +143,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
         id: generateId(),
         name: 'Характеристики',
         icon: <AllInclusiveIcon />,
-        link: RouteNames.CHARACTERISTICS,
+        // link: RouteNames.CHARACTERISTICS,
         items: [
           ...transformCharacteristics(user?.characteristics),
           {
@@ -155,25 +155,61 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
         ],
       },
     ]
-    const abonement = user?.trainers
-      ? [
-          {
-            id: generateId(),
-            name: 'Мої абонементи',
-            icon: <CreditCardIcon />,
-            link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
-            items: [
-              ...transformAbonements(user.abonements),
-              {
-                id: generateId(),
-                name: 'Підписатися на абонемент',
-                icon: <AddCardIcon />,
-                link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${MyAbonementRoutes.GYMS}`,
-              },
-            ],
-          },
-        ]
-      : []
+    let abonement: any[] = []
+    if (user?.abonements) {
+      abonement = [
+        {
+          id: generateId(),
+          name: 'Мої абонементи',
+          icon: <CreditCardIcon />,
+          link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
+          items: [
+            ...transformAbonements(user.abonements),
+            {
+              id: generateId(),
+              name: 'Підписатися на абонемент',
+              icon: <AddCardIcon />,
+              link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${AssignToAbonementRoutes.GYMS}`,
+            },
+          ],
+        },
+      ]
+    } else if (user?.trainers) {
+      abonement = [
+        {
+          id: generateId(),
+          name: 'Підписатися на абонемент',
+          icon: <AddCardIcon />,
+          link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${AssignToAbonementRoutes.GYMS}`,
+        },
+      ]
+    }
+    // const abonement = user?.abonements
+    // ? [
+    //     {
+    //       id: generateId(),
+    //       name: 'Мої абонементи',
+    //       icon: <CreditCardIcon />,
+    //       link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
+    //       items: [
+    //         ...transformAbonements(user.abonements),
+    //         {
+    //           id: generateId(),
+    //           name: 'Підписатися на абонемент',
+    //           icon: <AddCardIcon />,
+    //           link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${AssignToAbonementRoutes.GYMS}`,
+    //         },
+    //       ],
+    //     },
+    //   ]
+    // : [
+    //     {
+    //       id: generateId(),
+    //       name: 'Підписатися на абонемент',
+    //       icon: <AddCardIcon />,
+    //       link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${AssignToAbonementRoutes.GYMS}`,
+    //     },
+    //   ]
 
     const hasAbilityCreateAbonement = role === UserRoles.ADMIN || role === UserRoles.TRAINER
     const gymsMenuItems = hasAbilityCreateAbonement

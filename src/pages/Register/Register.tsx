@@ -21,6 +21,7 @@ import { error } from 'redux/slices/snackbarSlice'
 
 import { LocalStorageKey, UserRoles } from 'shared-files/enums'
 import { RegisterRequest } from 'api/auth/types'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const Register: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -78,7 +79,7 @@ const Register: React.FC = (): React.ReactElement => {
         )
       }
       setIsLoading(false)
-    }, 1000)
+    }, SERVER_DELAY_TIME)
   }
 
   return (

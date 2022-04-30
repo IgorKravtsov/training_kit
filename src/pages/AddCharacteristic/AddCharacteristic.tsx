@@ -21,6 +21,7 @@ import { GetAllCharacteristics } from 'api/characteristic/characteristic'
 import { Characteristic } from 'api/characteristic/types'
 import { AppUser } from 'api/user/types'
 import { useThemeColor } from 'shared-files/hooks'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
   const { user } = useAuthProvider()
@@ -61,7 +62,7 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
       dispatch(hideLoading())
       const result = user.characteristics ? arrDiff(response.characteristics, user.characteristics) : response.characteristics
       setСharacteristicList(result.map(item => ({ label: item.title, ...item })))
-    }, 1000)
+    }, SERVER_DELAY_TIME)
   }
 
   useEffect(() => {

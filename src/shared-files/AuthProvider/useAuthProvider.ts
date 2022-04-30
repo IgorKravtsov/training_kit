@@ -11,6 +11,7 @@ import { LocalStorageKey, UserRoles } from 'shared-files/enums'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { setNotificationsWithCount } from 'redux/slices/notificationSlice'
 import { Organization } from 'api/organization/types'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 export type AuthContextState = {
   user: Partial<AppUser> | null
@@ -38,7 +39,7 @@ export const useAuthProvider = (): AuthContextState => {
         }
         // userResponse && dispatch(setUser(userResponse.user))
         dispatch(hideLoading())
-      }, 3000)
+      }, SERVER_DELAY_TIME)
     }
   }
 

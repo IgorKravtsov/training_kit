@@ -24,7 +24,8 @@ const CollapsableListItem: React.FC<CollapsableListItemProps> = ({ item }): Reac
 
   const [open, setOpen] = useState(false)
 
-  const handleClick = () => {
+  const handleClick = (link?: string) => {
+    link && navigate(link)
     setOpen(!open)
   }
 
@@ -35,7 +36,7 @@ const CollapsableListItem: React.FC<CollapsableListItemProps> = ({ item }): Reac
 
   return (
     <>
-      <ListItemButton onClick={handleClick}>
+      <ListItemButton onClick={() => handleClick(item.link)}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={name} />
         {open ? <ExpandLess /> : <ExpandMore />}

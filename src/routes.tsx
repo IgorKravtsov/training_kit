@@ -15,10 +15,14 @@ const VisitDashboard = React.lazy(() => import('./pages/VisitDashboard/VisitDash
 const Characteristics = React.lazy(() => import('./pages/Characteristics/Characteristics'))
 const AddCharacteristic = React.lazy(() => import('./pages/AddCharacteristic/AddCharacteristic'))
 const Cabinet = React.lazy(() => import('./pages/Cabinet/Cabinet'))
-const MyAbonement = React.lazy(() => import('./pages/MyAbonement/MyAbonement'))
+
+const MyAbonements = React.lazy(() => import('./pages/MyAbonements/MyAbonements'))
+const MyAbonementsAbonement = React.lazy(() => import('./pages/MyAbonements/pages/Abonement'))
+
 const AssignToAbonement = React.lazy(() => import('./pages/AssignToAbonement/AssignToAbonement'))
-const AssignToAbonementGyms = React.lazy(() => import('./pages/AssignToAbonement/pages/Gyms'))
+const AssignToAbonementGyms = React.lazy(() => import('./pages/AssignToAbonement/pages/Gyms/Gyms'))
 const AssignToAbonementAbonements = React.lazy(() => import('./pages/AssignToAbonement/pages/Abonements'))
+
 const CreateAbonement = React.lazy(() => import('./pages/CreateAbonement/CreateAbonement'))
 const Notifications = React.lazy(() => import('./pages/Notifications/Notifications'))
 const AddGym = React.lazy(() => import('./pages/AddGym/AddGym'))
@@ -52,7 +56,7 @@ export enum MyTrainingsRoutes {
   CREATE_TRAININGS = 'create-tarinings',
 }
 
-export enum MyAbonementRoutes {
+export enum AssignToAbonementRoutes {
   GYMS = 'gyms',
   ABONEMENTS = 'abonements',
 }
@@ -67,6 +71,7 @@ export const learnerRoutes: React.ReactNode[] = [
   <Route key={RouteNames.HOME} path={RouteNames.HOME} element={<Home />} />,
   <Route key={RouteNames.LOGIN} path={RouteNames.LOGIN} element={<Login />} />,
   <Route key={RouteNames.REGISTER} path={RouteNames.REGISTER} element={<Register />} />,
+
   <Route key={RouteNames.MY_TRAININGS} path={RouteNames.MY_TRAININGS + '/:userId'} element={<MyTrainings />}>
     <Route path={MyTrainingsRoutes.NEAREST} element={<MyTrainingsNearest />} />
     <Route path={MyTrainingsRoutes.TRAINING_HISTORY} element={<MyTrainingsTrainingHistory />} />
@@ -74,15 +79,22 @@ export const learnerRoutes: React.ReactNode[] = [
     <Route path={`${MyTrainingsRoutes.CREATE_TRAININGS}/:gymId`} element={<MyTrainingsCreateTrainings />} />
     <Route path={`${MyTrainingsRoutes.CREATE_TRAININGS}/:gymId/*`} element={<MyTrainingsCreateTrainings />} />
   </Route>,
+
   <Route key={RouteNames.VISIT_DASHBOARD} path={RouteNames.VISIT_DASHBOARD} element={<VisitDashboard />} />,
   <Route key={RouteNames.ADD_CHARACTERISTIC} path={RouteNames.ADD_CHARACTERISTIC + '/:userId'} element={<AddCharacteristic />} />,
-  <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:id'} element={<Characteristics />}></Route>,
+
+  <Route key={RouteNames.CHARACTERISTICS} path={RouteNames.CHARACTERISTICS + '/:characteristicId'} element={<Characteristics />}></Route>,
+
   <Route key={RouteNames.CABINET} path={RouteNames.CABINET + '/:userId'} element={<Cabinet />} />,
-  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.MY_ABONEMENT + '/:userId'} element={<MyAbonement />} />,
+
+  <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.MY_ABONEMENT + '/:userId'} element={<MyAbonements />} />,
+  <Route path={RouteNames.MY_ABONEMENT + '/:userId' + '/:abonementId'} element={<MyAbonementsAbonement />} />,
+
   <Route key={RouteNames.MY_ABONEMENT} path={RouteNames.ASSIGN_TO_ABONEMENT + '/:userId'} element={<AssignToAbonement />}>
-    <Route path={MyAbonementRoutes.GYMS} element={<AssignToAbonementGyms />} />
-    <Route path={`:gymId/${MyAbonementRoutes.ABONEMENTS}`} element={<AssignToAbonementAbonements />} />
+    <Route path={AssignToAbonementRoutes.GYMS} element={<AssignToAbonementGyms />} />
+    <Route path={`:gymId/${AssignToAbonementRoutes.ABONEMENTS}`} element={<AssignToAbonementAbonements />} />
   </Route>,
+
   <Route key={RouteNames.NOTIFICATIONS} path={RouteNames.NOTIFICATIONS + '/:userId'} element={<Notifications />} />,
   <Route key={RouteNames.ASSIGN_TRAINERS} path={RouteNames.ASSIGN_TRAINERS + '/:userId'} element={<AssignTrainers />} />,
 ]

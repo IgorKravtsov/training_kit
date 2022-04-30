@@ -22,6 +22,7 @@ import { setOrganization } from 'redux/slices/organizationSlice'
 
 import Form from './components/Form'
 import { LocalStorageKey } from 'shared-files/enums'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const Login: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -67,7 +68,7 @@ const Login: React.FC = (): React.ReactElement => {
         )
       }
       setIsLoading(false)
-    }, 1000)
+    }, SERVER_DELAY_TIME)
   }
 
   return (

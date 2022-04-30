@@ -15,6 +15,7 @@ export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   className?: string
   options: AutocompleteOption[]
   customNoOptionsText?: string
+  multiple?: boolean
 }
 
 const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
@@ -29,6 +30,7 @@ const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
   options,
   id,
   customNoOptionsText,
+  multiple,
   disabled,
 }): React.ReactElement => {
   return (
@@ -37,6 +39,7 @@ const FormAutocomplete: React.FC<FormAutocompleteProps> = ({
       control={control}
       render={({ field: { onChange, value } }) => (
         <Autocomplete
+          multiple={multiple}
           disablePortal
           id={id}
           options={options}

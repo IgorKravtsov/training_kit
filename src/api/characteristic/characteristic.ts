@@ -1,4 +1,4 @@
-import { mocked_characteristics } from '../MOCKED_DATA/characteristics'
+import { mocked_characteristics, randomizeCharacteristicData } from '../MOCKED_DATA/characteristics'
 import {
   GetAllCharacteristicsResponse,
   GetCharacteristicByIdRequest,
