@@ -22,10 +22,10 @@ import { selectNotification } from 'redux/slices/notificationSlice'
 
 import { UserRoles } from 'shared-files/enums'
 import { MenuItem } from 'shared-files/interfaces'
-import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 import { generateId } from 'utils'
-import { AssignToAbonementRoutes, RouteNames } from 'routes'
+import { AssignToAbonementRoutes, RouteNames, MyTrainingsRoutes } from 'routes'
 
 import { Characteristic, CharacteristicType } from 'api/characteristic/types'
 import { Abonement } from 'api/abonements/types'
@@ -33,7 +33,7 @@ import { Gym } from 'api/gym/types'
 import { AppUser } from 'api/user/types'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
-  const { user, role } = useAuthProvider()
+  const { user, role } = useAuthContext()
   const { drawerList } = useAppSelector(selectSidebar)
   const { notificationCount } = useAppSelector(selectNotification)
   const dispatch = useAppDispatch()
@@ -74,30 +74,30 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       id: generateId(),
       name: 'Мій кабінет',
       icon: <AccountBoxIcon />,
-      link: `${RouteNames.CABINET}/${user?.uid}`,
+      link: `${RouteNames.CABINET}/${user?.id}`,
     },
     {
       id: generateId(),
       name: 'Мої тренування',
       icon: <SportsMartialArtsIcon />,
-      link: `${RouteNames.MY_TRAININGS}/${user?.uid}`,
+      link: `${RouteNames.MY_TRAININGS}/${user?.id}/${MyTrainingsRoutes.NEAREST}`,
     },
     {
       // TODO: переместить эту этот пункт в кабинет пользователя
       id: generateId(),
-      name: 'Знайти тренерів',
+      name: 'Стати учнем у...',
       icon: <AddReactionIcon />,
-      link: `${RouteNames.ASSIGN_TRAINERS}/${user?.uid}`,
+      link: `${RouteNames.ASSIGN_TRAINERS}/${user?.id}`,
     },
     {
       id: generateId(),
       name: 'Оповіщення',
       icon: (
-        <Badge badgeContent={notificationCount || 0} color='primary'>
-          <NotificationsActiveIcon color='inherit' />
+        <Badge badgeContent={notificationCount || 0} color="primary">
+          <NotificationsActiveIcon color="inherit" />
         </Badge>
       ),
-      link: `${RouteNames.NOTIFICATIONS}/${user?.uid}`,
+      link: `${RouteNames.NOTIFICATIONS}/${user?.id}`,
     },
   ]
 
@@ -107,7 +107,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       id: generateId(),
       name: 'Знайти учнів',
       icon: <BoyIcon />,
-      link: `${RouteNames.ASSIGN_LEARNERS}/${user?.uid}`,
+      link: `${RouteNames.ASSIGN_LEARNERS}/${user?.id}`,
     },
   ]
   const adminList = [...trainerList]
@@ -121,17 +121,30 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
 
   const transformCharacteristics = (characteristics?: Characteristic[]) => {
     if (!characteristics) return []
-    return characteristics.map(({ id, type, title }) => ({ id, icon: getCharIcon(type), name: title, link: `${RouteNames.CHARACTERISTICS}/${id}` }))
+    return characteristics.map(({ id, type, title }) => ({
+      id,
+      icon: getCharIcon(type),
+      name: title,
+      link: `${RouteNames.CHARACTERISTICS}/${id}`,
+    }))
   }
 
   const transformAbonements = (abonements?: Abonement[]) => {
     if (!abonements) return []
-    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_ABONEMENT}/${user?.uid}/${id}` }))
+    return abonements.map(({ id, title }) => ({
+      id,
+      name: title,
+      link: `${RouteNames.MY_ABONEMENT}/${user?.id}/${id}`,
+    }))
   }
 
   const transformGyms = (abonements?: Gym[]) => {
     if (!abonements) return []
-    return abonements.map(({ id, title }) => ({ id, name: title, link: `${RouteNames.MY_GYM}/${user?.uid}/${id}` }))
+    return abonements.map(({ id, title }) => ({
+      id,
+      name: title,
+      link: `${RouteNames.MY_GYM}/${user?.id}/${id}`,
+    }))
   }
 
   const createDrawerList = (user: Partial<AppUser> | null, role: UserRoles) => {
@@ -150,7 +163,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
             id: generateId(),
             name: 'Додати характеристику',
             icon: <AddCircleIcon />,
-            link: `${RouteNames.ADD_CHARACTERISTIC}/${user?.uid}`,
+            link: `${RouteNames.ADD_CHARACTERISTIC}/${user?.id}`,
           },
         ],
       },
@@ -162,14 +175,14 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
           id: generateId(),
           name: 'Мої абонементи',
           icon: <CreditCardIcon />,
-          link: `${RouteNames.MY_ABONEMENT}/${user?.uid}`,
+          link: `${RouteNames.MY_ABONEMENT}/${user?.id}`,
           items: [
             ...transformAbonements(user.abonements),
             {
               id: generateId(),
               name: 'Підписатися на абонемент',
               icon: <AddCardIcon />,
-              link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${AssignToAbonementRoutes.GYMS}`,
+              link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.id}/${AssignToAbonementRoutes.GYMS}`,
             },
           ],
         },
@@ -180,7 +193,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
           id: generateId(),
           name: 'Підписатися на абонемент',
           icon: <AddCardIcon />,
-          link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${AssignToAbonementRoutes.GYMS}`,
+          link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.id}/${AssignToAbonementRoutes.GYMS}`,
         },
       ]
     }
@@ -211,20 +224,21 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
     //     },
     //   ]
 
-    const hasAbilityCreateAbonement = role === UserRoles.ADMIN || role === UserRoles.TRAINER
+    const hasAbilityCreateAbonement =
+      role === UserRoles.ADMIN || role === UserRoles.TRAINER
     const gymsMenuItems = hasAbilityCreateAbonement
       ? [
           {
             id: generateId(),
             name: 'Додати зал',
             icon: <AddCircleIcon />,
-            link: `${RouteNames.ADD_GYM}/${user?.uid}`,
+            link: `${RouteNames.ADD_GYM}/${user?.id}`,
           },
           {
             id: generateId(),
             name: 'Створити абонемент для залів',
             icon: <AddCardIcon />,
-            link: `${RouteNames.CREATE_ABONEMENT}/${user?.uid}`,
+            link: `${RouteNames.CREATE_ABONEMENT}/${user?.id}`,
           },
         ]
       : [
@@ -232,7 +246,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
             id: generateId(),
             name: 'Додати зал',
             icon: <AddCircleIcon />,
-            link: `${RouteNames.ADD_GYM}/${user?.uid}`,
+            link: `${RouteNames.ADD_GYM}/${user?.id}`,
           },
         ]
 

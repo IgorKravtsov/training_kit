@@ -1,4 +1,4 @@
-import { Id } from 'shared-files/types/appId.type'
+import { Id } from 'shared-files/types'
 
 export enum CharacteristicType {
   Power,

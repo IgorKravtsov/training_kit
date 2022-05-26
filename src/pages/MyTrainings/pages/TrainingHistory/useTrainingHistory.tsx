@@ -23,18 +23,25 @@ export const useTrainingHistory = () => {
     trainer: string
   }
 
-  const transformRows = (learnerTrainingHistory: Training[] | null): TrainingHistoryRows[] => {
+  const transformRows = (
+    learnerTrainingHistory: Training[] | null,
+  ): TrainingHistoryRows[] => {
     if (!learnerTrainingHistory) return []
-    return learnerTrainingHistory.map(item => ({
+    return learnerTrainingHistory.map((item) => ({
       id: item.id,
       gymTitle: item.gym?.title || '-',
       title: item.title,
       trainer: item.trainer.displayName || '-',
-      trainingDate: `${formatDate(item.trainingDate)} - ${formatTime(item.trainingTime)}`,
+      trainingDate: `${formatDate(item.trainingDateTime)} - ${formatTime(
+        item.trainingDateTime,
+      )}`,
     }))
   }
 
-  const rows = useMemo(() => transformRows(learnerTrainingHistory), [learnerTrainingHistory])
+  const rows = useMemo(
+    () => transformRows(learnerTrainingHistory),
+    [learnerTrainingHistory],
+  )
 
   const columns: GridColDef[] = [
     {

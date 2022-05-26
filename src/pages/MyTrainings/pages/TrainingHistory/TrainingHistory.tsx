@@ -5,39 +5,37 @@ import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
 
 import { DataGrid } from '@mui/x-data-grid'
-import { useAppDispatch } from 'redux/hooks/typedHooks'
 
 import { Id } from 'shared-files/types'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 import { useTrainingHistory } from './useTrainingHistory'
 import CustomToolbar from 'pages/MyTrainings/components/CustomToolbar/CustomToolbar'
+import { CustomNoRowsOverlay } from 'pages/MyTrainings/components/CustomNoRowsOverlay/CustomNoRowsOverlay'
+
+import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { getLearnerTrainingHistory } from 'redux/slices/myTrainingsSlice'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const TrainingHistory: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const { columns, rows, localizedText, rowCount } = useTrainingHistory()
-
   const dispatch = useAppDispatch()
 
   const [loading, setLoading] = useState(false)
 
   const getTrainingHistory = async (learnerId: Id) => {
     setLoading(true)
-    setTimeout(async () => {
-      await dispatch(getLearnerTrainingHistory({ learnerId }))
-      setLoading(false)
-    }, SERVER_DELAY_TIME)
+    await dispatch(getLearnerTrainingHistory({ learnerId }))
+    setLoading(false)
   }
 
   useEffect(() => {
-    user?.uid && getTrainingHistory(user?.uid)
+    user?.id && getTrainingHistory(user?.id)
   }, [])
 
   return (
     <Container>
-      <Card sx={{ height: 600 }} elevation={4}>
+      <Card sx={{ height: 600, width: '100%' }} elevation={4}>
         <DataGrid
           columns={columns}
           rows={rows}
@@ -49,6 +47,7 @@ const TrainingHistory: React.FC = (): React.ReactElement => {
           components={{
             Toolbar: CustomToolbar,
             LoadingOverlay: LinearProgress,
+            NoRowsOverlay: CustomNoRowsOverlay,
           }}
         />
       </Card>

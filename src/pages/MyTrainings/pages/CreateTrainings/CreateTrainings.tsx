@@ -5,7 +5,10 @@ import Container from '@mui/material/Container'
 import Divider from '@mui/material/Divider'
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
-import { getTrainerGyms, selectMyTrainings } from 'redux/slices/myTrainingsSlice'
+import {
+  getTrainerGyms,
+  selectMyTrainings,
+} from 'redux/slices/myTrainingsSlice'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
@@ -36,14 +39,16 @@ const CreateTrainings: React.FC = (): React.ReactElement => {
   }
 
   useEffect(() => {
-    user?.uid && getServerData(user.uid)
+    user?.id && getServerData(user.id)
   }, [])
 
   return (
     <Container sx={{ textAlign: 'center', pb: 10 }}>
       <CreateTrainingsContext.Provider value={stepperContext}>
         <CreateTrainingStepper />
-        <SectionTitle className={classes.sectionTitle}>{steps[activeStep].label}</SectionTitle>
+        <SectionTitle className={classes.sectionTitle}>
+          {steps[activeStep].label}
+        </SectionTitle>
         <Divider sx={{ mb: 4 }} />
         {activeStep === 0 && <GymList gyms={trainerGyms} />}
         {activeStep === 1 && <ChooseCreationMode />}

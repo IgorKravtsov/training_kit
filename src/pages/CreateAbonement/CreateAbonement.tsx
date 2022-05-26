@@ -1,61 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './createAbonement.styles'
-import Title from 'components/Title/Title'
-import { Id } from 'shared-files/types'
-import { useAppDispatch } from 'redux/hooks'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { getTrainerGyms } from 'redux/slices/gymSlice'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
-import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+
+import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+import Title from 'components/Title/Title'
+import { useAppDispatch } from 'redux/hooks'
+
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+
 import Form from './components/Form/Form'
-import { Card, Container, Grid } from '@mui/material'
-import MainImage from './components/MainImage/MainImage'
+import { Container, Grid } from '@mui/material'
+
 import { Options } from './interfaces'
+import { SERVER_DELAY_TIME } from 'shared-files/constants'
+import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
+import { error } from 'redux/slices/snackbarSlice'
+import { CreateNewAbonementRequest } from 'api/abonements/types'
 
 const CreateAbonement: React.FC = (): React.ReactElement => {
   const classes = useStyles()
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
 
+  const [isLoading, setIsLoading] = useState(false)
   const [options, setOptions] = useState<Options>({
     byDays: false,
     byTrainings: false,
   })
 
-  // const validationSchema = yup.object({
-  //   firstName: yup.string().trim().required('Це поле має бути заповнено'),
-  //   lastName: yup.string().trim().required('Це поле має бути заповнено'),
-  //   email: yup.string().email('Це не є правильною поштою').required('Це поле має бути заповнено'),
-  //   organization: yup.mixed().required('Це поле має бути обрано'),
-  //   birthday: yup.date().required('Це поле має бути заповнено'),
-  //   password: yup.string().min(6, 'Мінімальне кол-во символів - 6').required('Це поле має бути заповнено'),
-  //   confirmPass: yup
-  //     .string()
-  //     .oneOf([yup.ref('password'), null], 'Це поле має співпадати з полем паролю')
-  //     .required('Це поле має бути заповнено'),
-  // })
-  // type SubmitData = yup.InferType<typeof validationSchema>
+  const validationSchema = yup.object({
+    title: yup.string().trim().required('Це поле має бути заповнено'),
+    gyms: yup.array().of(yup.mixed()).min(1, 'Це поле має бути заповнено').required('Це поле має бути заповнено'),
+    days: yup.number().min(1, 'Мінімальне значення цього поля - 1').typeError('Це поле має бути заповнено'),
+    trainings: yup.number().min(1, 'Мінімальне значення цього поля - 1'),
+    price: yup.number().required('Це поле має бути заповнено'),
+  })
+  type SubmitData = yup.InferType<typeof validationSchema>
 
   const formFeatures = useForm({
-    // resolver: yupResolver(validationSchema),
-    // defaultValues: {
-    //   birthday: new Date(),
-    // },
+    resolver: yupResolver(validationSchema),
   })
 
-  // const getGyms = async (trainerId: Id) => {
-  //   dispatch(showLoading())
-  //   setTimeout(async () => {
-  //     await dispatch(getTrainerGyms({ trainerId }))
-  //     dispatch(hideLoading())
-  //   }, SERVER_DELAY_TIME)
-  // }
-  const onSubmit = (data: any) => {}
+  const onSubmit = (data: SubmitData) => {
+    if (!data.days && !data.trainings) {
+      dispatch(error({ message: 'Необхідно обрати можливості абоніменту' }))
+      return
+    }
+    // const request: CreateNewAbonementRequest {
 
-  useEffect(() => {
-    // user?.uid && getGyms(user?.uid)
-  }, [])
+    // }
+  }
 
   return (
     <>
@@ -68,7 +64,7 @@ const CreateAbonement: React.FC = (): React.ReactElement => {
             {/* <Card elevation={6} sx={{ padding: '5px 30px 50px 30px', textAlign: 'center' }}> */}
             <Title>Створити абонімент</Title>
 
-            <Form options={options} formFeatures={formFeatures} onSubmit={onSubmit} setOptions={setOptions} />
+            <Form options={options} formFeatures={formFeatures} onSubmit={onSubmit} setOptions={setOptions} isLoading={isLoading} />
             {/* </Card> */}
           </Grid>
         </Grid>

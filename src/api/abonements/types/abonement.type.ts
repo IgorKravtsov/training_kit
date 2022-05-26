@@ -1,7 +1,7 @@
 import { Id } from 'shared-files/types'
 
 export interface AbonementOption {
-  id: Id
+  id?: Id
   name: string
   value: number | string
 }

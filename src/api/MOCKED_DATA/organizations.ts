@@ -1,4 +1,4 @@
-import { GetOrganizationByEmailRequest, Organization } from 'api/organization/types'
+import { GetOrganizationsByEmailRequest, Organization } from 'api/organization/types'
 
 export const mocked_organizations: Organization[] = [
   {
@@ -20,7 +20,7 @@ export const mocked_organizations: Organization[] = [
   },
 ]
 
-export const getOrganizationByEmail = ({ email }: GetOrganizationByEmailRequest) => {
+export const getOrganizationByEmail = ({ email }: GetOrganizationsByEmailRequest) => {
   switch (email) {
     case 'superletsplay7@gmail.com':
       return { organizations: mocked_organizations }

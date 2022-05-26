@@ -1,8 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetTrainerGyms } from 'api/gym/gym'
-import { GetTrainerGymsRequest, GetTrainerGymsResponse, Gym } from 'api/gym/types'
+import {
+  GetTrainerGymsRequest,
+  GetTrainerGymsResponse,
+  Gym,
+} from 'api/gym/types'
 import { GetLearnerTrainingHistory } from 'api/training/training'
-import { GetLearnerTrainingHistoryRequest, GetLearnerTrainingHistoryResponse, Training } from 'api/training/types'
+import {
+  GetLearnerTrainingHistoryRequest,
+  GetLearnerTrainingHistoryResponse,
+  Training,
+} from 'api/training/types'
 import { RootState } from 'redux/store'
 import { Id } from 'shared-files/types'
 
@@ -27,18 +35,23 @@ const initialState: MyTrainingsState = {
   errors: null,
 }
 
-export const getLearnerTrainingHistory = createAsyncThunk(
+export const getLearnerTrainingHistory = createAsyncThunk<
+  GetLearnerTrainingHistoryResponse,
+  GetLearnerTrainingHistoryRequest
+>(
   'myTrainings/getLearnerTrainingHistory',
   async (request: GetLearnerTrainingHistoryRequest) => {
-    const response: GetLearnerTrainingHistoryResponse = await GetLearnerTrainingHistory(request)
-    return response
-  }
+    return await GetLearnerTrainingHistory(request)
+  },
 )
 
-export const getTrainerGyms = createAsyncThunk('myTrainings/getTrainerGyms', async (request: GetTrainerGymsRequest) => {
-  const response: GetTrainerGymsResponse = await GetTrainerGyms(request)
-  return response
-})
+export const getTrainerGyms = createAsyncThunk(
+  'myTrainings/getTrainerGyms',
+  async (request: GetTrainerGymsRequest) => {
+    const response: GetTrainerGymsResponse = await GetTrainerGyms(request)
+    return response
+  },
+)
 
 const myTrainingsSlice = createSlice({
   name: 'myTrainings',
@@ -58,7 +71,7 @@ const myTrainingsSlice = createSlice({
       state.selectedCreationType = null
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(getLearnerTrainingHistory.fulfilled, (state, action) => {
         state.learnerTrainingHistory = action.payload.trainings
@@ -76,6 +89,11 @@ const myTrainingsSlice = createSlice({
   },
 })
 
-export const { setSelectedCreationType, setSelectedGym, clearSelectedCreationType, clearSelectedGym } = myTrainingsSlice.actions
+export const {
+  setSelectedCreationType,
+  setSelectedGym,
+  clearSelectedCreationType,
+  clearSelectedGym,
+} = myTrainingsSlice.actions
 export const myTrainingReducer = myTrainingsSlice.reducer
 export const selectMyTrainings = (state: RootState) => state.myTrainings

@@ -20,14 +20,22 @@ const Characteristics: React.FC = (): React.ReactElement => {
 
   const dispatch = useAppDispatch()
 
-  const [characteristic, setCharacteristic] = useState<Characteristic | null>(null)
+  const [characteristic, setCharacteristic] = useState<Characteristic | null>(
+    null,
+  )
 
-  const getCharacteristic = async (userId: Id | undefined, characteristicId: Id | undefined) => {
+  const getCharacteristic = async (
+    userId: Id | undefined,
+    characteristicId: Id | undefined,
+  ) => {
     if (!userId || !characteristicId) return
     dispatch(showLoading())
     setTimeout(async () => {
       try {
-        const { characteristic } = await GetCharacteristicById({ characteristicId, userId })
+        const { characteristic } = await GetCharacteristicById({
+          characteristicId,
+          userId,
+        })
         setCharacteristic(characteristic)
       } catch (err: any) {
         dispatch(error({ message: err.message }))
@@ -38,13 +46,18 @@ const Characteristics: React.FC = (): React.ReactElement => {
   }
 
   useEffect(() => {
-    getCharacteristic(user?.uid, characteristicId)
-  }, [characteristicId, user?.uid])
+    getCharacteristic(user?.id, characteristicId)
+  }, [characteristicId, user?.id])
 
   return (
     <Container sx={{ textAlign: 'center' }}>
-      <Typography variant='h1'>{characteristic?.title}</Typography>
-      {characteristic && <ChartSection values={characteristic.data?.values || []} labels={characteristic.data?.labels || []} />}
+      <Typography variant="h1">{characteristic?.title}</Typography>
+      {characteristic && (
+        <ChartSection
+          values={characteristic.data?.values || []}
+          labels={characteristic.data?.labels || []}
+        />
+      )}
     </Container>
   )
 }

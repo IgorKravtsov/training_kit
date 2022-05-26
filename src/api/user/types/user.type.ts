@@ -7,7 +7,7 @@ import { Id } from 'shared-files/types'
 import { PublicAppUserDto } from './publicUserDto.type'
 
 export interface AppUser {
-  uid: Id
+  id: Id
   email: string | null
   emailVerified?: boolean
   isAnonymous?: boolean

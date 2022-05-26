@@ -1,9 +1,9 @@
 import { Organization } from './organization.type'
 
-export interface GetOrganizationByEmailRequest {
+export interface GetOrganizationsByEmailRequest {
   email: string
 }
 
-export interface GetOrganizationByEmailResponse {
+export interface GetOrganizationsByEmailResponse {
   organizations: Organization[]
 }

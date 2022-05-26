@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { GetUserTrainings } from 'api/training/training'
-import { GetUserTrainingsRequest, GetUserTrainingsResponse, GymTraining } from 'api/training/types'
+import { GetUserTrainings, MarkVisitingTraining } from 'api/training/training'
+import {
+  GetUserTrainingsRequest,
+  GetUserTrainingsResponse,
+  GymTraining,
+  MarkVisitingTrainingRequest,
+  MarkVisitingTrainingResponse,
+} from 'api/training/types'
 import { RootState } from 'redux/store'
 
 interface TrainingState {
@@ -13,9 +19,18 @@ const initialState: TrainingState = {
   errors: null,
 }
 
-export const getUserTrainings = createAsyncThunk('training/getUserTrainings', async (request: GetUserTrainingsRequest) => {
-  const response: GetUserTrainingsResponse = await GetUserTrainings(request)
-  return response
+export const getUserTrainings = createAsyncThunk<
+  GetUserTrainingsResponse,
+  GetUserTrainingsRequest
+>('training/getUserTrainings', async (request) => {
+  return await GetUserTrainings(request)
+})
+
+export const markVisitTraining = createAsyncThunk<
+  MarkVisitingTrainingResponse,
+  MarkVisitingTrainingRequest
+>('training/markVisit', async (request) => {
+  return await MarkVisitingTraining(request)
 })
 
 const trainingSlice = createSlice({
@@ -26,7 +41,7 @@ const trainingSlice = createSlice({
       state.errors = null
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(getUserTrainings.fulfilled, (state, action) => {
         state.trainings = action.payload.trainings

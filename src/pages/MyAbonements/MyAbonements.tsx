@@ -20,7 +20,8 @@ const MyAbonement: React.FC = (): React.ReactElement => {
 
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedAbonement, setSelectedAbonement] = useState<AbonementWithUserData | null>(null)
+  const [selectedAbonement, setSelectedAbonement] =
+    useState<AbonementWithUserData | null>(null)
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => {
@@ -31,7 +32,10 @@ const MyAbonement: React.FC = (): React.ReactElement => {
     setIsLoading(true)
     setTimeout(async () => {
       try {
-        const response = await GetOneAbonementWithUserData({ abonementId, userId })
+        const response = await GetOneAbonementWithUserData({
+          abonementId,
+          userId,
+        })
         setSelectedAbonement(response.abonementWithUserData)
       } catch (err: any) {
         dispatch(error({ message: err.message }))
@@ -43,26 +47,37 @@ const MyAbonement: React.FC = (): React.ReactElement => {
 
   const openAbonement = (abonementId: Id) => {
     handleOpen()
-    user?.uid && getOneAbonementData(user?.uid, abonementId)
+    user?.id && getOneAbonementData(user?.id, abonementId)
   }
   return (
     <>
       <Title>Мої абонементи</Title>
-      <Container component='section' sx={{ pb: 2 }}>
-        <Grid container justifyContent='center' alignItems='center' spacing={2}>
+      <Container component="section" sx={{ pb: 2 }}>
+        <Grid container justifyContent="center" alignItems="center" spacing={2}>
           {user?.abonements &&
-            user?.abonements.map(abonement => (
+            user?.abonements.map((abonement) => (
               <Grid key={abonement.id} item xs={12} sm={6} md={4}>
-                <AbonementListItem abonement={abonement} onClick={() => openAbonement(abonement.id)} />
+                <AbonementListItem
+                  abonement={abonement}
+                  onClick={() => openAbonement(abonement.id)}
+                />
               </Grid>
             ))}
         </Grid>
       </Container>
 
-      <Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
         <Fade in={open}>
           <Card className={classes.modalContent}>
-            <SelectedAbonement abonement={selectedAbonement} isLoading={isLoading} />
+            <SelectedAbonement
+              abonement={selectedAbonement}
+              isLoading={isLoading}
+            />
           </Card>
         </Fade>
       </Modal>

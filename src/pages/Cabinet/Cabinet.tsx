@@ -1,12 +1,12 @@
 import React from 'react'
 import { useStyles } from './cabinet.styles'
 
-import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import Title from 'components/Title/Title'
 
 const Cabinet: React.FC = (): React.ReactElement => {
   const classes = useStyles()
-  const { user } = useAuthProvider()
+  const { user } = useAuthContext()
   return (
     <>
       <Title>Здравствуйте, {user?.displayName}</Title>

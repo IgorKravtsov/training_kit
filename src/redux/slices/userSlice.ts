@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Login, Logout, Register } from 'api/auth/auth'
-import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from 'api/auth/types'
+import { LoginRequest, RegisterRequest } from 'api/auth/types'
 import { AppUser } from 'api/user/types'
 import { RootState } from 'redux/store'
 
@@ -14,15 +14,19 @@ const initialState: UserSlice = {
   error: null,
 }
 
-export const register = createAsyncThunk('user/register', async (request: RegisterRequest) => {
-  const response: RegisterResponse = await Register(request)
-  return response
-})
+export const register = createAsyncThunk(
+  'user/register',
+  async (request: RegisterRequest) => {
+    return await Register(request)
+  },
+)
 
-export const login = createAsyncThunk('user/login', async (request: LoginRequest) => {
-  const response: LoginResponse = await Login(request)
-  return response
-})
+export const login = createAsyncThunk<AppUser, LoginRequest>(
+  'user/login',
+  async (request: LoginRequest) => {
+    return await Login(request)
+  },
+)
 
 export const logout = createAsyncThunk('user/logout', async () => {
   return await Logout()
@@ -38,8 +42,11 @@ const userSlice = createSlice({
     logOutUser(state) {
       state.user = null
     },
+    setError(state, action: PayloadAction<any>) {
+      state.error = action.payload
+    },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user
@@ -48,12 +55,12 @@ const userSlice = createSlice({
         state.error = action.error
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user
+        state.user = action.payload
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.error
       })
-      .addCase(logout.fulfilled, state => {
+      .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
       .addCase(logout.rejected, (state, action) => {
@@ -62,6 +69,6 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUser, logOutUser } = userSlice.actions
+export const { setUser, logOutUser, setError } = userSlice.actions
 export const userReducer = userSlice.reducer
 export const selectUser = (state: RootState) => state.user

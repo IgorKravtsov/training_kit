@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   tabs: {
     paddingLeft: '16px',
+    paddingBottom: '32px',
     // paddingTop: '16px',
   },
 }))

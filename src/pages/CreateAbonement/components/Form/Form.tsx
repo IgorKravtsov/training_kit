@@ -29,7 +29,14 @@ interface FormProps {
   setOptions: (o: Options) => void
 }
 
-const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, isLoading, onError, options, setOptions }): React.ReactElement => {
+const Form: React.FC<FormProps> = ({
+  formFeatures,
+  onSubmit,
+  isLoading,
+  onError,
+  options,
+  setOptions,
+}): React.ReactElement => {
   const { user } = useAuthContext()
   const {
     control,
@@ -44,29 +51,43 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, isLoading, onError,
   }
 
   return (
-    <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit} onError={onError}>
-      <Grid container direction='column' justifyContent='center' spacing={2}>
+    <FormWrapper
+      formFeatures={formFeatures}
+      onSubmit={onSubmit}
+      onError={onError}
+    >
+      <Grid container direction="column" justifyContent="center" spacing={2}>
         <Grid item xs={12}>
-          <FormInput name='title' control={control} errors={errors} placeholder={'Назва абонемента...'} label={'Назва абонемента'} fullWidth />
+          <FormInput
+            name="title"
+            control={control}
+            errors={errors}
+            placeholder={'Назва абонемента...'}
+            label={'Назва абонемента'}
+            fullWidth
+          />
         </Grid>
 
         <Grid item xs={6}>
           <FormLoadingAutocomplete
-            name='gyms'
+            name="gyms"
             multiple
             control={control}
             errors={errors}
             getFunc={GetTrainerGyms}
-            request={{ trainerId: user?.uid || 0 }}
-            responseKey='gyms'
-            labelKey='title'
+            request={{ trainerId: user?.id || 0 }}
+            responseKey="gyms"
+            labelKey="title"
             placeholder={'Оберіть зал'}
             label={'Абонемент створюється для:'}
           />
         </Grid>
 
         <Grid item xs={6}>
-          <CheckboxSection options={options} changeOption={handleChangeOption} />
+          <CheckboxSection
+            options={options}
+            changeOption={handleChangeOption}
+          />
         </Grid>
 
         <Grid item container spacing={2}>
@@ -74,8 +95,8 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, isLoading, onError,
             <Grid item xs={6}>
               <FormInput
                 fullWidth
-                name='days'
-                type='number'
+                name="days"
+                type="number"
                 control={control}
                 errors={errors}
                 placeholder={'Кількість днів...'}
@@ -89,8 +110,8 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, isLoading, onError,
             <Grid item xs={6}>
               <FormInput
                 fullWidth
-                name='trainings'
-                type='number'
+                name="trainings"
+                type="number"
                 control={control}
                 errors={errors}
                 placeholder={'Кількість тренувань...'}
@@ -104,8 +125,8 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, isLoading, onError,
         <Grid item xs={6}>
           <FormInput
             fullWidth
-            name='price'
-            type='number'
+            name="price"
+            type="number"
             control={control}
             errors={errors}
             placeholder={'Ціна абонемента (в гривнях)...'}
@@ -116,10 +137,10 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, isLoading, onError,
         <Grid item xs={12}>
           <LoadingButton
             loading={isLoading}
-            loadingPosition='start'
-            type='submit'
+            loadingPosition="start"
+            type="submit"
             color={useThemeColor()}
-            variant='contained'
+            variant="contained"
             disabled={!options.byDays && !options.byTrainings}
             fullWidth
             endIcon={<SendIcon />}

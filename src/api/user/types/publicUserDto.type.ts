@@ -1,6 +1,6 @@
 export interface PublicAppUserDto {
   photoURL?: string | null
   displayName: string | null
-  uid: string
+  id: string
   email: string | null
 }

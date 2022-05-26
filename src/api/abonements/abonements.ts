@@ -2,8 +2,10 @@ import { mocked_abonements, mocked_abonementsWithUserData } from 'api/MOCKED_DAT
 import {
   AssignUserToAbonementRequest,
   AssignUserToAbonementResponse,
-  GetOneAbonementRequest as GetOneAbonementWithUserDataRequest,
-  GetOneAbonementResponse as GetOneAbonementWithUserDataResponse,
+  CreateNewAbonementRequest,
+  CreateNewAbonementResponse,
+  GetOneAbonementWithUserDataRequest,
+  GetOneAbonementWithUserDataResponse,
   GetUserAbonementsRequest,
   GetUserAbonementsResponse,
 } from './types'
@@ -18,4 +20,8 @@ export const AssignUserToAbonement = (request: AssignUserToAbonementRequest): Pr
 
 export const GetOneAbonementWithUserData = (request: GetOneAbonementWithUserDataRequest): Promise<GetOneAbonementWithUserDataResponse> => {
   return Promise.resolve({ abonementWithUserData: mocked_abonementsWithUserData[0] })
+}
+
+export const CreateNewAbonement = (request: CreateNewAbonementRequest): Promise<CreateNewAbonementResponse> => {
+  return Promise.resolve({ abonement: mocked_abonements[0] })
 }

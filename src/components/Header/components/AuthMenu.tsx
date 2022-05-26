@@ -48,18 +48,22 @@ const AuthMenu: React.FC = (): React.ReactElement => {
         </Badge>
       </IconButton> */}
       <IconButton
-        size='large'
-        aria-label='account of current user'
-        aria-controls='menu-appbar'
-        aria-haspopup='true'
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
         onClick={handleMenu}
-        color='inherit'
+        color="inherit"
         sx={{ ml: 'auto' }}
       >
-        {user?.photoURL ? <Avatar src={user?.photoURL} alt='user photo' /> : <AccountCircle />}
+        {user?.photoURL ? (
+          <Avatar src={user?.photoURL} alt="user photo" />
+        ) : (
+          <AccountCircle />
+        )}
       </IconButton>
       <Menu
-        id='menu-appbar'
+        id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'top',
@@ -73,7 +77,9 @@ const AuthMenu: React.FC = (): React.ReactElement => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => goToPage(`${RouteNames.CABINET}/${user?.uid}`)}>{user?.displayName || user?.email}</MenuItem>
+        <MenuItem onClick={() => goToPage(`${RouteNames.CABINET}/${user?.id}`)}>
+          {user?.displayName || user?.email}
+        </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>Вийти</MenuItem>
       </Menu>

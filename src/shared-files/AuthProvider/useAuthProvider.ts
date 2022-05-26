@@ -1,17 +1,21 @@
 import { useEffect } from 'react'
 
-import { RefreshAuth } from 'api/auth/auth'
 import { AppUser } from 'api/user/types/user.type'
 
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
-import { selectUser, setUser } from 'redux/slices/userSlice'
+import {
+  logOutUser,
+  selectUser,
+  setError,
+  setUser,
+} from 'redux/slices/userSlice'
 
 import { LanguageType } from 'shared-files/enums/LanguageType.enum'
-import { LocalStorageKey, UserRoles } from 'shared-files/enums'
+import { UserRoles } from 'shared-files/enums'
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { setNotificationsWithCount } from 'redux/slices/notificationSlice'
 import { Organization } from 'api/organization/types'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
+import { $api } from 'api/_config'
 
 export type AuthContextState = {
   user: Partial<AppUser> | null
@@ -26,20 +30,16 @@ export const useAuthProvider = (): AuthContextState => {
   const dispatch = useAppDispatch()
 
   const getLoggedInUser = async () => {
-    const token = localStorage.getItem(LocalStorageKey.RefreshToken)
-    if (token) {
+    try {
       dispatch(showLoading())
-      setTimeout(async () => {
-        const userResponse = await RefreshAuth({ refreshToken: token })
-        setUserLanguage(userResponse?.user?.lang || LanguageType.Ukrainian)
-        if (userResponse) {
-          dispatch(setUser(userResponse.user))
-          userResponse.notifications &&
-            dispatch(setNotificationsWithCount({ count: userResponse.notifications?.count, notifications: userResponse.notifications?.data }))
-        }
-        // userResponse && dispatch(setUser(userResponse.user))
-        dispatch(hideLoading())
-      }, SERVER_DELAY_TIME)
+      const { data } = await $api.get<AppUser>('user')
+
+      dispatch(setUser(data))
+    } catch (e: any) {
+      dispatch(logOutUser())
+      dispatch(setError(e.message))
+    } finally {
+      dispatch(hideLoading())
     }
   }
 

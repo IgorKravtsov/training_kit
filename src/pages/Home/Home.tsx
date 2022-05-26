@@ -4,12 +4,14 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import Typography from '@mui/material/Typography'
 
 const Home: React.FC = (): React.ReactElement => {
-  const { isAuth } = useAuthContext()
+  const { isAuth, user, role } = useAuthContext()
 
   return (
     <>
-      <Typography variant='h3' sx={{ paddingTop: '50px' }}>
-        {isAuth ? 'ВОШЛИ' : 'ВЫШЛИ'}
+      <Typography variant="h3" sx={{ paddingTop: '50px' }}>
+        {isAuth
+          ? `ВОШЛИ, ${user?.displayName || '-'} з роллю ${role}`
+          : 'ВЫШЛИ'}
       </Typography>
     </>
   )

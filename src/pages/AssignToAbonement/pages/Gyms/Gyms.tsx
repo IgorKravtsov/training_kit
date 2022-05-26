@@ -21,7 +21,9 @@ const Gyms: React.FC = (): React.ReactElement => {
   const dispatch = useAppDispatch()
 
   const getGyms = (user: Partial<AppUser>) => {
-    const trainers = user.trainers ? user.trainers?.map(trainer => trainer.uid) : []
+    const trainers = user.trainers
+      ? user.trainers?.map((trainer) => trainer.id)
+      : []
     dispatch(showLoading())
     setTimeout(() => {
       const response = dispatch(getLearnerGyms({ trainers }))

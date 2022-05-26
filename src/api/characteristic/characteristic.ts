@@ -1,5 +1,6 @@
 import { mocked_characteristics, randomizeCharacteristicData } from '../MOCKED_DATA/characteristics'
 import {
+  GetAllCharacteristicsRequest,
   GetAllCharacteristicsResponse,
   GetCharacteristicByIdRequest,
   GetCharacteristicByIdResponse,
@@ -15,6 +16,6 @@ export const GetCharacteristicById = async (request: GetCharacteristicByIdReques
   return Promise.resolve({ characteristic: mocked_characteristics[0] })
 }
 
-export const GetAllCharacteristics = async (): Promise<GetAllCharacteristicsResponse> => {
+export const GetAllCharacteristics = async (request: GetAllCharacteristicsRequest): Promise<GetAllCharacteristicsResponse> => {
   return Promise.resolve({ characteristics: mocked_characteristics })
 }

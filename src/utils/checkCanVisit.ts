@@ -1,22 +1,14 @@
 export const checkCanVisit = (trainingDate: Date | string): boolean | void => {
-  let tDate = trainingDate
-  if (!tDate) return
-  if (typeof tDate === 'string') {
-    tDate = new Date(trainingDate)
-  }
+  if (!trainingDate) return
 
-  const THIRTY_MINUTES = 1000 * 60 * 30
-  const startVisitTime = new Date(tDate.getDate() - THIRTY_MINUTES)
-  const endVisitTime = new Date(tDate.getDate() + THIRTY_MINUTES)
+  const tDate = new Date(trainingDate)
 
-  return startVisitTime >= endVisitTime
+  const THIRTY_MINUTES = 30
+  const startVisitTime = new Date(tDate)
+  const endVisitTime = new Date(tDate)
+
+  startVisitTime.setMinutes(tDate.getMinutes() - THIRTY_MINUTES)
+  endVisitTime.setMinutes(tDate.getMinutes() + THIRTY_MINUTES)
+
+  return new Date() > startVisitTime && new Date() < endVisitTime
 }
-
-// export const lessThanOneHourAgo = (date: Date | string): boolean => {
-//   const HOUR = 1000 * 60 * 60
-//   const anHourAgo = new Date(Date.now() - HOUR)
-
-//   console.log(anHourAgo)
-
-//   return date > anHourAgo
-// }

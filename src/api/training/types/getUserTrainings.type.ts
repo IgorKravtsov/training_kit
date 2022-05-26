@@ -2,7 +2,7 @@ import { Id } from 'shared-files/types'
 import { GymTraining } from './gymTraining.type'
 
 export interface GetUserTrainingsRequest {
-  trainerIds: Id[]
+  learnerId: Id
   startDate: Date | string
   endDate: Date | string
 }

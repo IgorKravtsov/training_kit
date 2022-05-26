@@ -40,17 +40,16 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem(LocalStorageKey.RefreshToken)
     dispatch(logout())
   }
 
   return (
-    <Box sx={{ width: 250 }} role='presentation'>
-      <Grid xs={12} container justifyContent='center' sx={{ mt: 2 }}>
+    <Box sx={{ width: 250 }} role="presentation">
+      <Grid xs={12} container justifyContent="center" sx={{ mt: 2 }}>
         <ThemeSwitch sx={{ m: 1 }} checked={darkTheme} onChange={changeTheme} />
       </Grid>
       <List>
-        {drawerList.map(item => (
+        {drawerList.map((item) => (
           <DrowerListItem key={item.id} item={item} />
         ))}
         {role !== UserRoles.ANONYMOUS && (

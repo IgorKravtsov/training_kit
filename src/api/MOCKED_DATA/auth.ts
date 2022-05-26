@@ -11,12 +11,12 @@ const mocked_trainers: PublicAppUserDto[] = [
   {
     displayName: 'Trainer1',
     email: 'trainer1@gmail.com',
-    uid: generateId(),
+    id: generateId(),
   },
   {
     displayName: 'Trainer2',
     email: 'trainer2@gmail.com',
-    uid: generateId(),
+    id: generateId(),
   },
 ]
 
@@ -27,9 +27,10 @@ export const mocked_user: { [x: string]: AppUser } = {
     emailVerified: true,
     isAnonymous: false,
     phoneNumber: '+380145124643',
-    photoURL: 'https://pbs.twimg.com/profile_images/1173161429266030592/lJCNA_JC_400x400.jpg',
+    photoURL:
+      'https://pbs.twimg.com/profile_images/1173161429266030592/lJCNA_JC_400x400.jpg',
     role: UserRoles.ADMIN,
-    uid: generateId(),
+    id: generateId(),
     lang: LanguageType.Ukrainian,
     organizations: mocked_organizations,
     characteristics: [mocked_characteristics[0], mocked_characteristics[1]],
@@ -43,9 +44,10 @@ export const mocked_user: { [x: string]: AppUser } = {
     email: 'test@test.com',
     emailVerified: true,
     isAnonymous: false,
-    photoURL: 'https://yt3.ggpht.com/ytc/AKedOLS2SrXxxmfcdRRxYPEGIwsFVV0L_JZSNo6hna3H=s900-c-k-c0x00ffffff-no-rj',
+    photoURL:
+      'https://yt3.ggpht.com/ytc/AKedOLS2SrXxxmfcdRRxYPEGIwsFVV0L_JZSNo6hna3H=s900-c-k-c0x00ffffff-no-rj',
     role: UserRoles.ADMIN,
-    uid: generateId(),
+    id: generateId(),
     lang: LanguageType.Ukrainian,
     organizations: [mocked_organizations[0]],
   },

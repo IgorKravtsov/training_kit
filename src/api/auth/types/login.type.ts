@@ -6,8 +6,8 @@ export interface LoginRequest {
   organizationId?: string | number
 }
 
-export interface LoginResponse {
-  user: AppUser
-  accessToken: string
-  refreshToken: string
-}
+// export interface LoginResponse {
+//   user: AppUser
+//   // accessToken: string
+//   // refreshToken: string
+// }

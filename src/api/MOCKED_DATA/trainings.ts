@@ -6,9 +6,8 @@ export const mocked_trainings: Training[] = [
   {
     id: generateId(),
     title: 'Ката (Средняя группа)',
-    trainingDate: new Date(),
-    trainingTime: new Date(),
-    // trainingTime: '16:30',
+    trainingDateTime: new Date(),
+    // trainingTime: new Date(),
     trainer: mocked_trainers[0],
     gym: {
       id: generateId(),
@@ -19,8 +18,10 @@ export const mocked_trainings: Training[] = [
   {
     id: generateId(),
     title: 'Кумите (Средняя группа)',
-    trainingDate: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
-    trainingTime: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+    trainingDateTime: new Date(
+      'Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)',
+    ),
+    // trainingTime: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
     // trainingTime: '12:00',
     trainer: mocked_trainers[0],
     gym: {
@@ -32,8 +33,10 @@ export const mocked_trainings: Training[] = [
   {
     id: generateId(),
     title: 'Средняя группа',
-    trainingDate: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
-    trainingTime: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+    trainingDateTime: new Date(
+      'Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)',
+    ),
+    // trainingTime: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
     // trainingTime: '17:00',
     trainer: mocked_trainers[0],
     gym: {
@@ -45,8 +48,8 @@ export const mocked_trainings: Training[] = [
   {
     id: generateId(),
     title: 'Ката (Старшая группа)',
-    trainingDate: new Date(),
-    trainingTime: new Date(),
+    trainingDateTime: new Date(),
+    // trainingTime: new Date(),
     // trainingTime: '17:00',
     trainer: mocked_trainers[0],
     gym: {
@@ -69,17 +72,19 @@ export const mocked_gym_trainings: GymTraining[] = [
       {
         id: generateId(),
         title: 'Ката (Средняя группа)',
-        trainingDate: new Date(),
+        trainingDateTime: new Date(),
         // trainingTime: '16:30',
-        trainingTime: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+        // trainingTime: new Date('Mon Apr 25 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
         trainer: mocked_trainers[1],
       },
       {
         id: generateId(),
         title: 'Средняя группа',
-        trainingDate: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+        trainingDateTime: new Date(
+          'Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)',
+        ),
         // trainingTime: '17:00',
-        trainingTime: new Date(),
+        // trainingTime: new Date(),
         trainer: mocked_trainers[0],
       },
     ],
@@ -95,9 +100,11 @@ export const mocked_gym_trainings: GymTraining[] = [
       {
         id: generateId(),
         title: 'Средняя группа',
-        trainingDate: new Date('Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)'),
+        trainingDateTime: new Date(
+          'Wed Apr 27 2022 21:09:33 GMT+0300 (Восточная Европа, летнее время)',
+        ),
         // trainingTime: '17:00',
-        trainingTime: new Date(),
+        // trainingTime: new Date(),
         trainer: mocked_trainers[2],
       },
     ],

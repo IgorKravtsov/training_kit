@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid'
 import FormAutocomplete from 'components/FormAutocomplete/FormAutocomplete'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 
-import { useAuthProvider } from 'shared-files/AuthProvider/useAuthProvider'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { AutocompleteOption } from 'shared-files/interfaces'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
@@ -24,11 +24,13 @@ import { useThemeColor } from 'shared-files/hooks'
 import { SERVER_DELAY_TIME } from 'shared-files/constants'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
-  const { user } = useAuthProvider()
+  const { user } = useAuthContext()
   const dispatch = useAppDispatch()
 
   const [isSearching, setIsSearching] = useState(false)
-  const [сharacteristicList, setСharacteristicList] = useState<AutocompleteOption[]>([])
+  const [characteristicList, setCharacteristicList] = useState<
+    AutocompleteOption[]
+  >([])
 
   const validationSchema = yup.object({
     characteristicName: yup.mixed().required('Це необхідно вибрати'),
@@ -44,8 +46,13 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
     formState: { errors },
   } = formFeatures
 
-  const arrDiff = (arr1: Characteristic[], arr2: Characteristic[]): Characteristic[] => {
-    return arr1.filter(({ id: id1 }) => !arr2.some(({ id: id2 }) => id2 === id1))
+  const arrDiff = (
+    arr1: Characteristic[],
+    arr2: Characteristic[],
+  ): Characteristic[] => {
+    return arr1.filter(
+      ({ id: id1 }) => !arr2.some(({ id: id2 }) => id2 === id1),
+    )
   }
 
   const onSubmit = (data: SubmitData) => {
@@ -58,10 +65,14 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
 
     dispatch(showLoading())
     setTimeout(async () => {
-      const response = await GetAllCharacteristics()
+      const response = await GetAllCharacteristics({ userId: user.id || 0 })
       dispatch(hideLoading())
-      const result = user.characteristics ? arrDiff(response.characteristics, user.characteristics) : response.characteristics
-      setСharacteristicList(result.map(item => ({ label: item.title, ...item })))
+      const result = user.characteristics
+        ? arrDiff(response.characteristics, user.characteristics)
+        : response.characteristics
+      setCharacteristicList(
+        result.map((item) => ({ label: item.title, ...item })),
+      )
     }, SERVER_DELAY_TIME)
   }
 
@@ -70,32 +81,32 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
   }, [])
 
   useEffect(() => {
-    console.log('===characteristics===', сharacteristicList)
-  }, [сharacteristicList])
+    console.log('===characteristics===', characteristicList)
+  }, [characteristicList])
 
   return (
     <>
-      <Typography variant='h1'>Додати характеристику</Typography>
+      <Typography variant="h1">Додати характеристику</Typography>
       <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit}>
-        <Grid container direction='row' spacing={2}>
+        <Grid container direction="row" spacing={2}>
           <Grid item xs={4} sx={{ mt: 2 }}>
             <FormAutocomplete
-              name='characteristicName'
+              name="characteristicName"
               control={control}
               errors={errors}
-              options={сharacteristicList}
-              label='Оберіть характеристику'
-              placeholder='Оберіть характеристику...'
+              options={characteristicList}
+              label="Оберіть характеристику"
+              placeholder="Оберіть характеристику..."
             />
           </Grid>
           <Grid item xs={4} sx={{ mt: 4 }}>
-            <Button type='submit' variant='contained' color={useThemeColor()}>
+            <Button type="submit" variant="contained" color={useThemeColor()}>
               Знайти пристрій
             </Button>
           </Grid>
         </Grid>
       </FormWrapper>
-      {isSearching && <Typography variant='h2'>Пошук пристрою...</Typography>}
+      {isSearching && <Typography variant="h2">Пошук пристрою...</Typography>}
     </>
   )
 }

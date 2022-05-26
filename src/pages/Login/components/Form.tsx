@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack'
 
 import { isEmail } from 'utils/isEmail'
 
-import { GetOrganizationByEmail } from 'api/organization/organization'
+import { GetOrganizationsByEmail } from 'api/organization/organization'
 import { Organization } from 'api/organization/types'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
@@ -51,7 +51,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
     const email = getValues()?.email || ''
     if (isEmail(email)) {
       try {
-        return await GetOrganizationByEmail({ email })
+        return await GetOrganizationsByEmail({ email })
         // setOrganizationsOfUser(res.organizations)
       } catch (err: any) {
         dispatch(

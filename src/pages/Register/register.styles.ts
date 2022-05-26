@@ -22,4 +22,7 @@ export const useStyles = makeStyles({
   forgotPass: {
     marginTop: '25px !important',
   },
+  inputContainer: {
+    '& .MuiTextField-root': { width: '100%' },
+  },
 })
