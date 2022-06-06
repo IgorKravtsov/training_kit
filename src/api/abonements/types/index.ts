@@ -1,5 +1,5 @@
 export * from './abonement.type'
-export * from './getUserAbonements.type'
+export * from './getLearnerAbonements.type'
 export * from './assignUserToAbonement.type'
 export * from './getOneAbonementWithUserData.type'
 export * from './createNewAbonement.type'

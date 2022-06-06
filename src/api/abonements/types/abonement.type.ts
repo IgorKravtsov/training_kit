@@ -1,19 +1,17 @@
 import { Id } from 'shared-files/types'
 
-export interface AbonementOption {
-  id?: Id
-  name: string
-  value: number | string
-}
 export interface Abonement {
   id: Id
   title: string
-  options: AbonementOption[]
+  // options: AbonementOption[]
+  price: number
+  amountDays?: number
+  amountTrainings?: number
 }
-export interface AbonementWithUserData {
+export interface LearnerAbonement {
   id: Id
-  title: string
-  options: AbonementOption[]
+  // title: string
+  abonement: Abonement
   startDate: Date | string
   trainingsLeft?: number
   daysLeft?: number

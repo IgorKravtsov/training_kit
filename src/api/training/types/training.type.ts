@@ -18,6 +18,6 @@ export interface Training {
   gym?: Gym
   trainingDateTime: Date | string
   // trainingTime: Date | string
-  trainer: PublicAppUserDto
+  trainers: PublicAppUserDto[]
   canBeVisited?: boolean | CannotVisitTraining
 }

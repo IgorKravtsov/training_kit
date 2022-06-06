@@ -6,7 +6,7 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import AbonementListItem from './components/AbonementList/AbonementListItem'
 import { Id } from 'shared-files/types'
 import { GetOneAbonementWithUserData } from 'api/abonements/abonements'
-import { AbonementWithUserData } from 'api/abonements/types'
+import { LearnerAbonement } from 'api/abonements/types'
 import SelectedAbonement from './components/SelectedAbonement/SelectedAbonement'
 import { SERVER_DELAY_TIME } from 'shared-files/constants'
 import { useAppDispatch } from 'redux/hooks'
@@ -21,7 +21,7 @@ const MyAbonement: React.FC = (): React.ReactElement => {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [selectedAbonement, setSelectedAbonement] =
-    useState<AbonementWithUserData | null>(null)
+    useState<LearnerAbonement | null>(null)
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => {
@@ -75,7 +75,7 @@ const MyAbonement: React.FC = (): React.ReactElement => {
         <Fade in={open}>
           <Card className={classes.modalContent}>
             <SelectedAbonement
-              abonement={selectedAbonement}
+              lAbonement={selectedAbonement}
               isLoading={isLoading}
             />
           </Card>

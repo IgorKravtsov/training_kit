@@ -30,12 +30,19 @@ export interface FormProps {
   isLoading?: boolean
 }
 
-const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading = false }): React.ReactElement => {
+const Form: React.FC<FormProps> = ({
+  formFeatures,
+  onSubmit,
+  onError,
+  isLoading = false,
+}): React.ReactElement => {
   const classes = useStyles()
   const dispatch = useAppDispatch()
 
   const [isShowPass, setIsShowPass] = useState(false)
-  const [organizationsOfUser, setOrganizationsOfUser] = useState<Organization[]>([])
+  const [organizationsOfUser, setOrganizationsOfUser] = useState<
+    Organization[]
+  >([])
 
   const {
     control,
@@ -57,7 +64,7 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
         dispatch(
           error({
             message: err.message,
-          })
+          }),
         )
         // setOrganizationsOfUser([])
       }
@@ -65,35 +72,41 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
   }
 
   return (
-    <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit} onError={onError}>
+    <FormWrapper
+      formFeatures={formFeatures}
+      onSubmit={onSubmit}
+      onError={onError}
+    >
       <Stack spacing={1.5}>
         <FormInput
-          name='email'
+          name="email"
           control={control}
           errors={errors}
-          label='Пошта'
-          placeholder='Уведіть пошту...'
+          label="Пошта"
+          placeholder="Уведіть пошту..."
           color={organizationsOfUser.length > 0 ? 'success' : 'primary'}
           // onBlur={e => getOrganizationsByEmail(e.target.value)}
         />
 
         <FormPasswordInput
-          id='password'
-          name='password'
+          id="password"
+          name="password"
           control={control}
           errors={errors}
-          placeholder='Уведіть пароль...'
+          placeholder="Уведіть пароль..."
           className={classes.password}
-          handleClickShowPassword={() => setIsShowPass(prevState => !prevState)}
+          handleClickShowPassword={() =>
+            setIsShowPass((prevState) => !prevState)
+          }
           visiblePassword={isShowPass}
         />
 
         <FormLoadingAutocomplete
-          name='organization'
+          name="organization"
           control={control}
           errors={errors}
-          label='Оберіть організацію'
-          placeholder='Оберіть організацію...'
+          label="Оберіть організацію"
+          placeholder="Оберіть організацію..."
           getFunc={getOrganizationsByEmail}
           responseKey={'organizations'}
           labelKey={'title'}
@@ -101,10 +114,9 @@ const Form: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, isLoading 
 
         <LoadingButton
           loading={isLoading}
-          loadingPosition='start'
-          type='submit'
-          color={useThemeColor()}
-          variant='contained'
+          loadingPosition="start"
+          type="submit"
+          variant="contained"
           className={classes.btn}
           fullWidth
           endIcon={<SendIcon />}

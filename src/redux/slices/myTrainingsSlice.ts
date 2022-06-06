@@ -45,13 +45,12 @@ export const getLearnerTrainingHistory = createAsyncThunk<
   },
 )
 
-export const getTrainerGyms = createAsyncThunk(
-  'myTrainings/getTrainerGyms',
-  async (request: GetTrainerGymsRequest) => {
-    const response: GetTrainerGymsResponse = await GetTrainerGyms(request)
-    return response
-  },
-)
+export const getTrainerGyms = createAsyncThunk<
+  GetTrainerGymsResponse,
+  GetTrainerGymsRequest
+>('myTrainings/getTrainerGyms', async (request: GetTrainerGymsRequest) => {
+  return await GetTrainerGyms(request)
+})
 
 const myTrainingsSlice = createSlice({
   name: 'myTrainings',

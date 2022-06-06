@@ -8,6 +8,7 @@ import { Id } from 'shared-files/types'
 import { formatDate, formatTime } from 'utils'
 import { useLocalizationGrid } from './useLocalizationGrid'
 import { selectMyTrainings } from 'redux/slices/myTrainingsSlice'
+import { PublicAppUserDto } from 'api/user/types'
 
 // export const useTrainingHistory = (learnerTrainingHistory: Training[] | null) => {
 export const useTrainingHistory = () => {
@@ -20,18 +21,30 @@ export const useTrainingHistory = () => {
     title: string
     gymTitle: string
     trainingDate: string | Date
-    trainer: string
+    trainers: string
+  }
+
+  const concatStrings = (arr: PublicAppUserDto[]) => {
+    let res = ''
+    arr.forEach((user, index) => {
+      res =
+        index !== arr.length - 1
+          ? res.concat(`${user.displayName} ,` || '')
+          : res.concat(user.displayName || '')
+    })
+    return res
   }
 
   const transformRows = (
     learnerTrainingHistory: Training[] | null,
   ): TrainingHistoryRows[] => {
     if (!learnerTrainingHistory) return []
+
     return learnerTrainingHistory.map((item) => ({
       id: item.id,
-      gymTitle: item.gym?.title || '-',
+      gymTitle: `${item.gym?.title} (${item.gym?.address})` || '-',
       title: item.title,
-      trainer: item.trainer.displayName || '-',
+      trainers: concatStrings(item.trainers),
       trainingDate: `${formatDate(item.trainingDateTime)} - ${formatTime(
         item.trainingDateTime,
       )}`,
@@ -48,26 +61,26 @@ export const useTrainingHistory = () => {
       field: 'title',
       headerName: 'Назва тренування',
       minWidth: 300,
-      maxWidth: 400,
+      // maxWidth: 400,
       headerClassName: classes.header,
     },
     {
       field: 'gymTitle',
       headerName: 'Зал',
-      minWidth: 200,
-      maxWidth: 400,
+      minWidth: 340,
+      // maxWidth: 400,
     },
     {
       field: 'trainingDate',
       headerName: 'Дата тренування',
-      minWidth: 300,
-      maxWidth: 400,
+      minWidth: 150,
+      // maxWidth: 400,
     },
     {
-      field: 'trainer',
+      field: 'trainers',
       headerName: 'Тренер',
       minWidth: 200,
-      maxWidth: 400,
+      // maxWidth: 400,
       headerAlign: 'right',
       align: 'right',
     },

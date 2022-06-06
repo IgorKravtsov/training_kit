@@ -17,6 +17,8 @@ export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
     [x: string]: any
   }
   className?: string
+  maxDate?: Date
+  minDate?: Date
 }
 
 const FormDatePicker: React.FC<FormAutocompleteProps> = ({
@@ -29,6 +31,8 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
   type,
   required,
   id,
+  maxDate,
+  minDate,
 }): React.ReactElement => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
@@ -39,9 +43,10 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
           <MobileDatePicker
             {...field}
             label={label}
-            inputFormat='dd MMMM yyyy'
-            maxDate={new Date()}
-            renderInput={params => (
+            inputFormat="dd MMMM yyyy"
+            maxDate={maxDate}
+            minDate={minDate}
+            renderInput={(params) => (
               <TextField
                 {...params}
                 fullWidth
@@ -52,7 +57,7 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
                 type={type}
                 placeholder={placeholder}
                 required={required}
-                color='primary'
+                color="primary"
               />
             )}
           />

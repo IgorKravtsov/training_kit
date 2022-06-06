@@ -1,5 +1,5 @@
 import { Id } from 'shared-files/types'
-import { AbonementWithUserData } from './abonement.type'
+import { LearnerAbonement } from './abonement.type'
 
 export interface GetOneAbonementWithUserDataRequest {
   abonementId: Id
@@ -7,5 +7,5 @@ export interface GetOneAbonementWithUserDataRequest {
 }
 
 export interface GetOneAbonementWithUserDataResponse {
-  abonementWithUserData: AbonementWithUserData
+  abonementWithUserData: LearnerAbonement
 }

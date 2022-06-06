@@ -1,8 +1,4 @@
 import {
-  mocked_gym_trainings,
-  mocked_trainings,
-} from 'api/MOCKED_DATA/trainings'
-import {
   CreateOneTrainingRequest,
   GetLearnerTrainingHistoryRequest,
   GetLearnerTrainingHistoryResponse,
@@ -10,6 +6,7 @@ import {
   GetUserTrainingsResponse,
   MarkVisitingTrainingRequest,
   MarkVisitingTrainingResponse,
+  Training,
 } from './types'
 import { $api } from '../_config'
 
@@ -44,8 +41,9 @@ export const GetLearnerTrainingHistory = async (
   return data
 }
 
-export const CreateOneTraining = (
+export const CreateOneTraining = async (
   request: CreateOneTrainingRequest,
-): Promise<void> => {
-  return Promise.resolve()
+): Promise<Training> => {
+  const { data } = await $api.post<Training>('training/create', request)
+  return data
 }
