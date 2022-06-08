@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Login, Logout, Register } from 'api/auth/auth'
 import { LoginRequest, RegisterRequest } from 'api/auth/types'
 import { AppUser } from 'api/user/types'
+import { ApiKnownError } from 'api/_config'
 import { RootState } from 'redux/store'
 
 interface UserSlice {
@@ -14,12 +15,13 @@ const initialState: UserSlice = {
   error: null,
 }
 
-export const register = createAsyncThunk(
-  'user/register',
-  async (request: RegisterRequest) => {
-    return await Register(request)
-  },
-)
+export const register = createAsyncThunk<
+  AppUser,
+  RegisterRequest,
+  { rejectValue: ApiKnownError }
+>('user/register', async (request) => {
+  return await Register(request)
+})
 
 export const login = createAsyncThunk<AppUser, LoginRequest>(
   'user/login',
@@ -49,9 +51,11 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user
+        state.user = action.payload
       })
       .addCase(register.rejected, (state, action) => {
+        console.log(action)
+
         state.error = action.error
       })
       .addCase(login.fulfilled, (state, action) => {

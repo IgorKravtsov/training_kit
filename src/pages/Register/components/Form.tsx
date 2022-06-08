@@ -17,8 +17,7 @@ import FormDatePicker from 'components/FormDatePicker/FormDatePicker'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 
 import { GetOrganizations } from 'api/organization/organization'
-import { useTheme } from '@mui/styles'
-import { useThemeColor, useThemeColorInverse } from 'shared-files/hooks'
+import { useThemeColor } from 'shared-files/hooks'
 
 export interface FormProps {
   formFeatures: UseFormReturn<any, any>
@@ -123,6 +122,7 @@ const Form: React.FC<FormProps> = ({
           name="birthday"
           control={control}
           errors={errors}
+          maxDate={new Date()}
           label="Ваша дата народження"
           placeholder="Дата народження..."
         />

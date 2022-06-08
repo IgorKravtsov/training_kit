@@ -12,8 +12,8 @@ export interface RegisterRequest {
   photoURL?: string
 }
 
-export interface RegisterResponse {
-  user: AppUser
-  // accessToken: string
-  // refreshToken: string
-}
+// export interface RegisterResponse {
+//   user: AppUser
+//   // accessToken: string
+//   // refreshToken: string
+// }

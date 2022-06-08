@@ -6,7 +6,7 @@ import Alert from '@mui/material/Alert'
 import Slide from '@mui/material/Slide'
 
 import { useAppSelector, useAppDispatch } from 'redux/hooks/typedHooks'
-import { clear, selectSnackbar } from 'redux/slices/snackbarSlice'
+import { clearError, selectSnackbar } from 'redux/slices/snackbarSlice'
 
 import {
   anonymousRoutes,
@@ -29,11 +29,7 @@ const AppLayout: React.FC = (): React.ReactElement => {
   const dispatch = useAppDispatch()
 
   const handleClose = () => {
-    dispatch(
-      clear({
-        message: '',
-      }),
-    )
+    dispatch(clearError())
   }
 
   const getRoutes = (role: UserRoles) => {

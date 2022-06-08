@@ -44,14 +44,15 @@ export const snackbarSlice = createSlice({
       state.snackType = SnackBarType.INFO
       state.message = action.payload.message
     },
-    clear: (state, action: PayloadAction<SnackbarState>) => {
+    clearError: (state) => {
       state.openSnack = false
-      state.snackType = undefined
-      state.message = action.payload.message
+      // state.snackType = undefined
+      // state.message = ''
     },
   },
 })
 
-export const { success, clear, error, informational, warning } = snackbarSlice.actions
+export const { success, clearError, error, informational, warning } =
+  snackbarSlice.actions
 export const snackbarReducer = snackbarSlice.reducer
 export const selectSnackbar = (state: RootState) => state.snackbar

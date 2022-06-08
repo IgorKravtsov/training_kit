@@ -1,11 +1,9 @@
-import axios from 'axios'
 import { checkCredits, mocked_user } from 'api/MOCKED_DATA/auth'
 import {
   LoginRequest,
   RefreshAuthRequest,
   RefreshAuthResponse,
   RegisterRequest,
-  RegisterResponse,
 } from './types'
 import { API_HOST } from '../api.constants'
 import { $api } from 'api/_config'
@@ -16,19 +14,15 @@ export const Login = async (request: LoginRequest): Promise<AppUser> => {
   return data
 }
 
-export const Register = async (
-  request: RegisterRequest,
-): Promise<RegisterResponse> => {
+export const Register = async (request: RegisterRequest): Promise<AppUser> => {
   // return Promise.resolve({ accessToken: 'MOCKED_accessToken', refreshToken: 'MOCKED_refreshToken', user: mocked_user['superletsplay7@gmail.com'] })
-  const { data } = await axios.post<RegisterResponse>(
-    `${API_HOST}/auth/register`,
-    request,
-  )
+  const { data } = await $api.post<AppUser>('auth/register', request)
   return data
 }
 
-export const Logout = async (): Promise<{ user: null }> => {
-  return Promise.resolve({ user: null })
+export const Logout = async () => {
+  const { data } = await $api.post<{ message: string }>('auth/logout')
+  return data
 }
 
 export const RefreshAuth = async (
