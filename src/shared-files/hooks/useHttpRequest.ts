@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks'
 import {
   hideLoading,
@@ -6,20 +7,26 @@ import {
 } from 'redux/slices/loadingIndicatorSlice'
 import { clearError, error, selectSnackbar } from 'redux/slices/snackbarSlice'
 
-export function useHttpRequest<T>(
-  request: (...arg: any[]) => Promise<T | void>,
+export function useHttpRequest<Args, Req>(
+  request: (...arg: Args[]) => Promise<Req | void>,
   clearErrorTime = 3000,
-): [(...args: any[]) => Promise<T | void>, string, boolean] {
+): [(...args: any[]) => Promise<Req | void>, string, boolean] {
   const { loading } = useAppSelector(selectLoadingIndicator)
   const { message } = useAppSelector(selectSnackbar)
   const dispatch = useAppDispatch()
 
-  const method = async (...args: any[]): Promise<T | void> => {
+  const method = async (...args: any[]): Promise<Req | void> => {
     try {
       dispatch(showLoading())
-      return await request(...args)
+      const data = await request(...args)
+      return data
     } catch (err: any) {
-      dispatch(error({ message: err.response.data.message }))
+      let message = err?.response?.data?.message
+      if (err?.message === 'Network Error') {
+        message = 'Помилка серверу'
+      }
+
+      dispatch(error({ message }))
       setTimeout(() => {
         dispatch(clearError())
       }, clearErrorTime)

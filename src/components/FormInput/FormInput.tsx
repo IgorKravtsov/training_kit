@@ -1,12 +1,12 @@
 import React from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import { Controller } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import TextField from '@mui/material/TextField'
 import { StandardTextFieldProps } from '@mui/material'
 
 export interface FormInputProps extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<any, any>
   errors: {
     [x: string]: any
   }
@@ -15,7 +15,6 @@ export interface FormInputProps extends Partial<StandardTextFieldProps> {
 
 const FormInput: React.FC<FormInputProps> = ({
   name,
-  control,
   errors,
   className,
   label,
@@ -24,6 +23,7 @@ const FormInput: React.FC<FormInputProps> = ({
   required,
   ...otherProps
 }): React.ReactElement => {
+  const { control } = useFormContext()
   return (
     <Controller
       name={name}
@@ -40,7 +40,7 @@ const FormInput: React.FC<FormInputProps> = ({
           // fullWidth
           required={required}
           className={className}
-          color='primary'
+          color="primary"
         />
       )}
     />

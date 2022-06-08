@@ -1,5 +1,10 @@
 import React from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import {
+  Control,
+  Controller,
+  FieldValues,
+  useFormContext,
+} from 'react-hook-form'
 
 import TextField from '@mui/material/TextField'
 import { StandardTextFieldProps } from '@mui/material'
@@ -12,7 +17,6 @@ import { ru } from 'date-fns/locale'
 
 export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<any, any>
   errors: {
     [x: string]: any
   }
@@ -23,7 +27,6 @@ export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
 
 const FormDatePicker: React.FC<FormAutocompleteProps> = ({
   name,
-  control,
   errors,
   className,
   label,
@@ -34,6 +37,7 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
   maxDate,
   minDate,
 }): React.ReactElement => {
+  const { control } = useFormContext()
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
       <Controller

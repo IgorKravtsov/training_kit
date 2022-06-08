@@ -10,20 +10,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Grid from '@mui/material/Grid'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { useAppDispatch } from 'redux/hooks'
 
+import FormWrapper from 'components/FormWrapper/FormWrapper'
 import AppCard from 'components/AppCard/AppCard'
 import Form from './components/Form'
 
-import { register, selectUser, setUser } from 'redux/slices/userSlice'
-import { error } from 'redux/slices/snackbarSlice'
-
-// import { LocalStorageKey, UserRoles } from 'shared-files/enums'
 import * as api from 'api/auth/auth'
 import { RegisterRequest } from 'api/auth/types'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
+
+import { setUser } from 'redux/slices/userSlice'
+
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { useHttpRequest } from 'shared-files/hooks/useHttpRequest'
+import { useHttpRequest } from 'shared-files/hooks'
+
 import { useRegisterValidation } from './useRegisterValidation'
 
 const Register: React.FC = (): React.ReactElement => {
@@ -64,25 +64,6 @@ const Register: React.FC = (): React.ReactElement => {
 
     const response = await registerMethod(request)
     response && dispatch(setUser(response))
-
-    // setIsLoading(true)
-    // setTimeout(async () => {
-    // const response = (await dispatch(register(request))) as any
-
-    // if (response?.meta.requestStatus !== 'rejected') {
-    //   // localStorage.setItem(LocalStorageKey.RefreshToken, response.payload.refreshToken)
-    //   navigate(RouteNames.HOME)
-    // } else {
-    //   // const message = response?.error?.message
-
-    //   dispatch(
-    //     error({
-    //       message: errorMessage || 'Помилка серверу',
-    //     }),
-    //   )
-    // }
-    // setIsLoading(false)
-    // }, SERVER_DELAY_TIME)
   }
 
   useEffect(() => {
@@ -101,12 +82,13 @@ const Register: React.FC = (): React.ReactElement => {
           </Typography>
         </Grid>
 
-        <Form
-          isLoading={isLoading}
+        <FormWrapper
           formFeatures={formFeatures}
           onSubmit={onSubmit}
           onError={onError}
-        />
+        >
+          <Form />
+        </FormWrapper>
       </AppCard>
     </>
   )

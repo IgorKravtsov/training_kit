@@ -1,5 +1,10 @@
 import React from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import {
+  Control,
+  Controller,
+  FieldValues,
+  useFormContext,
+} from 'react-hook-form'
 
 import TextField from '@mui/material/TextField'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -16,9 +21,9 @@ import IconButton from '@mui/material/IconButton'
 
 import { StandardTextFieldProps } from '@mui/material'
 
-export interface FormPasswordInputProps extends Partial<StandardTextFieldProps> {
+export interface FormPasswordInputProps
+  extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<any, any>
   errors: {
     [x: string]: any
   }
@@ -30,17 +35,15 @@ export interface FormPasswordInputProps extends Partial<StandardTextFieldProps> 
 
 const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
   name,
-  control,
   errors,
   className,
-  label,
   placeholder,
-  type,
   required,
   handleClickShowPassword,
   visiblePassword,
   id,
 }): React.ReactElement => {
+  const { control } = useFormContext()
   return (
     <>
       <Controller
@@ -56,14 +59,14 @@ const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
             fullWidth
             required={required}
             className={className}
-            color='primary'
+            color="primary"
             endAdornment={
-              <InputAdornment position='end'>
+              <InputAdornment position="end">
                 <IconButton
-                  aria-label='toggle password visibility'
+                  aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
-                  onMouseDown={e => e.preventDefault()}
-                  edge='end'
+                  onMouseDown={(e) => e.preventDefault()}
+                  edge="end"
                 >
                   {visiblePassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton>
@@ -73,7 +76,10 @@ const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
         )}
       />
       {errors[name]?.message && (
-        <FormHelperText style={{ color: '#d32f2f', marginLeft: '14px' }} id={id}>
+        <FormHelperText
+          style={{ color: '#d32f2f', marginLeft: '14px' }}
+          id={id}
+        >
           {errors[name]?.message}
         </FormHelperText>
       )}

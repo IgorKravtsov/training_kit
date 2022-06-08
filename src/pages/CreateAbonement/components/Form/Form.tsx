@@ -60,7 +60,6 @@ const Form: React.FC<FormProps> = ({
         <Grid item xs={12}>
           <FormInput
             name="title"
-            control={control}
             errors={errors}
             placeholder={'Назва абонемента...'}
             label={'Назва абонемента'}
@@ -72,7 +71,6 @@ const Form: React.FC<FormProps> = ({
           <FormLoadingAutocomplete
             name="gyms"
             multiple
-            control={control}
             errors={errors}
             getFunc={GetTrainerGyms}
             request={{ trainerId: user?.id || 0 }}
@@ -97,7 +95,6 @@ const Form: React.FC<FormProps> = ({
                 fullWidth
                 name="days"
                 type="number"
-                control={control}
                 errors={errors}
                 placeholder={'Кількість днів...'}
                 label={'Кількість днів'}
@@ -112,7 +109,6 @@ const Form: React.FC<FormProps> = ({
                 fullWidth
                 name="trainings"
                 type="number"
-                control={control}
                 errors={errors}
                 placeholder={'Кількість тренувань...'}
                 label={'Кількість тренувань'}
@@ -127,7 +123,6 @@ const Form: React.FC<FormProps> = ({
             fullWidth
             name="price"
             type="number"
-            control={control}
             errors={errors}
             placeholder={'Ціна абонемента (в гривнях)...'}
             label={'Ціна абонемента (гривні)'}

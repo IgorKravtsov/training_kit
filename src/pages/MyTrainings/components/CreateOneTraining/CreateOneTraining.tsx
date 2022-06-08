@@ -86,7 +86,6 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
             name="title"
             fullWidth
             errors={errors}
-            control={control}
             label="Назва тренування"
             placeholder="Уведіть назву (бажано комбінувати з групою)..."
           />
@@ -99,7 +98,6 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
             fullWidth
             rows={4}
             errors={errors}
-            control={control}
             label="Опис тренування (не обов'язково)"
             placeholder="Опис..."
           />
@@ -115,7 +113,6 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
             <Grid item xs={6}>
               <FormDatePicker
                 name="trainingDate"
-                control={control}
                 errors={errors}
                 label="Дата тренування"
                 placeholder="Дата тренування..."
@@ -125,7 +122,6 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
             <Grid item xs={6}>
               <FormTimePicker
                 name="trainingTime"
-                control={control}
                 errors={errors}
                 label="Час тренування"
                 placeholder="Час тренування..."

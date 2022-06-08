@@ -1,15 +1,20 @@
 import React from 'react'
 
-import { UseFormReturn } from 'react-hook-form'
+import { FieldValues, UseFormReturn } from 'react-hook-form'
 import { FormProvider } from 'react-hook-form'
 
 export interface FormProps {
-  formFeatures: UseFormReturn<any, any>
+  formFeatures: UseFormReturn<any, unknown>
   onSubmit: (data: any) => void
   onError?: (error: any) => void
 }
 
-const FormWrapper: React.FC<FormProps> = ({ formFeatures, onSubmit, onError, children }): React.ReactElement => {
+const FormWrapper: React.FC<FormProps> = ({
+  formFeatures,
+  onSubmit,
+  onError,
+  children,
+}): React.ReactElement => {
   const { handleSubmit } = formFeatures
 
   return (

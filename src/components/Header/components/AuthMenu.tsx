@@ -12,13 +12,17 @@ import Badge from '@mui/material/Badge'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
-import { logout } from 'redux/slices/userSlice'
+// import { logout } from 'redux/slices/userSlice'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useHttpRequest } from 'shared-files/hooks'
+import { Logout } from 'api/auth/auth'
+import { logOutUser } from 'redux/slices/userSlice'
 
 const AuthMenu: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [logout] = useHttpRequest(Logout)
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
@@ -31,8 +35,11 @@ const AuthMenu: React.FC = (): React.ReactElement => {
   }
 
   const handleLogout = async () => {
-    await dispatch(logout())
-    navigate(RouteNames.WELCOME)
+    const response = await logout()
+    if (response) {
+      dispatch(logOutUser())
+      navigate(RouteNames.WELCOME)
+    }
   }
 
   const goToPage = (path: string) => {

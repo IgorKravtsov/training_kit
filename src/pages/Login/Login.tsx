@@ -14,16 +14,23 @@ import Typography from '@mui/material/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Alert from '@mui/material/Alert'
 
+import FormWrapper from 'components/FormWrapper/FormWrapper'
 import AppCard from 'components/AppCard/AppCard'
-import { login, selectUser } from 'redux/slices/userSlice'
+import { login, selectUser, setUser } from 'redux/slices/userSlice'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { error } from 'redux/slices/snackbarSlice'
 import { setOrganization } from 'redux/slices/organizationSlice'
+
+import * as api from 'api/auth/auth'
 
 import Form from './components/Form'
 import { LocalStorageKey } from 'shared-files/enums'
 import { SERVER_DELAY_TIME } from 'shared-files/constants'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useLoginValidation } from './useLoginValidation'
+import { useHttpRequest } from 'shared-files/hooks'
+import { LoginRequest } from 'api/auth/types'
+import { AppUser } from 'api/user/types'
 
 const Login: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -32,20 +39,9 @@ const Login: React.FC = (): React.ReactElement => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [login, _, isLoading] = useHttpRequest<LoginRequest, AppUser>(api.Login)
 
-  const [isLoading, setIsLoading] = useState(false)
-
-  const validationSchema = yup.object({
-    email: yup
-      .string()
-      .email('Це не є правильною поштою')
-      .required('Це поле має бути заповнено'),
-    password: yup
-      .string()
-      .min(1, 'Мінімальне кол-во символів - 1')
-      .required('Це поле має бути заповнено'),
-    organization: yup.mixed().required('Це поле має бути вибране'),
-  })
+  const { validationSchema } = useLoginValidation()
   type SubmitData = yup.InferType<typeof validationSchema>
 
   const formFeatures = useForm({
@@ -58,28 +54,12 @@ const Login: React.FC = (): React.ReactElement => {
 
   const onSubmit = async (data: SubmitData) => {
     const { email, password, organization } = data
-
-    setIsLoading(true)
-    setTimeout(async () => {
-      const response = (await dispatch(
-        login({ email, password, organizationId: organization.id }),
-      )) as any
-
-      if (response?.meta.requestStatus !== 'rejected') {
-        dispatch(setOrganization(organization))
-        // localStorage.setItem(LocalStorageKey.RefreshToken, response.payload.refreshToken)
-        navigate(RouteNames.HOME)
-      } else {
-        const message = response?.error?.message
-
-        dispatch(
-          error({
-            message: message || 'Помилка серверу',
-          }),
-        )
-      }
-      setIsLoading(false)
-    }, SERVER_DELAY_TIME)
+    const response = await login({
+      email,
+      password,
+      organizationId: organization.id,
+    })
+    response && dispatch(setUser(response))
   }
 
   useEffect(() => {
@@ -98,12 +78,13 @@ const Login: React.FC = (): React.ReactElement => {
           </Typography>
         </Grid>
 
-        <Form
-          isLoading={isLoading}
+        <FormWrapper
           formFeatures={formFeatures}
           onSubmit={onSubmit}
           onError={onError}
-        />
+        >
+          <Form />
+        </FormWrapper>
       </AppCard>
       <Grid container xs={12}>
         <Alert style={{ marginLeft: '10px' }} severity="info">

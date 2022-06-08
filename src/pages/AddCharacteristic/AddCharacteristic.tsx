@@ -80,10 +80,6 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
     getCharacteristicList(user)
   }, [])
 
-  useEffect(() => {
-    console.log('===characteristics===', characteristicList)
-  }, [characteristicList])
-
   return (
     <>
       <Typography variant="h1">Додати характеристику</Typography>

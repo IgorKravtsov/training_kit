@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Control, Controller, FieldValues } from 'react-hook-form'
+import {
+  Control,
+  Controller,
+  FieldValues,
+  useFormContext,
+} from 'react-hook-form'
 
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import { StandardTextFieldProps, AutocompleteRenderInputParams } from '@mui/material'
+import {
+  StandardTextFieldProps,
+  AutocompleteRenderInputParams,
+} from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { AutocompleteOption } from 'shared-files/interfaces/autocompleteOption.interface'
 
-export interface FormLoadingAutocompleteProps extends Partial<StandardTextFieldProps> {
+export interface FormLoadingAutocompleteProps
+  extends Partial<StandardTextFieldProps> {
   name: string
-  control: Control<any, any>
   errors: {
     [x: string]: any
   }
@@ -27,7 +35,6 @@ export interface FormLoadingAutocompleteProps extends Partial<StandardTextFieldP
 const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
   {
     name,
-    control,
     errors,
     className,
     label,
@@ -43,8 +50,9 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
     openText = '',
     multiple,
   },
-  { ...otherProps }
+  { ...otherProps },
 ): React.ReactElement => {
+  const { control } = useFormContext()
   const [open, setOpen] = useState(false)
   const [options, setOptions] = useState<AutocompleteOption[]>([])
   const loading = open && options.length === 0
@@ -59,7 +67,12 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
       const response = await getFunc(request)
 
       if (active) {
-        setOptions(response[responseKey].map((item: any) => ({ label: item[labelKey], ...item })))
+        setOptions(
+          response[responseKey].map((item: any) => ({
+            label: item[labelKey],
+            ...item,
+          })),
+        )
       }
     })()
 
@@ -94,7 +107,7 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
           }}
           loading={loading}
           isOptionEqualToValue={(option, value) => option.label === value.label}
-          getOptionLabel={option => option.label}
+          getOptionLabel={(option) => option.label}
           loadingText={loadingText}
           openText={openText}
           renderInput={(parametrs: AutocompleteRenderInputParams) => (
@@ -106,13 +119,15 @@ const FormLoadingAutocomplete: React.FC<FormLoadingAutocompleteProps> = (
               type={type}
               placeholder={placeholder}
               required={required}
-              color='primary'
+              color="primary"
               {...otherProps}
               InputProps={{
                 ...parametrs.InputProps,
                 endAdornment: (
                   <>
-                    {loading ? <CircularProgress color='inherit' size={20} /> : null}
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
                     {parametrs.InputProps.endAdornment}
                   </>
                 ),
