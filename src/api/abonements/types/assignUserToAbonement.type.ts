@@ -1,10 +1,10 @@
 import { Id } from 'shared-files/types'
 
 export interface AssignUserToAbonementRequest {
-  learnerId: Id
-  abonementId: Id
+  learner: Id
+  abonement: Id
 }
 
-export interface AssignUserToAbonementResponse {
-  message: string
-}
+// export interface AssignUserToAbonementResponse {
+//   message: string
+// }

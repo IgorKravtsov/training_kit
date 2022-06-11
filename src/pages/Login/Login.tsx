@@ -39,7 +39,7 @@ const Login: React.FC = (): React.ReactElement => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [login] = useHttpRequest<LoginRequest, AppUser>(api.Login, {
+  const [login] = useHttpRequest(api.Login, {
     shouldShowLoading: false,
   })
 

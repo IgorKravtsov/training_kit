@@ -27,5 +27,5 @@ const assignTrainersSlice = createSlice({
 
 export const { setTrainerList, setRequestTrainerList } =
   assignTrainersSlice.actions
-export const assignTrainersSliceReducer = assignTrainersSlice.reducer
+export const assignTrainersReducer = assignTrainersSlice.reducer
 export const selectAssignTrainers = (state: RootState) => state.assignTrainers

@@ -1,4 +1,4 @@
-import { Abonement } from 'api/abonements/types'
+import { Abonement, LearnerAbonement } from 'api/abonements/types'
 import { Characteristic } from 'api/characteristic/types'
 import { Gym } from 'api/gym/types'
 import { Organization } from 'api/organization/types'
@@ -24,5 +24,6 @@ export interface AppUser {
   characteristics?: Characteristic[]
   trainers?: PublicAppUserDto[]
   abonements?: Abonement[]
+  learnerAbonements?: LearnerAbonement[]
   gyms?: Gym[]
 }

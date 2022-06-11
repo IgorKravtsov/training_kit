@@ -1,17 +1,11 @@
 import {
-  mocked_abonements,
-  mocked_abonementsWithUserData,
-} from 'api/MOCKED_DATA/abonements'
-
-import {
   AssignUserToAbonementRequest,
-  AssignUserToAbonementResponse,
   CreateNewAbonementRequest,
   CreateNewAbonementResponse,
-  GetOneAbonementWithUserDataRequest,
-  GetOneAbonementWithUserDataResponse,
+  GetOneLearnerAbonementRequest,
   GetLearnerAbonementsRequest,
-  GetLearnerAbonementsResponse,
+  Abonement,
+  GetTrainersAbonementsRequest,
 } from './types'
 
 import { LearnerAbonement } from './types'
@@ -26,25 +20,44 @@ export const GetLearnerAbonements = async (
     request,
   )
   return data
-  // return Promise.resolve({ abonements: mocked_abonements })
 }
 
-export const AssignUserToAbonement = (
+export const GetTrainersAbonements = async (
+  request: GetTrainersAbonementsRequest,
+): Promise<Abonement[]> => {
+  const { data } = await $api.post<Abonement[]>(
+    'abonement/get-trainers-abonements',
+    request,
+  )
+  return data
+}
+
+export const AssignUserToAbonement = async (
   request: AssignUserToAbonementRequest,
-): Promise<AssignUserToAbonementResponse> => {
-  return Promise.resolve({ message: 'OK' })
+): Promise<LearnerAbonement> => {
+  const { data } = await $api.post<LearnerAbonement>(
+    'abonement/assign-abonement',
+    request,
+  )
+  return data
 }
 
-export const GetOneAbonementWithUserData = (
-  request: GetOneAbonementWithUserDataRequest,
-): Promise<GetOneAbonementWithUserDataResponse> => {
-  return Promise.resolve({
-    abonementWithUserData: mocked_abonementsWithUserData[0],
-  })
+export const GetOneLearnerAbonement = async (
+  request: GetOneLearnerAbonementRequest,
+): Promise<LearnerAbonement> => {
+  const { data } = await $api.post<LearnerAbonement>(
+    'abonement/get-one-learner-abonement',
+    request,
+  )
+  return data
 }
 
-export const CreateNewAbonement = (
+export const CreateNewAbonement = async (
   request: CreateNewAbonementRequest,
 ): Promise<CreateNewAbonementResponse> => {
-  return Promise.resolve({ abonement: mocked_abonements[0] })
+  const { data } = await $api.post<CreateNewAbonementResponse>(
+    'abonement/create',
+    request,
+  )
+  return data
 }

@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
-import { getUserAbonements, selectAbonement } from 'redux/slices/abonementSlice'
+import { selectAbonement, setAbonements } from 'redux/slices/abonementSlice'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { AppUser } from 'api/user/types'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
+// import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
+import { AppUser, PublicAppUserDto } from 'api/user/types'
+// import { SERVER_DELAY_TIME } from 'shared-files/constants'
 import AbonementListItem from '../components/AbonementList/AbonementListItem'
 import { Container, Grid } from '@mui/material'
 import { Id } from 'shared-files/types'
-import { AssignUserToAbonement } from 'api/abonements/abonements'
+import {
+  AssignUserToAbonement,
+  GetTrainersAbonements,
+} from 'api/abonements/abonements'
 import { error, success } from 'redux/slices/snackbarSlice'
 import { useNavigate } from 'react-router-dom'
 import { RouteNames } from 'routes'
+import { useHttpRequest } from 'shared-files/hooks'
 
 const Abonements: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
@@ -20,37 +24,31 @@ const Abonements: React.FC = (): React.ReactElement => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const getAbonements = async (user: Partial<AppUser>) => {
-    const trainers = user?.trainers
-      ? user?.trainers.map((trainer) => trainer.id)
-      : []
-    dispatch(showLoading())
-    setTimeout(async () => {
-      await dispatch(getUserAbonements({ trainers }))
-      dispatch(hideLoading())
-    }, SERVER_DELAY_TIME)
+  const [getTrainersAbonements] = useHttpRequest(GetTrainersAbonements, {
+    action: setAbonements,
+  })
+  const [assignUserToAbonement] = useHttpRequest(AssignUserToAbonement)
+
+  const getAbonements = async (trainers: PublicAppUserDto[]) => {
+    await getTrainersAbonements({
+      trainers: trainers.map((trainer) => trainer.id),
+    })
   }
 
   const assignToAbonement = async (learnerId: Id, abonementId: Id) => {
-    dispatch(showLoading())
-    setTimeout(async () => {
-      try {
-        await AssignUserToAbonement({ learnerId, abonementId })
-        dispatch(success({ message: 'Ви успішно підписалися на абонемент!' }))
-        setTimeout(() => {
-          navigate(`${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.id || 0}/gyms`)
-        }, 2000)
-      } catch (err: any) {
-        dispatch(error({ message: err.message }))
-      } finally {
-        dispatch(hideLoading())
-      }
-    }, SERVER_DELAY_TIME)
+    const response = await assignUserToAbonement({
+      abonement: abonementId,
+      learner: learnerId,
+    })
+    if (response) {
+      dispatch(success({ message: 'Ви успішно підписалися на абонемент!' }))
+    }
   }
 
   useEffect(() => {
-    user && getAbonements(user)
+    getAbonements(user?.trainers || [])
   }, [])
+
   return (
     <Container>
       <Grid container spacing={2} justifyContent="center">

@@ -20,7 +20,7 @@ const TrainerList: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const { appTrainerList: trainerList } = useAppSelector(selectAssignTrainers) //Add skeleton while loading
 
-  const [assignToTrainers] = useHttpRequest<AssginToTrainersRequest, AppUser>(
+  const [assignToTrainers] = useHttpRequest(
     AssignToTrainers,
     { action: setUser },
   )

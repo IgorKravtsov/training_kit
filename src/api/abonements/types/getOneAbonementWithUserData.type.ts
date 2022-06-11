@@ -1,11 +1,11 @@
 import { Id } from 'shared-files/types'
 import { LearnerAbonement } from './abonement.type'
 
-export interface GetOneAbonementWithUserDataRequest {
+export interface GetOneLearnerAbonementRequest {
   abonementId: Id
-  userId: Id
+  learnerId: Id
 }
 
-export interface GetOneAbonementWithUserDataResponse {
-  abonementWithUserData: LearnerAbonement
-}
+// export interface GetOneLearnerAbonementResponse {
+//   abonementWithUserData: LearnerAbonement
+// }

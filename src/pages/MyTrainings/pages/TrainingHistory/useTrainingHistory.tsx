@@ -73,7 +73,7 @@ export const useTrainingHistory = () => {
     {
       field: 'trainingDate',
       headerName: 'Дата тренування',
-      minWidth: 150,
+      minWidth: 200,
       // maxWidth: 400,
     },
     {

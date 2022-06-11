@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GetLearnerAbonements } from 'api/abonements/abonements'
 import {
   Abonement,
@@ -18,27 +18,31 @@ const initialState: AbonementState = {
   learnerAbonements: null,
 }
 
-export const getUserAbonements = createAsyncThunk<
-  LearnerAbonement[],
-  GetLearnerAbonementsRequest
->(
-  'abonement/getUserAbonements',
-  async (request: GetLearnerAbonementsRequest) => {
-    return await GetLearnerAbonements(request)
-  },
-)
+// export const getUserAbonements = createAsyncThunk<
+//   LearnerAbonement[],
+//   GetLearnerAbonementsRequest
+// >(
+//   'abonement/getUserAbonements',
+//   async (request: GetLearnerAbonementsRequest) => {
+//     return await GetLearnerAbonements(request)
+//   },
+// )
 
 const abonementSlice = createSlice({
   name: 'abonement',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getUserAbonements.fulfilled, (state, action) => {
-      state.learnerAbonements = action.payload
-    })
+  reducers: {
+    setAbonements(state, action: PayloadAction<Abonement[]>) {
+      state.abonements = action.payload
+    },
   },
+  // extraReducers: (builder) => {
+  //   builder.addCase(getUserAbonements.fulfilled, (state, action) => {
+  //     state.learnerAbonements = action.payload
+  //   })
+  // },
 })
 
-export const {} = abonementSlice.actions
+export const { setAbonements } = abonementSlice.actions
 export const abonementReducer = abonementSlice.reducer
 export const selectAbonement = (state: RootState) => state.abonement

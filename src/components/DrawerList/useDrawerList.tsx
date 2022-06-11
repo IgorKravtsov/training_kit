@@ -28,7 +28,7 @@ import { generateId } from 'utils'
 import { AssignToAbonementRoutes, RouteNames, MyTrainingsRoutes } from 'routes'
 
 import { Characteristic, CharacteristicType } from 'api/characteristic/types'
-import { Abonement } from 'api/abonements/types'
+import { Abonement, LearnerAbonement } from 'api/abonements/types'
 import { Gym } from 'api/gym/types'
 import { AppUser } from 'api/user/types'
 
@@ -138,6 +138,15 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
     }))
   }
 
+  const transformLeanerAbonements = (abonements?: LearnerAbonement[]) => {
+    if (!abonements) return []
+    return abonements.map(({ id, abonement }) => ({
+      id,
+      name: abonement?.title || '-',
+      link: `${RouteNames.MY_ABONEMENT}/${user?.id}/${id}`,
+    }))
+  }
+
   const transformGyms = (abonements?: Gym[]) => {
     if (!abonements) return []
     return abonements.map(({ id, title }) => ({
@@ -169,7 +178,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       },
     ]
     let abonement: any[] = []
-    if (user?.abonements) {
+    if (user?.learnerAbonements) {
       abonement = [
         {
           id: generateId(),
@@ -177,7 +186,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
           icon: <CreditCardIcon />,
           link: `${RouteNames.MY_ABONEMENT}/${user?.id}`,
           items: [
-            ...transformAbonements(user.abonements),
+            // ...transformLeanerAbonements(user.learnerAbonements),
             {
               id: generateId(),
               name: 'Підписатися на абонемент',

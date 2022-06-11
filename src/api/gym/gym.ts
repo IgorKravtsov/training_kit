@@ -1,19 +1,16 @@
 import { mocked_gyms } from 'api/MOCKED_DATA/gym'
 import {
   GetLearnerGymsRequest,
-  GetLearnerGymsResponse,
   GetTrainerGymsRequest,
   GetTrainerGymsResponse,
+  Gym,
 } from './types'
 import { $api } from '../_config'
 
 export const GetLearnerGyms = async (
   request: GetLearnerGymsRequest,
-): Promise<GetLearnerGymsResponse> => {
-  const { data } = await $api.post<GetLearnerGymsResponse>(
-    'gym/learner-gyms',
-    request,
-  )
+): Promise<Gym[]> => {
+  const { data } = await $api.post<Gym[]>('gym/learner-gyms', request)
   return data
 }
 

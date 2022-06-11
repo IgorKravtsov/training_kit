@@ -9,18 +9,21 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { formatDate } from 'utils'
 
 import OptionText from '../OptionText/OptionText'
+import { selectLearnerAbonement } from 'redux/slices/learnerAbonementSlice'
+import { useAppSelector } from 'redux/hooks'
 
 interface SelectedAbonementProps {
   isLoading: boolean
-  lAbonement: LearnerAbonement | null
 }
 
 const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
-  lAbonement,
   isLoading,
 }): React.ReactElement => {
-  const { user } = useAuthContext()
   const classes = useStyles()
+  const { user } = useAuthContext()
+
+  const { selectedLearnerAbonement } = useAppSelector(selectLearnerAbonement)
+
   return (
     <>
       {isLoading ? (
@@ -41,7 +44,7 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
               <Avatar>A</Avatar>
             )}
           </Grid>
-          {lAbonement && (
+          {selectedLearnerAbonement && (
             <>
               <Grid
                 item
@@ -49,7 +52,7 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                 sx={{ textAlign: 'center', paddingTop: '30px' }}
               >
                 <Typography id="modal-modal-title" variant="h4" component="h2">
-                  {lAbonement.abonement.title}
+                  {selectedLearnerAbonement?.abonement?.title || '-'}
                 </Typography>
               </Grid>
               <section style={{ marginTop: '50px' }}>
@@ -59,7 +62,7 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Ціна: {lAbonement.abonement.price}
+                    Ціна: {selectedLearnerAbonement?.abonement?.price || 0}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -68,8 +71,8 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Лишилось днів: {lAbonement.daysLeft} (Дата закінчення:{' '}
-                    {lAbonement.endDate})
+                    Лишилось днів: {selectedLearnerAbonement.daysLeft} (Дата
+                    закінчення: {formatDate(selectedLearnerAbonement.endDate)})
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -78,33 +81,27 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Лишилось тренувань: {lAbonement.trainingsLeft}
+                    Лишилось тренувань:{' '}
+                    {selectedLearnerAbonement.trainingsLeft || '∞'}
                   </Typography>
                 </Grid>
-                {/* {abonement.options.map((option) => (
-                  <Grid item xs={12} key={option.id}>
-                    <Typography
-                      variant="subtitle1"
-                      id="modal-modal-description"
-                      sx={{ marginTop: '2px' }}
-                    >
-                      {option.name}: {option.value}
-                    </Typography>
-                  </Grid>
-                ))} */}
               </section>
               <Divider sx={{ mt: 2 }} />
               <section style={{ marginTop: '50px' }}>
                 <Typography id="modal-modal-start-date">
-                  Дата початку: {formatDate(lAbonement.startDate)}
+                  Дата початку: {formatDate(selectedLearnerAbonement.startDate)}
                 </Typography>
                 <OptionText>
-                  Дата закінчення: {formatDate(lAbonement.endDate) || '-'}
+                  Дата закінчення:{' '}
+                  {formatDate(selectedLearnerAbonement.endDate) || '∞'}
                 </OptionText>
 
-                <OptionText>Лишилось днів: {lAbonement.daysLeft}</OptionText>
                 <OptionText>
-                  Лишилось тренувань: {lAbonement.trainingsLeft || '-'}
+                  Лишилось днів: {selectedLearnerAbonement.daysLeft}
+                </OptionText>
+                <OptionText>
+                  Лишилось тренувань:{' '}
+                  {selectedLearnerAbonement.trainingsLeft || '∞'}
                 </OptionText>
               </section>
             </>

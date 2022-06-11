@@ -2,7 +2,7 @@ import { Id } from 'shared-files/types'
 import { LearnerAbonement } from './abonement.type'
 
 export interface GetLearnerAbonementsRequest {
-  trainers: Id[]
+  learnerId: Id
 }
 
 export interface GetLearnerAbonementsResponse {

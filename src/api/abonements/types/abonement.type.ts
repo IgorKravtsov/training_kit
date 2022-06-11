@@ -11,7 +11,7 @@ export interface Abonement {
 export interface LearnerAbonement {
   id: Id
   // title: string
-  abonement: Abonement
+  abonement?: Abonement
   startDate: Date | string
   trainingsLeft?: number
   daysLeft?: number

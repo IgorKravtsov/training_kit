@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './MyTrainings.styles'
 
-import {
-  Link,
-  Navigate,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 
-import Title from 'components/Title/Title'
 import { MyTrainingsRoutes, RouteNames } from 'routes'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import Error from 'components/Error/Error'

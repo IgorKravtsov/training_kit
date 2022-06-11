@@ -36,7 +36,6 @@ const AddTrainers: React.FC = (): React.ReactElement => {
   })
 
   const onSubmit = async (data: SearchTrainerForm) => {
-    // const { trainer } = data
     dispatch(
       setTrainerList(
         requestTrainerList.filter(
@@ -46,8 +45,6 @@ const AddTrainers: React.FC = (): React.ReactElement => {
         ),
       ),
     )
-    // const trainerList = await getTrainersToAssign({ trainer })
-    // trainerList && dispatch(setTrainerList(trainerList))
   }
 
   useEffect(() => {
