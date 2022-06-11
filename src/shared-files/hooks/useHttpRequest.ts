@@ -8,11 +8,11 @@ import { clearError, error, selectSnackbar } from 'redux/slices/snackbarSlice'
 import { defaultHttpRequestConfig } from 'shared-files/constants'
 import { HttpRequestConfig } from 'shared-files/interfaces'
 
-export function useHttpRequest<Args, Req>(
-  request: (...arg: Args[]) => Promise<Req | void>,
-  httpRequestConfig?: Partial<HttpRequestConfig>,
-): [(...args: any[]) => Promise<Req | void>, string, boolean] {
-  const config: HttpRequestConfig = {
+export function useHttpRequest<Args, Res>(
+  request: (...arg: Args[]) => Promise<Res | void>,
+  httpRequestConfig?: Partial<HttpRequestConfig<Res>>,
+): [(...args: Args[]) => Promise<Res | void>, string, boolean] {
+  const config: HttpRequestConfig<Res> = {
     ...defaultHttpRequestConfig,
     ...httpRequestConfig,
   }
@@ -20,10 +20,13 @@ export function useHttpRequest<Args, Req>(
   const { message } = useAppSelector(selectSnackbar)
   const dispatch = useAppDispatch()
 
-  const method = async (...args: any[]): Promise<Req | void> => {
+  const method = async (...args: Args[]): Promise<Res | void> => {
     try {
       config.shouldShowLoading && dispatch(showLoading())
-      return await request(...args)
+      const data = await request(...args)
+      data && config.action && dispatch(config.action(data))
+
+      return data
     } catch (err: any) {
       let message = err?.response?.data?.message
       if (err?.message === 'Network Error') {
@@ -35,7 +38,7 @@ export function useHttpRequest<Args, Req>(
         dispatch(clearError())
       }, config.clearErrorTime)
     } finally {
-      dispatch(hideLoading())
+      config.shouldShowLoading && dispatch(hideLoading())
     }
   }
 

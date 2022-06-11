@@ -19,7 +19,7 @@ const AuthMenu: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [logout] = useHttpRequest(Logout)
+  const [logout] = useHttpRequest(Logout, { action: logOutUser })
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
@@ -34,7 +34,7 @@ const AuthMenu: React.FC = (): React.ReactElement => {
   const handleLogout = async () => {
     const response = await logout()
     if (response) {
-      dispatch(logOutUser())
+      // dispatch(logOutUser())
       navigate(RouteNames.WELCOME)
     }
   }

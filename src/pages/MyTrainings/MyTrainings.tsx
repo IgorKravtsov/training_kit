@@ -27,7 +27,7 @@ enum MyTrainingsPageTabs {
 const MyTrainings: React.FC = (): React.ReactElement => {
   const classes = useStyles()
 
-  const { user } = useAuthContext()
+  const { user, role } = useAuthContext()
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -49,10 +49,19 @@ const MyTrainings: React.FC = (): React.ReactElement => {
   }
 
   useEffect(() => {
-    if (!hasTrainers) {
+    if (!hasTrainers && role === UserRoles.LEARNER) {
       navigate(`${RouteNames.ASSIGN_TRAINERS}/${user?.id || 0}`, {
         replace: true,
       })
+    } else if (!hasTrainers) {
+      navigate(
+        `${RouteNames.MY_TRAININGS}/${user?.id || 0}/${
+          MyTrainingsRoutes.CREATE_TRAININGS
+        }`,
+        {
+          replace: true,
+        },
+      )
     }
   }, [])
 
@@ -73,16 +82,20 @@ const MyTrainings: React.FC = (): React.ReactElement => {
         variant="scrollable"
         className={classes.tabs}
       >
-        <Tab
-          label={'Ближчі тренування'}
-          component={Link}
-          to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.NEAREST}`}
-        />
-        <Tab
-          label={'Історія тренувань'}
-          component={Link}
-          to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.TRAINING_HISTORY}`}
-        />
+        {hasTrainers && (
+          <>
+            <Tab
+              label={'Ближчі тренування'}
+              component={Link}
+              to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.NEAREST}`}
+            />
+            <Tab
+              label={'Історія тренувань'}
+              component={Link}
+              to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.TRAINING_HISTORY}`}
+            />
+          </>
+        )}
         {(user.role === UserRoles.TRAINER || user.role === UserRoles.ADMIN) && (
           <Tab
             label={'Створити тренування'}
@@ -95,17 +108,5 @@ const MyTrainings: React.FC = (): React.ReactElement => {
     </div>
   )
 }
-
-// <Title>Мої тренування</Title>
-// {isHasTrainers ? (
-//   <>
-//     {/* <Title>У вас немає тренерів</Title>
-//     <Link to={`${RouteNames.ASSIGN_TRAINERS}/${user.id}`}>
-//       Знайти тренера
-//     </Link> */}
-//   </>
-// ) : (
-//   <></>
-// )}
 
 export default MyTrainings

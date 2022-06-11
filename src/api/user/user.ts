@@ -1,5 +1,10 @@
 import { $api } from 'api/_config'
-import { GetTrainersToAssignRequest, PublicAppUserDto } from './types'
+import {
+  AppUser,
+  AssginToTrainersRequest,
+  GetTrainersToAssignRequest,
+  PublicAppUserDto,
+} from './types'
 
 export const GetTrainersToAssign = async (
   request: GetTrainersToAssignRequest,
@@ -8,5 +13,12 @@ export const GetTrainersToAssign = async (
     'user/get-trainers-to-assign',
     request,
   )
+  return data
+}
+
+export const AssignToTrainers = async (
+  request: AssginToTrainersRequest,
+): Promise<AppUser> => {
+  const { data } = await $api.post<AppUser>('user/assign-to-trainers', request)
   return data
 }

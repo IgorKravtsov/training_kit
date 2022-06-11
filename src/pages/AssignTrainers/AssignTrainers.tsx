@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
-import { useStyles } from './assingTrainers.styles'
+import { useStyles } from './assignTrainers.styles'
 
 import { useForm } from 'react-hook-form'
 
 import { Container, Grid } from '@mui/material'
 
 import Title from 'components/Title/Title'
-import Search from './components/Search/Search'
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 
-import { SearchTrainerForm } from './interfaces'
 import { useHttpRequest } from 'shared-files/hooks'
 import { GetTrainersToAssign } from 'api/user/user'
 
@@ -19,7 +17,11 @@ import {
   setRequestTrainerList,
   setTrainerList,
 } from 'redux/slices/assignTrainersSlice'
+
+import Search from './components/Search/Search'
 import TrainerList from './components/TrainerList/TrainerList'
+
+import { SearchTrainerForm } from './interfaces'
 
 const AddTrainers: React.FC = (): React.ReactElement => {
   const classes = useStyles()
@@ -52,6 +54,7 @@ const AddTrainers: React.FC = (): React.ReactElement => {
     const getTrainers = async () => {
       const trainerList = await getTrainersToAssign({ trainer: '' })
       trainerList && dispatch(setRequestTrainerList(trainerList))
+      trainerList && dispatch(setTrainerList(trainerList))
     }
     getTrainers()
   }, [])
