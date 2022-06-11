@@ -1,19 +1,79 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useStyles } from './assingTrainers.styles'
+
+import { useForm } from 'react-hook-form'
 
 import { Container, Grid } from '@mui/material'
+
 import Title from 'components/Title/Title'
-import Search from './components/Search'
+import Search from './components/Search/Search'
+import FormWrapper from 'components/FormWrapper/FormWrapper'
+
+import { SearchTrainerForm } from './interfaces'
+import { useHttpRequest } from 'shared-files/hooks'
+import { GetTrainersToAssign } from 'api/user/user'
+
+import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import {
+  selectAssignTrainers,
+  setRequestTrainerList,
+  setTrainerList,
+} from 'redux/slices/assignTrainersSlice'
+import TrainerList from './components/TrainerList/TrainerList'
 
 const AddTrainers: React.FC = (): React.ReactElement => {
+  const classes = useStyles()
+
+  const { requestTrainerList } = useAppSelector(selectAssignTrainers)
+  const dispatch = useAppDispatch()
+
+  const [getTrainersToAssign] = useHttpRequest(GetTrainersToAssign)
+
+  const formFeatures = useForm<SearchTrainerForm>({
+    defaultValues: { trainer: '' },
+  })
+
+  const onSubmit = async (data: SearchTrainerForm) => {
+    // const { trainer } = data
+    dispatch(
+      setTrainerList(
+        requestTrainerList.filter(
+          (trainer) =>
+            trainer.displayName?.includes(data.trainer) ||
+            trainer.email?.includes(data.trainer),
+        ),
+      ),
+    )
+    // const trainerList = await getTrainersToAssign({ trainer })
+    // trainerList && dispatch(setTrainerList(trainerList))
+  }
+
+  useEffect(() => {
+    const getTrainers = async () => {
+      const trainerList = await getTrainersToAssign({ trainer: '' })
+      trainerList && dispatch(setRequestTrainerList(trainerList))
+    }
+    getTrainers()
+  }, [])
+
   return (
-    <>
-      <Container component="section" sx={{ mt: 3 }}>
-        <Grid container justifyContent="center">
-          <Title>Додати тренера</Title>
-          <Search />
+    <Container component="section" sx={{ mt: 3 }}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12}>
+          <Title className={classes.title}>Додати тренера</Title>
         </Grid>
-      </Container>
-    </>
+
+        <Grid item xs={12} style={{ marginTop: '10px' }}>
+          <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit}>
+            <Search />
+          </FormWrapper>
+        </Grid>
+
+        <Grid item xs={12} style={{ marginTop: '60px' }}>
+          <TrainerList />
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 

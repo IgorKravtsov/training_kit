@@ -11,10 +11,21 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const Title: React.FC = ({ children }): React.ReactElement => {
+interface TitleProps {
+  className?: string
+}
+
+const Title: React.FC<TitleProps> = ({
+  className,
+  children,
+}): React.ReactElement => {
   const classes = useStyles()
 
-  return <Typography className={classes.title}>{children}</Typography>
+  return (
+    <Typography className={[classes.title, className].join(' ')}>
+      {children}
+    </Typography>
+  )
 }
 
 export default Title
