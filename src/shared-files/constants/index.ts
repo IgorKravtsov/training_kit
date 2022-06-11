@@ -1,1 +1,2 @@
-export * from './browserDelayTime'
+export * from './browserDelayTime.constant'
+export * from './requestConfig.constant'

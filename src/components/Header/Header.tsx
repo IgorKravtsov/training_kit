@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
-import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 
 import DrawerList from 'components/DrawerList/DrawerList'
@@ -24,7 +23,6 @@ import { useThemeColor } from 'shared-files/hooks'
 const Header: React.FC = (): React.ReactElement => {
   const navigate = useNavigate()
   const { isAuth, role, selectedOrganization } = useAuthContext()
-  // const { organization } = useAppSelector(selectOrganization)
 
   const navigatePath = useMemo(
     () => (role === UserRoles.ANONYMOUS ? RouteNames.WELCOME : RouteNames.HOME),

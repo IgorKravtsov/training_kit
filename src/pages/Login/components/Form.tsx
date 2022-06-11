@@ -21,11 +21,14 @@ import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
 import { useThemeColor } from 'shared-files/hooks'
 
-const Form: React.FC = (): React.ReactElement => {
+interface FormProps {
+  isLoading: boolean
+}
+
+const Form: React.FC<FormProps> = ({ isLoading }): React.ReactElement => {
   const classes = useStyles()
 
   const dispatch = useAppDispatch()
-  const { loading: isLoading } = useAppSelector(selectLoadingIndicator)
 
   const [isShowPass, setIsShowPass] = useState(false)
   // const [organizationsOfUser, setOrganizationsOfUser] = useState<

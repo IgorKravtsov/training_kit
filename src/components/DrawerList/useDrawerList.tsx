@@ -242,24 +242,25 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
           },
         ]
       : [
-          {
-            id: generateId(),
-            name: 'Додати зал',
-            icon: <AddCircleIcon />,
-            link: `${RouteNames.ADD_GYM}/${user?.id}`,
-          },
+          // {
+          //   id: generateId(),
+          //   name: 'Додати зал',
+          //   icon: <AddCircleIcon />,
+          //   link: `${RouteNames.ADD_GYM}/${user?.id}`,
+          // },
         ]
 
-    const gyms = user?.gyms
-      ? [
-          {
-            id: generateId(),
-            name: 'Мої зали',
-            icon: <AccountBoxIcon />,
-            items: [...transformGyms(user.gyms), ...gymsMenuItems],
-          },
-        ]
-      : []
+    const gyms =
+      user?.gyms && user?.gyms?.length > 0
+        ? [
+            {
+              id: generateId(),
+              name: 'Мої зали',
+              icon: <AccountBoxIcon />,
+              items: [...transformGyms(user.gyms), ...gymsMenuItems],
+            },
+          ]
+        : []
     return [...sidebar[role], ...abonement, ...gyms, ...characteristics]
   }
 

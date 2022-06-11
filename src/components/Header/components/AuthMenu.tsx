@@ -8,11 +8,8 @@ import MenuItem from '@mui/material/MenuItem'
 import Menu from '@mui/material/Menu'
 import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
-import Badge from '@mui/material/Badge'
-import NotificationsIcon from '@mui/icons-material/Notifications'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
-// import { logout } from 'redux/slices/userSlice'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { useHttpRequest } from 'shared-files/hooks'
 import { Logout } from 'api/auth/auth'
@@ -81,7 +78,7 @@ const AuthMenu: React.FC = (): React.ReactElement => {
           vertical: 'top',
           horizontal: 'right',
         }}
-        open={Boolean(anchorEl)}
+        open={!!anchorEl}
         onClose={handleClose}
       >
         <MenuItem onClick={() => goToPage(`${RouteNames.CABINET}/${user?.id}`)}>

@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Control,
-  Controller,
-  FieldValues,
-  useFormContext,
-} from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -23,7 +18,7 @@ export interface FormLoadingAutocompleteProps
     [x: string]: any
   }
   className?: string
-  getFunc: (request?: any) => Promise<any>
+  getFunc: (...request: any[]) => Promise<any>
   request?: any
   labelKey?: string
   responseKey: string

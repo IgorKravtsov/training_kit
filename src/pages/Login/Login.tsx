@@ -39,7 +39,9 @@ const Login: React.FC = (): React.ReactElement => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [login, _, isLoading] = useHttpRequest<LoginRequest, AppUser>(api.Login)
+  const [login] = useHttpRequest<LoginRequest, AppUser>(api.Login, {
+    shouldShowLoading: false,
+  })
 
   const { validationSchema } = useLoginValidation()
   type SubmitData = yup.InferType<typeof validationSchema>
@@ -48,17 +50,21 @@ const Login: React.FC = (): React.ReactElement => {
     resolver: yupResolver(validationSchema),
   })
 
+  const [isLoading, setisLoading] = useState(false)
+
   const onError = (e: any) => {
     console.log('===ERROR===', e)
   }
 
   const onSubmit = async (data: SubmitData) => {
     const { email, password, organization } = data
+    setisLoading(true)
     const response = await login({
       email,
       password,
       organizationId: organization.id,
     })
+    setisLoading(false)
     response && dispatch(setUser(response))
   }
 
@@ -83,7 +89,7 @@ const Login: React.FC = (): React.ReactElement => {
           onSubmit={onSubmit}
           onError={onError}
         >
-          <Form />
+          <Form isLoading={isLoading} />
         </FormWrapper>
       </AppCard>
       <Grid container xs={12}>
