@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 
 import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator'
 import Header from 'components/Header/Header'
-import AppLayout from 'shared-files/AppLayout'
+import AppLayout from 'components/AppLayout'
 
 import { darkTheme, lightTheme } from 'styles/theme'
 import { selectTheme, toggleTheme } from 'redux/slices/themeSlice'

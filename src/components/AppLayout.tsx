@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
@@ -17,7 +17,7 @@ import {
 
 import ErrorPage from 'pages/Error/Error'
 import { UserRoles } from 'shared-files/enums'
-import { useAuthContext } from './AuthProvider/AuthProvider'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator'
 
 const AppLayout: React.FC = (): React.ReactElement => {
