@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import './App.css'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 
@@ -23,12 +23,14 @@ const App: React.FC = (): React.ReactElement => {
   }, [])
 
   return (
-    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
-      <CssBaseline />
-      <LoadingIndicator open={loading} />
-      <Header />
-      <AppLayout />
-    </ThemeProvider>
+    <Suspense fallback={<LoadingIndicator open={true} />}>
+      <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+        <CssBaseline />
+        <LoadingIndicator open={loading} />
+        <Header />
+        <AppLayout />
+      </ThemeProvider>
+    </Suspense>
   )
 }
 

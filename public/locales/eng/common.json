@@ -6,5 +6,8 @@
     "min": "Minimum symbols - {{ num }}",
     "confirmPass": "This field has to pass an password field value",
     "invalidEmail": "Invalid email"
-  }
+  },
+  "logout": "Log out",
+  "login": "Login",
+  "register": "Register"
 }

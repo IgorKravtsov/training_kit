@@ -57,7 +57,7 @@ const AppLayout: React.FC = (): React.ReactElement => {
   }, [role])
 
   return (
-    <Suspense fallback={<LoadingIndicator open={true} />}>
+    <>
       <Routes>
         {routes}
         <Route path="*" element={<ErrorPage />} />
@@ -77,7 +77,7 @@ const AppLayout: React.FC = (): React.ReactElement => {
           {message}
         </Alert>
       </Snackbar>
-    </Suspense>
+    </>
   )
 }
 

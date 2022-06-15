@@ -1,0 +1,20 @@
+{
+  "login": "Увійти",
+  "register": "Зареєструватися",
+  "myCabinet": "Мій кабінет",
+  "myTrainings": "Мої тренування",
+  "findTrainer": "Стати учнем у...",
+  "notifications": "Оповіщення",
+  "findLearners": "Знайти учнів",
+  "characteristics": "Характеристики",
+  "addCharacteristic": "Додати характеристику",
+  "myAbonements": "Мої абонементи",
+  "assignToAbonement": "Підписатися на абонемент",
+  "addGym": "Додати зал",
+  "createAbonement": "Створити абонемент для залів",
+  "myGym": "Мої зали",
+  "changeLang": "Змінити мову",
+  "ukr": "Українська",
+  "eng": "Англійська",
+  "rus": "Російська"
+}

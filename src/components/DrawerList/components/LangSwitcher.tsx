@@ -10,30 +10,30 @@ import { generateId } from 'utils'
 import CollapsableListItem from './CollapsableListItem'
 
 const LangSwitcher: React.FC = (): React.ReactElement => {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const changeLangMenuItem: MenuItem = {
     id: generateId(),
-    name: 'Змінити мову',
+    name: t('sidebar:changeLang'),
     icon: <LanguageIcon />,
     items: [
       {
         id: generateId(),
-        name: 'Українська',
+        name: t('sidebar:ukr'),
         onClick() {
           i18n.changeLanguage(LanguageType.Ukrainian)
         },
       },
       {
         id: generateId(),
-        name: 'Англійська',
+        name: t('sidebar:eng'),
         onClick() {
           i18n.changeLanguage(LanguageType.English)
         },
       },
       {
         id: generateId(),
-        name: 'Російська -> тьфу',
+        name: t('sidebar:rus'),
         onClick() {
           i18n.changeLanguage(LanguageType.Russian)
         },

@@ -24,6 +24,7 @@ import { saveTheme } from 'utils/saveTheme'
 
 import { useDrawerList } from './useDrawerList'
 import LangSwitcher from './components/LangSwitcher'
+import { useTranslation } from 'react-i18next'
 
 interface DrownerListProps {}
 
@@ -31,6 +32,8 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
   const { role } = useAuthContext()
   const { darkTheme } = useAppSelector(selectTheme)
   const dispatch = useAppDispatch()
+
+  const { t } = useTranslation(['common'])
 
   const { drawerList } = useDrawerList()
 
@@ -61,7 +64,7 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
-              <ListItemText primary={'Вийти'} />
+              <ListItemText primary={t('common:logout')} />
             </ListItemButton>
           </>
         )}

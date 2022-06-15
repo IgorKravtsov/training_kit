@@ -1,0 +1,20 @@
+{
+  "login": "Login",
+  "register": "Register",
+  "myCabinet": "My cabinet",
+  "myTrainings": "My trainings",
+  "findTrainer": "Find trainer",
+  "notifications": "Notifications",
+  "findLearners": "Find learners",
+  "characteristics": "Characteristics",
+  "addCharacteristic": "Add a characteristic",
+  "myAbonements": "My abonements",
+  "assignToAbonement": "Assign to abonement",
+  "addGym": "Add a gym",
+  "createAbonement": "Create abonement",
+  "myGym": "My gyms",
+  "changeLang": "Change language",
+  "ukr": "Ukrainian",
+  "eng": "English",
+  "rus": "Russian"
+}

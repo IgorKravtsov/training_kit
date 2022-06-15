@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
 import { RouteNames } from 'routes'
 
 import IconButton from '@mui/material/IconButton'
@@ -19,6 +21,8 @@ const AuthMenu: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { t } = useTranslation(['common'])
+
   const [logout] = useHttpRequest(Logout, { action: logOutUser })
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -85,7 +89,7 @@ const AuthMenu: React.FC = (): React.ReactElement => {
           {user?.displayName || user?.email}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleLogout}>Вийти</MenuItem>
+        <MenuItem onClick={handleLogout}>{t('common:logout')}</MenuItem>
       </Menu>
     </>
   )

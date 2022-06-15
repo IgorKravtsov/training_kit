@@ -31,11 +31,14 @@ import { Characteristic, CharacteristicType } from 'api/characteristic/types'
 import { Abonement, LearnerAbonement } from 'api/abonements/types'
 import { Gym } from 'api/gym/types'
 import { AppUser } from 'api/user/types'
+import { useTranslation } from 'react-i18next'
 
 export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const { user, role } = useAuthContext()
   const { drawerList } = useAppSelector(selectSidebar)
   const { notificationCount } = useAppSelector(selectNotification)
+
+  const { t } = useTranslation(['sidebar'])
   const dispatch = useAppDispatch()
 
   const getCharIcon = (type: CharacteristicType) => {
@@ -57,13 +60,13 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const anonymousList = [
     {
       id: generateId(),
-      name: 'Увійти',
+      name: t('sidebar:login'),
       icon: <LoginIcon />,
       link: RouteNames.LOGIN,
     },
     {
       id: generateId(),
-      name: 'Зареєструватися',
+      name: t('sidebar:register'),
       icon: <RegisterIcon />,
       link: RouteNames.REGISTER,
     },
@@ -72,26 +75,26 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
   const learnerList = [
     {
       id: generateId(),
-      name: 'Мій кабінет',
+      name: t('sidebar:myCabinet'),
       icon: <AccountBoxIcon />,
       link: `${RouteNames.CABINET}/${user?.id}`,
     },
     {
       id: generateId(),
-      name: 'Мої тренування',
+      name: t('sidebar:myTrainings'),
       icon: <SportsMartialArtsIcon />,
       link: `${RouteNames.MY_TRAININGS}/${user?.id}/${MyTrainingsRoutes.NEAREST}`,
     },
     {
       // TODO: переместить эту этот пункт в кабинет пользователя
       id: generateId(),
-      name: 'Стати учнем у...',
+      name: t('sidebar:findTrainer'),
       icon: <AddReactionIcon />,
       link: `${RouteNames.ASSIGN_TRAINERS}/${user?.id}`,
     },
     {
       id: generateId(),
-      name: 'Оповіщення',
+      name: t('sidebar:notifications'),
       icon: (
         <Badge badgeContent={notificationCount || 0} color="primary">
           <NotificationsActiveIcon color="inherit" />
@@ -105,7 +108,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
     ...learnerList,
     {
       id: generateId(),
-      name: 'Знайти учнів',
+      name: t('sidebar:findLearners'),
       icon: <BoyIcon />,
       link: `${RouteNames.ASSIGN_LEARNERS}/${user?.id}`,
     },
@@ -163,14 +166,14 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
     const characteristics: MenuItem[] = [
       {
         id: generateId(),
-        name: 'Характеристики',
+        name: t('sidebar:characteristics'),
         icon: <AllInclusiveIcon />,
         // link: RouteNames.CHARACTERISTICS,
         items: [
           ...transformCharacteristics(user?.characteristics),
           {
             id: generateId(),
-            name: 'Додати характеристику',
+            name: t('sidebar:addCharacteristic'),
             icon: <AddCircleIcon />,
             link: `${RouteNames.ADD_CHARACTERISTIC}/${user?.id}`,
           },
@@ -182,14 +185,14 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       abonement = [
         {
           id: generateId(),
-          name: 'Мої абонементи',
+          name: t('sidebar:myAbonements'),
           icon: <CreditCardIcon />,
           link: `${RouteNames.MY_ABONEMENT}/${user?.id}`,
           items: [
             // ...transformLeanerAbonements(user.learnerAbonements),
             {
               id: generateId(),
-              name: 'Підписатися на абонемент',
+              name: t('sidebar:assignToAbonement'),
               icon: <AddCardIcon />,
               link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.id}/${AssignToAbonementRoutes.GYMS}`,
             },
@@ -200,7 +203,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       abonement = [
         {
           id: generateId(),
-          name: 'Підписатися на абонемент',
+          name: t('sidebar:assignToAbonement'),
           icon: <AddCardIcon />,
           link: `${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.id}/${AssignToAbonementRoutes.GYMS}`,
         },
@@ -239,13 +242,13 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
       ? [
           {
             id: generateId(),
-            name: 'Додати зал',
+            name: t('sidebar:addGym'),
             icon: <AddCircleIcon />,
             link: `${RouteNames.ADD_GYM}/${user?.id}`,
           },
           {
             id: generateId(),
-            name: 'Створити абонемент для залів',
+            name: t('sidebar:createAbonement'),
             icon: <AddCardIcon />,
             link: `${RouteNames.CREATE_ABONEMENT}/${user?.id}`,
           },
@@ -264,7 +267,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
         ? [
             {
               id: generateId(),
-              name: 'Мої зали',
+              name: t('sidebar:myGym'),
               icon: <AccountBoxIcon />,
               items: [...transformGyms(user.gyms), ...gymsMenuItems],
             },
