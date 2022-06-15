@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
@@ -17,12 +17,13 @@ import { selectTheme, toggleTheme } from 'redux/slices/themeSlice'
 import DrowerListItem from './DrawerListItem'
 import ThemeSwitch from './components/ThemeSwitch'
 
-import { LocalStorageKey, UserRoles } from 'shared-files/enums'
+import { UserRoles } from 'shared-files/enums'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 import { saveTheme } from 'utils/saveTheme'
 
 import { useDrawerList } from './useDrawerList'
+import LangSwitcher from './components/LangSwitcher'
 
 interface DrownerListProps {}
 
@@ -52,9 +53,10 @@ const DrawerList: React.FC<DrownerListProps> = (): React.ReactElement => {
         {drawerList.map((item) => (
           <DrowerListItem key={item.id} item={item} />
         ))}
+        <Divider />
+        <LangSwitcher />
         {role !== UserRoles.ANONYMOUS && (
           <>
-            <Divider />
             <ListItemButton onClick={handleLogout}>
               <ListItemIcon>
                 <LogoutIcon />

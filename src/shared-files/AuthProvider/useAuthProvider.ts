@@ -12,10 +12,14 @@ import {
 
 import { LanguageType } from 'shared-files/enums/LanguageType.enum'
 import { UserRoles } from 'shared-files/enums'
+
 import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 import { setNotificationsWithCount } from 'redux/slices/notificationSlice'
+
 import { Organization } from 'api/organization/types'
 import { $api } from 'api/_config'
+
+import i18next from 'i18n/i18n'
 
 export type AuthContextState = {
   user: Partial<AppUser> | null
@@ -35,6 +39,7 @@ export const useAuthProvider = (): AuthContextState => {
       const { data } = await $api.get<AppUser>('user')
 
       dispatch(setUser(data))
+      setUserLanguage(data.lang)
     } catch (e: any) {
       dispatch(logOutUser())
       dispatch(setError(e.message))
@@ -44,17 +49,18 @@ export const useAuthProvider = (): AuthContextState => {
   }
 
   const setUserLanguage = (lang: LanguageType) => {
-    switch (lang) {
-      case LanguageType.Ukrainian:
-        // i18next.changeLanguage('en-us');
-        break
-      case LanguageType.Russian:
-        // i18next.changeLanguage('en-ca');
-        break
-      case LanguageType.English:
-        // i18next.changeLanguage('fr-ca');
-        break
-    }
+    i18next.changeLanguage(lang || LanguageType.Ukrainian)
+    // switch (lang) {
+    //   case LanguageType.Ukrainian:
+    //     i18next.changeLanguage('en-us')
+    //     break
+    //   case LanguageType.Russian:
+    //     i18next.changeLanguage('en-ca')
+    //     break
+    //   case LanguageType.English:
+    //     i18next.changeLanguage('fr-ca')
+    //     break
+    // }
   }
 
   useEffect(() => {

@@ -270,6 +270,7 @@ export const useDrawerList = (): { drawerList: MenuItem[] } => {
             },
           ]
         : []
+
     return [...sidebar[role], ...abonement, ...gyms, ...characteristics]
   }
 

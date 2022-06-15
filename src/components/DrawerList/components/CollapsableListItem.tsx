@@ -17,36 +17,43 @@ export interface CollapsableListItemProps {
   item: MenuItem
 }
 
-const CollapsableListItem: React.FC<CollapsableListItemProps> = ({ item }): React.ReactElement => {
+const CollapsableListItem: React.FC<CollapsableListItemProps> = ({
+  item,
+}): React.ReactElement => {
   const { icon, items, name } = item
   const navigate = useNavigate()
   const { toggleFunc } = useContext(DrawerContext)
 
   const [open, setOpen] = useState(false)
 
-  const handleClick = (link?: string) => {
-    link && navigate(link)
+  const handleClick = (item: MenuItem) => {
+    item.onClick && item.onClick()
+    item.link && navigate(item.link)
     setOpen(!open)
   }
 
-  const handleInnerClick = (link: string) => {
-    navigate(link)
+  const handleInnerClick = (item: MenuItem) => {
+    item.onClick && item.onClick()
+    item.link && navigate(item.link)
     toggleFunc(false)
   }
 
   return (
     <>
-      <ListItemButton onClick={() => handleClick(item.link)}>
+      <ListItemButton onClick={() => handleClick(item)}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={name} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={open} timeout='auto' unmountOnExit>
-        <List component='div' disablePadding>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
           {items &&
-            items.map(innerItem => (
+            items.map((innerItem) => (
               <>
-                <ListItemButton sx={{ pl: 4 }} onClick={() => handleInnerClick(innerItem.link || '')}>
+                <ListItemButton
+                  sx={{ pl: 4 }}
+                  onClick={() => handleInnerClick(innerItem)}
+                >
                   <ListItemIcon>{innerItem.icon}</ListItemIcon>
                   <ListItemText primary={innerItem.name} />
                 </ListItemButton>

@@ -6,4 +6,5 @@ export type MenuItem = {
   icon?: React.ReactElement
   link?: string
   items?: MenuItem[]
+  onClick?: (...args: any[]) => void
 }

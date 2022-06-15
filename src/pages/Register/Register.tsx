@@ -25,29 +25,34 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { useHttpRequest } from 'shared-files/hooks'
 
 import { useRegisterValidation } from './useRegisterValidation'
+import { useTranslation } from 'react-i18next'
 
 const Register: React.FC = (): React.ReactElement => {
   const classes = useStyles()
+
+  const { t, i18n } = useTranslation(['register'])
 
   const { isAuth } = useAuthContext()
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [registerMethod, _, isLoading] = useHttpRequest(api.Register)
+  const [register] = useHttpRequest(api.Register)
 
   const { validationSchema } = useRegisterValidation()
   type SubmitData = InferType<typeof validationSchema>
+
+  console.log(i18n.language)
 
   const formFeatures = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       birthday: new Date(),
 
-      name: 'qwe',
-      lastName: 'qwe',
-      confirmPass: '123',
-      email: 'l@l.com',
-      password: '123',
+      // name: 'qwe',
+      // lastName: 'qwe',
+      // confirmPass: '123',
+      // email: 'l@l.com',
+      // password: '123',
     },
   })
 
@@ -62,7 +67,7 @@ const Register: React.FC = (): React.ReactElement => {
       organizations: [organization.id],
     }
 
-    const response = await registerMethod(request)
+    const response = await register(request)
     response && dispatch(setUser(response))
   }
 
@@ -78,7 +83,7 @@ const Register: React.FC = (): React.ReactElement => {
             {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography variant="h5" className={classes.title}>
-            Зареєструватися
+            {t('register:title')}
           </Typography>
         </Grid>
 

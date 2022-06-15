@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useStyles } from '../register.styles'
 
 import { useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import LoadingButton from '@mui/lab/LoadingButton'
 import SendIcon from '@mui/icons-material/Send'
@@ -22,6 +23,7 @@ import { useThemeColor } from 'shared-files/hooks'
 const Form: React.FC = (): React.ReactElement => {
   const classes = useStyles()
 
+  const { t } = useTranslation(['register'])
   // const [getOrganizations] = useHttpRequest(GetOrganizations)
   const { loading: isLoading } = useAppSelector(selectLoadingIndicator)
 
@@ -37,8 +39,8 @@ const Form: React.FC = (): React.ReactElement => {
           <FormInput
             name="name"
             errors={errors}
-            label="Ім'я"
-            placeholder="Уведіть ім'я..."
+            label={t('register:nameField.label')}
+            placeholder={t('register:nameField.placeholder')}
           />
         </Grid>
         <Grid item xs={12} sm={6} className={classes.inputContainer}>
