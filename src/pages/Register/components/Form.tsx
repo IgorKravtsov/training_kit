@@ -47,8 +47,8 @@ const Form: React.FC = (): React.ReactElement => {
           <FormInput
             name="lastName"
             errors={errors}
-            label="Прізвище"
-            placeholder="Уведіть прізвище..."
+            label={t('register:lastNameField.label')}
+            placeholder={t('register:lastNameField.placeholder')}
           />
         </Grid>
       </Grid>
@@ -56,15 +56,15 @@ const Form: React.FC = (): React.ReactElement => {
       <FormInput
         name="email"
         errors={errors}
-        label="Пошта"
-        placeholder="Уведіть пошту..."
+        label={t('register:emailField.label')}
+        placeholder={t('register:emailField.placeholder')}
       />
 
       <FormPasswordInput
         name="password"
         errors={errors}
-        label="Пароль"
-        placeholder="Уведіть пароль..."
+        label={t('register:passwordField.label')}
+        placeholder={t('register:passwordField.placeholder')}
         id="password"
         handleClickShowPassword={() => setIsShowPass((prevState) => !prevState)}
         visiblePassword={isShowPass}
@@ -73,7 +73,7 @@ const Form: React.FC = (): React.ReactElement => {
       <FormPasswordInput
         name="confirmPass"
         errors={errors}
-        placeholder="Підтвердіть пароль..."
+        placeholder={t('register:confirmPassField.placeholder')}
         id="confirmPass"
         handleClickShowPassword={() => setIsShowPass((prevState) => !prevState)}
         visiblePassword={isShowPass}
@@ -82,8 +82,8 @@ const Form: React.FC = (): React.ReactElement => {
       <FormLoadingAutocomplete
         name="organization"
         errors={errors}
-        label="Оберіть організацію"
-        placeholder="Оберіть організацію..."
+        label={t('register:passwordField.label')}
+        placeholder={t('register:passwordField.placeholder')}
         getFunc={GetOrganizations}
         responseKey={'organizations'}
         labelKey={'title'}
@@ -93,8 +93,8 @@ const Form: React.FC = (): React.ReactElement => {
         name="birthday"
         errors={errors}
         maxDate={new Date()}
-        label="Ваша дата народження"
-        placeholder="Дата народження..."
+        label={t('register:dobField.label')}
+        placeholder={t('register:dobField.placeholder')}
       />
 
       <LoadingButton
@@ -107,7 +107,7 @@ const Form: React.FC = (): React.ReactElement => {
         fullWidth
         endIcon={<SendIcon />}
       >
-        Зареєструватися
+        {t('register:loadingButtonLabel')}
       </LoadingButton>
     </Stack>
   )

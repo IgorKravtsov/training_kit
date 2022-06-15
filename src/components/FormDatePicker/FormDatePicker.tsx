@@ -13,7 +13,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker'
 
-import { ru } from 'date-fns/locale'
+import { useFormLocalization } from 'shared-files/hooks'
 
 export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
@@ -38,8 +38,9 @@ const FormDatePicker: React.FC<FormAutocompleteProps> = ({
   minDate,
 }): React.ReactElement => {
   const { control } = useFormContext()
+  const { locale } = useFormLocalization()
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={locale}>
       <Controller
         name={name}
         control={control}

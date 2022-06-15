@@ -30,18 +30,16 @@ import { useTranslation } from 'react-i18next'
 const Register: React.FC = (): React.ReactElement => {
   const classes = useStyles()
 
-  const { t, i18n } = useTranslation(['register'])
-
   const { isAuth } = useAuthContext()
 
+  const { t } = useTranslation(['register'])
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const [register] = useHttpRequest(api.Register)
 
   const { validationSchema } = useRegisterValidation()
   type SubmitData = InferType<typeof validationSchema>
-
-  console.log(i18n.language)
 
   const formFeatures = useForm({
     resolver: yupResolver(validationSchema),

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Control, Controller, FieldValues, useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import TextField from '@mui/material/TextField'
 import { StandardTextFieldProps } from '@mui/material'
@@ -8,7 +8,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 
-import { ru } from 'date-fns/locale'
+import { useFormLocalization } from 'shared-files/hooks'
 
 export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
@@ -29,8 +29,9 @@ const FormTimePicker: React.FC<FormAutocompleteProps> = ({
   id,
 }): React.ReactElement => {
   const { control } = useFormContext()
+  const { locale } = useFormLocalization()
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ru}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={locale}>
       <Controller
         name={name}
         control={control}
@@ -38,7 +39,7 @@ const FormTimePicker: React.FC<FormAutocompleteProps> = ({
           <TimePicker
             {...field}
             label={label}
-            renderInput={params => (
+            renderInput={(params) => (
               <TextField
                 {...params}
                 id={id}
@@ -49,7 +50,7 @@ const FormTimePicker: React.FC<FormAutocompleteProps> = ({
                 type={type}
                 placeholder={placeholder}
                 required={required}
-                color='primary'
+                color="primary"
               />
             )}
           />
