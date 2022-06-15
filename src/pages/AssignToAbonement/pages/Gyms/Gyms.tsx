@@ -14,6 +14,9 @@ import MainSection from '../../components/SectionTitle/SectionTitle'
 import GymList from '../../components/GymList/GymList'
 import { GetLearnerGyms } from 'api/gym/gym'
 import { useHttpRequest } from 'shared-files/hooks'
+import { GetGymAbonements } from 'api/abonements/abonements'
+import { setAbonements } from 'redux/slices/abonementSlice'
+import { Id } from 'shared-files/types'
 
 const Gyms: React.FC = (): React.ReactElement => {
   const classes = useStyles()

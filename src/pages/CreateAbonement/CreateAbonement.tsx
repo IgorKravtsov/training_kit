@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useStyles } from './createAbonement.styles'
 
-import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -9,54 +8,63 @@ import Title from 'components/Title/Title'
 import { useAppDispatch } from 'redux/hooks'
 
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useHttpRequest } from 'shared-files/hooks'
 
 import Form from './components/Form/Form'
 import { Container, Grid } from '@mui/material'
 
-import { Options } from './interfaces'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { error } from 'redux/slices/snackbarSlice'
-import { CreateNewAbonementRequest } from 'api/abonements/types'
+import { Options, SubmitData } from './interfaces'
+
+import { error, success } from 'redux/slices/snackbarSlice'
+import { useCreateAbonementValidation } from './useCreateAbonementValidation'
+import { CreateNewAbonement } from 'api/abonements/abonements'
+import { getIdFromArray } from 'utils'
+import { useNavigate } from 'react-router-dom'
 
 const CreateAbonement: React.FC = (): React.ReactElement => {
   const classes = useStyles()
+
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [createNewAbonement, _, isLoading] = useHttpRequest(CreateNewAbonement)
+
   const [options, setOptions] = useState<Options>({
     byDays: false,
     byTrainings: false,
   })
 
-  const validationSchema = yup.object({
-    title: yup.string().trim().required('Це поле має бути заповнено'),
-    gyms: yup.array().of(yup.mixed()).min(1, 'Це поле має бути заповнено').required('Це поле має бути заповнено'),
-    days: yup.number().min(1, 'Мінімальне значення цього поля - 1').typeError('Це поле має бути заповнено'),
-    trainings: yup.number().min(1, 'Мінімальне значення цього поля - 1'),
-    price: yup.number().required('Це поле має бути заповнено'),
-  })
-  type SubmitData = yup.InferType<typeof validationSchema>
+  const { validationSchema } = useCreateAbonementValidation()
 
   const formFeatures = useForm({
     resolver: yupResolver(validationSchema),
   })
 
-  const onSubmit = (data: SubmitData) => {
+  const onSubmit = async (data: SubmitData) => {
     if (!data.days && !data.trainings) {
       dispatch(error({ message: 'Необхідно обрати можливості абоніменту' }))
       return
     }
-    // const request: CreateNewAbonementRequest {
 
-    // }
+    const response = await createNewAbonement({
+      price: data.price,
+      title: data.title,
+      amountDays: data.days,
+      amountTrainings: data.trainings,
+      creatorId: user?.id || 0,
+      gymIds: data.gyms.map(getIdFromArray),
+    })
+    if (response) {
+      dispatch(success({ message: response.message }))
+      navigate('../')
+    }
   }
 
   return (
     <>
       <Container className={classes.wrapper}>
-        <Grid container spacing={2} justifyContent='center'>
+        <Grid container spacing={2} justifyContent="center">
           {/* <Grid item xs={4}>
             <MainImage /> */}
           {/* </Grid> */}
@@ -64,7 +72,13 @@ const CreateAbonement: React.FC = (): React.ReactElement => {
             {/* <Card elevation={6} sx={{ padding: '5px 30px 50px 30px', textAlign: 'center' }}> */}
             <Title>Створити абонімент</Title>
 
-            <Form options={options} formFeatures={formFeatures} onSubmit={onSubmit} setOptions={setOptions} isLoading={isLoading} />
+            <Form
+              options={options}
+              formFeatures={formFeatures}
+              onSubmit={onSubmit}
+              setOptions={setOptions}
+              isLoading={isLoading}
+            />
             {/* </Card> */}
           </Grid>
         </Grid>

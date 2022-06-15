@@ -3,19 +3,24 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
+  Grid,
   Typography,
 } from '@mui/material'
+import Chip from '@mui/material/Chip'
 import { Abonement } from 'api/abonements/types'
+import AbonementText from 'components/Text/AbonementText'
+import { Id } from 'shared-files/types'
 
 interface AbonementListItemProps {
   abonement: Abonement
   onClick: () => void
+  isSubscribed: (abonementId: Id) => boolean
 }
 
 const AbonementListItem: React.FC<AbonementListItemProps> = ({
   abonement,
   onClick,
+  isSubscribed,
 }): React.ReactElement => {
   return (
     <Card sx={{ maxWidth: 550 }} elevation={6}>
@@ -24,11 +29,25 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
           <Typography gutterBottom variant="h5" component="div">
             {abonement.title}
           </Typography>
-          {/* {abonement.options.map(option => (
-            <Typography key={option.id} variant='body2' color='text.secondary'>
-              {option.name}: {option.value}
-            </Typography>
-          ))} */}
+          {/* <AbonementText>
+            Дата початку: {formatDate(learnerAbonement.startDate)}
+          </AbonementText> */}
+          <AbonementText>
+            Кількість тренувань: {abonement.amountTrainings || '∞'}
+          </AbonementText>
+          <AbonementText>
+            Кількість днів: {abonement.amountDays || '∞'}
+          </AbonementText>
+          <AbonementText>Ціна: {abonement.price || '∞'}</AbonementText>
+          {/* <AbonementText>Зал: {abonement.}</AbonementText> */}
+          <AbonementText>
+            Тренер, що створив: {abonement.creator?.displayName || 'Невідомо'}
+          </AbonementText>
+          {isSubscribed(abonement.id) && (
+            <Grid container justifyContent="flex-end">
+              <Chip style={{ marginLeft: 'auto' }} label="Вже підписані" />
+            </Grid>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>

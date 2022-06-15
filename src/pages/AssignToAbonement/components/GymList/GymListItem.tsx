@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
@@ -16,13 +16,16 @@ import { useAppDispatch } from 'redux/hooks'
 import { setSelectedGym } from 'redux/slices/myTrainingsSlice'
 
 import { Gym } from 'api/gym/types'
+import { Id } from 'shared-files/types'
 
 interface GymListItemProps {
   gym: Gym
+  onSelectGym?: (gymId: Id) => void
 }
 
 const GymListItem: React.FC<GymListItemProps> = ({
   gym,
+  onSelectGym,
 }): React.ReactElement => {
   const { handleNext } = useContext(CreateTrainingsContext)
   const { user } = useAuthContext()
@@ -37,6 +40,7 @@ const GymListItem: React.FC<GymListItemProps> = ({
 
   const handleClick = () => {
     dispatch(setSelectedGym(gym.id))
+    onSelectGym && onSelectGym(gym.id)
     handleNext()
   }
 

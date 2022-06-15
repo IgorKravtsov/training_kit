@@ -6,6 +6,7 @@ import {
   GetLearnerAbonementsRequest,
   Abonement,
   GetTrainersAbonementsRequest,
+  GetGymAbonementsRequest,
 } from './types'
 
 import { LearnerAbonement } from './types'
@@ -57,6 +58,16 @@ export const CreateNewAbonement = async (
 ): Promise<CreateNewAbonementResponse> => {
   const { data } = await $api.post<CreateNewAbonementResponse>(
     'abonement/create',
+    request,
+  )
+  return data
+}
+
+export const GetGymAbonements = async (
+  request: GetGymAbonementsRequest,
+): Promise<Abonement[]> => {
+  const { data } = await $api.post<Abonement[]>(
+    'abonement/get-gym-abonements',
     request,
   )
   return data

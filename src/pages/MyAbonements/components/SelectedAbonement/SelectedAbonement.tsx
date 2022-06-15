@@ -71,8 +71,8 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Лишилось днів: {selectedLearnerAbonement.daysLeft} (Дата
-                    закінчення: {formatDate(selectedLearnerAbonement.endDate)})
+                    Всього днів:{' '}
+                    {selectedLearnerAbonement.abonement?.amountDays || '∞'}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -81,8 +81,8 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Лишилось тренувань:{' '}
-                    {selectedLearnerAbonement.trainingsLeft || '∞'}
+                    Всього тренувань:{' '}
+                    {selectedLearnerAbonement.abonement?.amountTrainings || '∞'}
                   </Typography>
                 </Grid>
               </section>
@@ -91,13 +91,17 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                 <Typography id="modal-modal-start-date">
                   Дата початку: {formatDate(selectedLearnerAbonement.startDate)}
                 </Typography>
-                <OptionText>
+                {/* <OptionText>
                   Дата закінчення:{' '}
                   {formatDate(selectedLearnerAbonement.endDate) || '∞'}
-                </OptionText>
+                </OptionText> */}
 
                 <OptionText>
-                  Лишилось днів: {selectedLearnerAbonement.daysLeft}
+                  Лишилось днів: {selectedLearnerAbonement.daysLeft || '∞'}{' '}
+                  {selectedLearnerAbonement.daysLeft &&
+                    `(Дата закінчення: ${formatDate(
+                      selectedLearnerAbonement.endDate,
+                    )})`}
                 </OptionText>
                 <OptionText>
                   Лишилось тренувань:{' '}

@@ -56,8 +56,6 @@ const MyAbonement: React.FC = (): React.ReactElement => {
       abonementId,
       learnerId,
     })
-
-    // response && setSelectedAbonement(response.abonementWithUserData)
   }
 
   const openAbonement = (abonementId: Id) => {

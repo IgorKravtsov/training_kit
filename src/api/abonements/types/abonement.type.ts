@@ -1,3 +1,4 @@
+import { PublicAppUserDto } from 'api/user/types'
 import { Id } from 'shared-files/types'
 
 export interface Abonement {
@@ -7,6 +8,7 @@ export interface Abonement {
   price: number
   amountDays?: number
   amountTrainings?: number
+  creator?: PublicAppUserDto
 }
 export interface LearnerAbonement {
   id: Id

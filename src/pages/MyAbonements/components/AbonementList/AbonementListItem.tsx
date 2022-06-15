@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
 
-import AbonementText from './AbonementText'
+import AbonementText from 'components/Text/AbonementText'
 
 import { LearnerAbonement } from 'api/abonements/types'
 import { formatDate } from 'utils'
