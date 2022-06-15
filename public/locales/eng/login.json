@@ -1,0 +1,17 @@
+{
+  "title": "Login",
+  "infoAlert": "Enter your email to download organizations",
+  "emailField": {
+    "label": "Email",
+    "placeholder": "Enter email..."
+  },
+  "passwordField": {
+    "label": "Password",
+    "placeholder": "Enter password..."
+  },
+  "organizationField": {
+    "label": "Choose organization",
+    "placeholder": "Choose organization..."
+  },
+  "loadingButtonLabel": "Login"
+}

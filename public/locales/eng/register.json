@@ -2,30 +2,30 @@
   "title": "Register",
   "nameField": {
     "label": "Name",
-    "placeholder": "Enter your name...",
-    "lastNameField": {
-      "label": "Last name",
-      "placeholder": "Enter your last name..."
-    },
-    "emailField": {
-      "label": "Email",
-      "placeholder": "Enter your email..."
-    },
-    "passwordField": {
-      "label": "Password",
-      "placeholder": "Enter your password..."
-    },
-    "confirmPassField": {
-      "placeholder": "Confirm your password..."
-    },
-    "organizationField": {
-      "label": "Choose organization",
-      "placeholder": "Choose organization..."
-    },
-    "dobField": {
-      "label": "Your Date of birth",
-      "placeholder": "Date of birth..."
-    },
-    "loadingButtonLabel": "Register"
-  }
+    "placeholder": "Enter your name..."
+  },
+  "lastNameField": {
+    "label": "Last name",
+    "placeholder": "Enter your last name..."
+  },
+  "emailField": {
+    "label": "Email",
+    "placeholder": "Enter your email..."
+  },
+  "passwordField": {
+    "label": "Password",
+    "placeholder": "Enter your password..."
+  },
+  "confirmPassField": {
+    "placeholder": "Confirm your password..."
+  },
+  "organizationField": {
+    "label": "Choose organization",
+    "placeholder": "Choose organization..."
+  },
+  "dobField": {
+    "label": "Your Date of birth",
+    "placeholder": "Date of birth..."
+  },
+  "loadingButtonLabel": "Register"
 }

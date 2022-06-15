@@ -1,26 +1,26 @@
+import { useTranslation } from 'react-i18next'
 import * as yup from 'yup'
 
 export const useRegisterValidation = () => {
+  const { t } = useTranslation(['common'])
+
   const validationSchema = yup.object({
-    name: yup.string().trim().required('Це поле має бути заповнено'),
-    lastName: yup.string().trim().required('Це поле має бути заповнено'),
+    name: yup.string().trim().required(t('common:validation.required')),
+    lastName: yup.string().trim().required(t('common:validation.required')),
     email: yup
       .string()
-      .email('Це не є правильною поштою')
-      .required('Це поле має бути заповнено'),
-    organization: yup.mixed().required('Це поле має бути обрано'),
-    birthday: yup.date().required('Це поле має бути заповнено'),
+      .email(t('common:validation.invalidEmail'))
+      .required(t('common:validation.required')),
+    organization: yup.mixed().required(t('common:validation.needChoose')),
+    birthday: yup.date().required(t('common:validation.required')),
     password: yup
       .string()
-      .min(1, 'Мінімальне кол-во символів - 1')
-      .required('Це поле має бути заповнено'),
+      .min(1, t('common:validation.min', { num: 1 }))
+      .required(t('common:validation.required')),
     confirmPass: yup
       .string()
-      .oneOf(
-        [yup.ref('password'), null],
-        'Це поле має співпадати з полем паролю',
-      )
-      .required('Це поле має бути заповнено'),
+      .oneOf([yup.ref('password'), null], t('common:validation.confirmPass'))
+      .required(t('common:validation.required')),
   })
 
   return { validationSchema }

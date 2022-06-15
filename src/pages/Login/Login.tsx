@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './login.styles'
+
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,27 +18,22 @@ import Alert from '@mui/material/Alert'
 
 import FormWrapper from 'components/FormWrapper/FormWrapper'
 import AppCard from 'components/AppCard/AppCard'
-import { login, selectUser, setUser } from 'redux/slices/userSlice'
+import { setUser } from 'redux/slices/userSlice'
 import { useAppDispatch } from 'redux/hooks/typedHooks'
-import { error } from 'redux/slices/snackbarSlice'
-import { setOrganization } from 'redux/slices/organizationSlice'
 
 import * as api from 'api/auth/auth'
 
 import Form from './components/Form'
-import { LocalStorageKey } from 'shared-files/enums'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { useLoginValidation } from './useLoginValidation'
 import { useHttpRequest } from 'shared-files/hooks'
-import { LoginRequest } from 'api/auth/types'
-import { AppUser } from 'api/user/types'
 
 const Login: React.FC = (): React.ReactElement => {
   const classes = useStyles()
 
   const { isAuth } = useAuthContext()
 
+  const { t } = useTranslation(['login'])
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [login] = useHttpRequest(api.Login, {
@@ -80,7 +77,7 @@ const Login: React.FC = (): React.ReactElement => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography variant="h5" className={classes.title}>
-            Вхід
+            {t('login:title')}
           </Typography>
         </Grid>
 
@@ -94,7 +91,7 @@ const Login: React.FC = (): React.ReactElement => {
       </AppCard>
       <Grid container xs={12}>
         <Alert style={{ marginLeft: '10px' }} severity="info">
-          Введіть свою пошту, щоб завантажити організації
+          {t('login:infoAlert')}
         </Alert>
       </Grid>
     </>

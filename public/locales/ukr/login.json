@@ -1,0 +1,17 @@
+{
+  "title": "Вхід",
+  "infoAlert": "Введіть свою пошту, щоб завантажити організації",
+  "emailField": {
+    "label": "Пошта",
+    "placeholder": "Уведіть пошту..."
+  },
+  "passwordField": {
+    "label": "Пароль",
+    "placeholder": "Уведіть пароль..."
+  },
+  "organizationField": {
+    "label": "Оберіть організацію",
+    "placeholder": "Оберіть організацію..."
+  },
+  "loadingButtonLabel": "Увійти"
+}

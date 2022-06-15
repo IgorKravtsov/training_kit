@@ -23,7 +23,7 @@ i18next
       LanguageType.Russian,
     ],
     nonExplicitSupportedLngs: false,
-    ns: ['register', 'login'],
+    ns: ['register', 'login', 'common'],
     defaultNS: 'common',
     // interpolation: {
     //   escapeValue: false,

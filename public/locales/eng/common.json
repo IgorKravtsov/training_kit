@@ -1,0 +1,10 @@
+{
+  "loading": "Loading",
+  "validation": {
+    "required": "This field is required",
+    "needChoose": "This field must be choosed",
+    "min": "Minimum symbols - {{ num }}",
+    "confirmPass": "This field has to pass an password field value",
+    "invalidEmail": "Invalid email"
+  }
+}

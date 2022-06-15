@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useStyles } from '../login.styles'
 
-import { useFormContext, UseFormReturn } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 
 import LoadingButton from '@mui/lab/LoadingButton'
 import SendIcon from '@mui/icons-material/Send'
@@ -10,16 +10,15 @@ import Stack from '@mui/material/Stack'
 import { isEmail } from 'utils/isEmail'
 
 import { GetOrganizationsByEmail } from 'api/organization/organization'
-import { Organization } from 'api/organization/types'
 
-import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
+import { useAppDispatch } from 'redux/hooks/typedHooks'
 import { error } from 'redux/slices/snackbarSlice'
-import { selectLoadingIndicator } from 'redux/slices/loadingIndicatorSlice'
 
 import FormInput from 'components/FormInput/FormInput'
 import FormPasswordInput from 'components/FormPasswordInput/FormPasswordInput'
 import FormLoadingAutocomplete from 'components/FormLoadingAutocomplete/FormLoadingAutocomplete'
 import { useThemeColor } from 'shared-files/hooks'
+import { useTranslation } from 'react-i18next'
 
 interface FormProps {
   isLoading: boolean
@@ -28,20 +27,18 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({ isLoading }): React.ReactElement => {
   const classes = useStyles()
 
+  const { t } = useTranslation(['login', 'common'])
   const dispatch = useAppDispatch()
 
   const [isShowPass, setIsShowPass] = useState(false)
-  // const [organizationsOfUser, setOrganizationsOfUser] = useState<
-  //   Organization[]
-  // >([])
 
   const {
     formState: { errors },
-    watch,
+    control,
     getValues,
   } = useFormContext()
 
-  watch(['email', 'password'])
+  useWatch({ name: ['email', 'password'], control })
 
   const getOrganizationsByEmail = async () => {
     //TODO: Поменять этот откровенный пи***!
@@ -66,9 +63,9 @@ const Form: React.FC<FormProps> = ({ isLoading }): React.ReactElement => {
       <FormInput
         name="email"
         errors={errors}
-        label="Пошта"
-        placeholder="Уведіть пошту..."
-        // color={organizationsOfUser.length > 0 ? 'success' : 'primary'}
+        label={t('login:emailField.label')}
+        placeholder={t('login:emailField.placeholder')}
+        // color={organizationsOfUser.length > 0 ? 'success' : 'primary'}=
         // onBlur={e => getOrganizationsByEmail(e.target.value)}
       />
 
@@ -76,7 +73,8 @@ const Form: React.FC<FormProps> = ({ isLoading }): React.ReactElement => {
         id="password"
         name="password"
         errors={errors}
-        placeholder="Уведіть пароль..."
+        label={t('login:passwordField.label')}
+        placeholder={t('login:passwordField.placeholder')}
         className={classes.password}
         handleClickShowPassword={() => setIsShowPass((prevState) => !prevState)}
         visiblePassword={isShowPass}
@@ -85,8 +83,9 @@ const Form: React.FC<FormProps> = ({ isLoading }): React.ReactElement => {
       <FormLoadingAutocomplete
         name="organization"
         errors={errors}
-        label="Оберіть організацію"
-        placeholder="Оберіть організацію..."
+        label={t('login:organizationField.label')}
+        placeholder={t('login:organizationField.placeholder')}
+        loadingText={`${t('common:loading')}...`}
         getFunc={getOrganizationsByEmail}
         responseKey={'organizations'}
         labelKey={'title'}
@@ -102,7 +101,7 @@ const Form: React.FC<FormProps> = ({ isLoading }): React.ReactElement => {
         fullWidth
         endIcon={<SendIcon />}
       >
-        Увійти
+        {t('login:loadingButtonLabel')}
       </LoadingButton>
     </Stack>
   )

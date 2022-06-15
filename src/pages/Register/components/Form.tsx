@@ -23,8 +23,8 @@ import { useThemeColor } from 'shared-files/hooks'
 const Form: React.FC = (): React.ReactElement => {
   const classes = useStyles()
 
-  const { t } = useTranslation(['register'])
-  // const [getOrganizations] = useHttpRequest(GetOrganizations)
+  const { t } = useTranslation(['register', 'common'])
+
   const { loading: isLoading } = useAppSelector(selectLoadingIndicator)
 
   const [isShowPass, setIsShowPass] = useState(false)
@@ -84,6 +84,7 @@ const Form: React.FC = (): React.ReactElement => {
         errors={errors}
         label={t('register:passwordField.label')}
         placeholder={t('register:passwordField.placeholder')}
+        loadingText={`${t('common:loading')}...`}
         getFunc={GetOrganizations}
         responseKey={'organizations'}
         labelKey={'title'}
