@@ -1,4 +1,7 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
 import {
   Avatar,
   Button,
@@ -8,12 +11,11 @@ import {
   IconButton,
   Typography,
 } from '@mui/material'
-import { AssginToTrainersRequest, PublicAppUserDto } from 'api/user/types'
+
+import { PublicAppUserDto } from 'api/user/types'
+
 import { useStyles } from './trainerListItem.styles'
-import { Link } from 'react-router-dom'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { useHttpRequest } from 'shared-files/hooks'
-import { AssignToTrainers } from 'api/user/user'
 
 interface TrainerListItemProps {
   trainer: PublicAppUserDto
@@ -26,6 +28,7 @@ const TrainerListItem: React.FC<TrainerListItemProps> = ({
 }): React.ReactElement => {
   const classes = useStyles()
   const { user } = useAuthContext()
+  const { t } = useTranslation(['assignTrainers'])
 
   const isThisUserTrainer = !!(
     user?.trainers && user?.trainers.find((ut) => ut.id === trainer.id)
@@ -58,7 +61,9 @@ const TrainerListItem: React.FC<TrainerListItemProps> = ({
               onClick={() => onClick(trainer)}
               disabled={isThisUserTrainer}
             >
-              {isThisUserTrainer ? 'Ваш тренер' : 'Записатися'}
+              {isThisUserTrainer
+                ? t('assignTrainers:assignedLabel')
+                : t('assignTrainers:notAssignedLabel')}
             </Button>
           </Grid>
         </Grid>

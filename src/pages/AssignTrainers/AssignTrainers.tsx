@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useStyles } from './assignTrainers.styles'
 
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { Container, Grid } from '@mui/material'
 
@@ -28,6 +29,7 @@ const AddTrainers: React.FC = (): React.ReactElement => {
 
   const { requestTrainerList } = useAppSelector(selectAssignTrainers)
   const dispatch = useAppDispatch()
+  const { t } = useTranslation(['assignTrainers'])
 
   const [getTrainersToAssign] = useHttpRequest(GetTrainersToAssign)
 
@@ -60,7 +62,7 @@ const AddTrainers: React.FC = (): React.ReactElement => {
     <Container component="section" sx={{ mt: 3 }}>
       <Grid container justifyContent="center">
         <Grid item xs={12}>
-          <Title className={classes.title}>Додати тренера</Title>
+          <Title className={classes.title}>{t('assignTrainers:title')}</Title>
         </Grid>
 
         <Grid item xs={12} style={{ marginTop: '10px' }}>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import { Grid, IconButton } from '@mui/material'
 import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded'
@@ -7,6 +8,8 @@ import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded'
 import FormInput from 'components/FormInput/FormInput'
 
 const Search: React.FC = (): React.ReactElement => {
+  const { t } = useTranslation(['assignTrainers'])
+
   const {
     formState: { errors },
   } = useFormContext()
@@ -17,12 +20,9 @@ const Search: React.FC = (): React.ReactElement => {
         <FormInput
           name="trainer"
           errors={errors}
-          label="Уведіть пошту або ім'я тренера"
+          label={t('assignTrainers:searchFieldLabel')}
           fullWidth
           variant="standard"
-          // placeholder="Уведіть пошту..."
-          // color={organizationsOfUser.length > 0 ? 'success' : 'primary'}
-          // onBlur={e => getOrganizationsByEmail(e.target.value)}
         />
       </Grid>
       <IconButton aria-label="search" type="submit">

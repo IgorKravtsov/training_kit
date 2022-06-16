@@ -23,7 +23,15 @@ i18next
       LanguageType.Russian,
     ],
     nonExplicitSupportedLngs: false,
-    ns: ['register', 'login', 'common', 'sidebar', 'home', 'myTrainings'],
+    ns: [
+      'register',
+      'login',
+      'common',
+      'sidebar',
+      'home',
+      'myTrainings',
+      'assignTrainers',
+    ],
     defaultNS: 'common',
     fallbackNS: 'common',
 
