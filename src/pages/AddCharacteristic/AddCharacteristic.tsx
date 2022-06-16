@@ -22,10 +22,12 @@ import { Characteristic } from 'api/characteristic/types'
 import { AppUser } from 'api/user/types'
 import { useThemeColor } from 'shared-files/hooks'
 import { SERVER_DELAY_TIME } from 'shared-files/constants'
+import { useTranslation } from 'react-i18next'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
+  const { t } = useTranslation(['addCharacteristic'])
 
   const [isSearching, setIsSearching] = useState(false)
   const [characteristicList, setCharacteristicList] = useState<
@@ -82,7 +84,7 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      <Typography variant="h1">Додати характеристику</Typography>
+      <Typography variant="h1">{t('addCharacteristic:title')}</Typography>
       <FormWrapper formFeatures={formFeatures} onSubmit={onSubmit}>
         <Grid container direction="row" spacing={2}>
           <Grid item xs={4} sx={{ mt: 2 }}>
@@ -91,18 +93,24 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
               control={control}
               errors={errors}
               options={characteristicList}
-              label="Оберіть характеристику"
-              placeholder="Оберіть характеристику..."
+              label={t('addCharacteristic:characteristicNameField.label')}
+              placeholder={t(
+                'addCharacteristic:characteristicNameField.placeholder',
+              )}
             />
           </Grid>
           <Grid item xs={4} sx={{ mt: 4 }}>
             <Button type="submit" variant="contained" color={useThemeColor()}>
-              Знайти пристрій
+              {t('addCharacteristic:btnLabel')}
             </Button>
           </Grid>
         </Grid>
       </FormWrapper>
-      {isSearching && <Typography variant="h2">Пошук пристрою...</Typography>}
+      {isSearching && (
+        <Typography variant="h2">
+          {t('addCharacteristic:searchingText')}
+        </Typography>
+      )}
     </>
   )
 }

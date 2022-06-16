@@ -32,6 +32,7 @@ i18next
       'myTrainings',
       'assignTrainers',
       'createAbonement',
+      'addCharacteristic'
     ],
     defaultNS: 'common',
     fallbackNS: 'common',

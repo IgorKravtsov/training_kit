@@ -1,0 +1,9 @@
+{
+  "title": "Add the characteristic",
+  "btnLabel": "Find smart device",
+  "searchingText": "Searching for smart device...",
+  "characteristicNameField": {
+    "label": "Choose characteristic",
+    "placeholder": "Choose characteristic..."
+  }
+}
