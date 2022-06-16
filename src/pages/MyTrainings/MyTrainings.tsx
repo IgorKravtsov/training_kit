@@ -40,7 +40,7 @@ const MyTrainings: React.FC = (): React.ReactElement => {
   }
   const [value, setValue] = useState(getTabValue(location.pathname))
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (e: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
 

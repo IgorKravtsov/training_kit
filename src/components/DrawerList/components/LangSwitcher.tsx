@@ -8,9 +8,17 @@ import { MenuItem } from 'shared-files/interfaces'
 import { generateId } from 'utils'
 
 import CollapsableListItem from './CollapsableListItem'
+import { useHttpRequest } from 'shared-files/hooks'
+import { UpdateLanguage } from 'api/user/user'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 const LangSwitcher: React.FC = (): React.ReactElement => {
   const { t, i18n } = useTranslation()
+  const { user } = useAuthContext()
+
+  const updateLanguage = async (lang: LanguageType) => {
+    await UpdateLanguage(user?.id || 0, { lang })
+  }
 
   const changeLangMenuItem: MenuItem = {
     id: generateId(),
@@ -22,6 +30,7 @@ const LangSwitcher: React.FC = (): React.ReactElement => {
         name: t('sidebar:ukr'),
         onClick() {
           i18n.changeLanguage(LanguageType.Ukrainian)
+          updateLanguage(LanguageType.Ukrainian)
         },
       },
       {
@@ -29,6 +38,7 @@ const LangSwitcher: React.FC = (): React.ReactElement => {
         name: t('sidebar:eng'),
         onClick() {
           i18n.changeLanguage(LanguageType.English)
+          updateLanguage(LanguageType.English)
         },
       },
       {
@@ -36,6 +46,7 @@ const LangSwitcher: React.FC = (): React.ReactElement => {
         name: t('sidebar:rus'),
         onClick() {
           i18n.changeLanguage(LanguageType.Russian)
+          updateLanguage(LanguageType.Russian)
         },
       },
     ],
