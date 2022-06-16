@@ -1,5 +1,6 @@
 import React from 'react'
 import { UseFormReturn } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 import SendIcon from '@mui/icons-material/Send'
 import { Grid } from '@mui/material'
@@ -38,10 +39,10 @@ const Form: React.FC<FormProps> = ({
   setOptions,
 }): React.ReactElement => {
   const { user } = useAuthContext()
+  const { t } = useTranslation(['createAbonement'])
+  
   const {
-    control,
     formState: { errors },
-    watch,
   } = formFeatures
 
   const handleChangeOption = (value: boolean, option: keyof Options) => {
@@ -61,8 +62,8 @@ const Form: React.FC<FormProps> = ({
           <FormInput
             name="title"
             errors={errors}
-            placeholder={'Назва абонемента...'}
-            label={'Назва абонемента'}
+            label={t('createAbonement:titleField.label')}
+            placeholder={t('createAbonement:titleField.placeholder')}
             fullWidth
           />
         </Grid>
@@ -76,8 +77,8 @@ const Form: React.FC<FormProps> = ({
             request={{ trainerId: user?.id || 0 }}
             responseKey="gyms"
             labelKey="title"
-            placeholder={'Оберіть зал'}
-            label={'Абонемент створюється для:'}
+            label={t('createAbonement:gymsField.label')}
+            placeholder={t('createAbonement:gymsField.placeholder')}
           />
         </Grid>
 
@@ -96,8 +97,8 @@ const Form: React.FC<FormProps> = ({
                 name="days"
                 type="number"
                 errors={errors}
-                placeholder={'Кількість днів...'}
-                label={'Кількість днів'}
+                label={t('createAbonement:daysField.label')}
+                placeholder={t('createAbonement:daysField.placeholder')}
                 InputProps={{ inputProps: { min: 1 } }}
               />
             </Grid>
@@ -110,8 +111,8 @@ const Form: React.FC<FormProps> = ({
                 name="trainings"
                 type="number"
                 errors={errors}
-                placeholder={'Кількість тренувань...'}
-                label={'Кількість тренувань'}
+                label={t('createAbonement:trainingsField.label')}
+                placeholder={t('createAbonement:trainingsField.placeholder')}
                 InputProps={{ inputProps: { min: 1 } }}
               />
             </Grid>
@@ -124,8 +125,8 @@ const Form: React.FC<FormProps> = ({
             name="price"
             type="number"
             errors={errors}
-            placeholder={'Ціна абонемента (в гривнях)...'}
-            label={'Ціна абонемента (гривні)'}
+            label={t('createAbonement:priceField.label')}
+            placeholder={t('createAbonement:priceField.placeholder')}
           />
         </Grid>
 
@@ -140,7 +141,7 @@ const Form: React.FC<FormProps> = ({
             fullWidth
             endIcon={<SendIcon />}
           >
-            Створити абонімент
+            {t('createAbonement:submitBtnLabel')}
           </LoadingButton>
         </Grid>
       </Grid>

@@ -1,0 +1,28 @@
+{
+  "title": "Create Abonement",
+  "submitError": "You need to choose abonement options",
+  "checkboxesLabel": "Add options by:",
+  "daysCheckboxLabel": "days quantity",
+  "trainingsCheckboxLabel": "trainings quantity",
+  "titleField": {
+    "label": "Abonement title",
+    "placeholder": "Abonement title..."
+  },
+  "gymsField": {
+    "label": "Abonement will be applied to:",
+    "placeholder": "Choose gyms"
+  },
+  "daysField": {
+    "label": "Days quantity",
+    "placeholder": "Days quantity..."
+  },
+  "trainingsField": {
+    "label": "Trainings quantity",
+    "placeholder": "Trainings quantity..."
+  },
+  "priceField": {
+    "label": "Abonement price (hrivnas)",
+    "placeholder": "Abonement price (in hrivnas)..."
+  },
+  "submitBtnLabel": "Create abonement"
+}

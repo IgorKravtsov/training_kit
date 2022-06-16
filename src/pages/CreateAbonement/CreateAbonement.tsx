@@ -20,10 +20,12 @@ import { useCreateAbonementValidation } from './useCreateAbonementValidation'
 import { CreateNewAbonement } from 'api/abonements/abonements'
 import { getIdFromArray } from 'utils'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const CreateAbonement: React.FC = (): React.ReactElement => {
   const classes = useStyles()
 
+  const { t } = useTranslation(['createAbonement'])
   const { user } = useAuthContext()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -43,7 +45,7 @@ const CreateAbonement: React.FC = (): React.ReactElement => {
 
   const onSubmit = async (data: SubmitData) => {
     if (!data.days && !data.trainings) {
-      dispatch(error({ message: 'Необхідно обрати можливості абоніменту' }))
+      dispatch(error({ message: t('createAbonement:submitError') }))
       return
     }
 
@@ -70,7 +72,7 @@ const CreateAbonement: React.FC = (): React.ReactElement => {
           {/* </Grid> */}
           <Grid item xs={8} sx={{ textAlign: 'center' }}>
             {/* <Card elevation={6} sx={{ padding: '5px 30px 50px 30px', textAlign: 'center' }}> */}
-            <Title>Створити абонімент</Title>
+            <Title>{t('createAbonement:title')}</Title>
 
             <Form
               options={options}

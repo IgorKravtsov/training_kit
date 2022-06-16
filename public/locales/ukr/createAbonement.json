@@ -1,0 +1,28 @@
+{
+  "title": "Створити абонімент",
+  "submitError": "Необхідно обрати можливості абоніменту",
+  "checkboxesLabel": "Додати можливості за:",
+  "daysCheckboxLabel": "кількістю днів",
+  "trainingsCheckboxLabel": "кількістю тренувань",
+  "titleField": {
+    "label": "Назва абонемента",
+    "placeholder": "Назва абонемента..."
+  },
+  "gymsField": {
+    "label": "Абонемент створюється для:",
+    "placeholder": "Оберіть зал"
+  },
+  "daysField": {
+    "label": "Кількість днів",
+    "placeholder": "Кількість днів..."
+  },
+  "trainingsField": {
+    "label": "Кількість тренувань",
+    "placeholder": "Кількість тренувань..."
+  },
+  "priceField": {
+    "label": "Ціна абонемента (гривні)",
+    "placeholder": "Ціна абонемента (в гривнях)..."
+  },
+  "submitBtnLabel": "Створити абонімент"
+}
