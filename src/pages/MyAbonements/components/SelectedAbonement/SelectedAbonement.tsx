@@ -11,6 +11,7 @@ import { formatDate } from 'utils'
 import OptionText from '../OptionText/OptionText'
 import { selectLearnerAbonement } from 'redux/slices/learnerAbonementSlice'
 import { useAppSelector } from 'redux/hooks'
+import { useLocale } from 'shared-files/hooks'
 
 interface SelectedAbonementProps {
   isLoading: boolean
@@ -22,6 +23,7 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
   const classes = useStyles()
   const { user } = useAuthContext()
 
+  const { locale } = useLocale()
   const { selectedLearnerAbonement } = useAppSelector(selectLearnerAbonement)
 
   return (
@@ -89,7 +91,8 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
               <Divider sx={{ mt: 2 }} />
               <section style={{ marginTop: '50px' }}>
                 <Typography id="modal-modal-start-date">
-                  Дата початку: {formatDate(selectedLearnerAbonement.startDate)}
+                  Дата початку:{' '}
+                  {formatDate(locale, selectedLearnerAbonement.startDate)}
                 </Typography>
                 {/* <OptionText>
                   Дата закінчення:{' '}
@@ -100,6 +103,7 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                   Лишилось днів: {selectedLearnerAbonement.daysLeft || '∞'}{' '}
                   {selectedLearnerAbonement.daysLeft &&
                     `(Дата закінчення: ${formatDate(
+                      locale,
                       selectedLearnerAbonement.endDate,
                     )})`}
                 </OptionText>

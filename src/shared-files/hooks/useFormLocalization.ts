@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { ru, uk, enGB } from 'date-fns/locale'
 import { LanguageType } from 'shared-files/enums'
 
-export const useFormLocalization = () => {
+export const useLocale = () => {
   const { i18n } = useTranslation()
 
   const getLocalization = () => {

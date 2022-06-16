@@ -5,6 +5,7 @@ import AbonementText from 'components/Text/AbonementText'
 
 import { LearnerAbonement } from 'api/abonements/types'
 import { formatDate } from 'utils'
+import { useLocale } from 'shared-files/hooks'
 
 interface AbonementListItemProps {
   learnerAbonement: LearnerAbonement
@@ -15,6 +16,7 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
   learnerAbonement,
   onClick,
 }): React.ReactElement => {
+  const { locale } = useLocale()
   return (
     <Card sx={{ maxWidth: 550 }} elevation={6}>
       <CardActionArea onClick={onClick}>
@@ -23,7 +25,7 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
             {learnerAbonement.abonement?.title || '-'}
           </Typography>
           <AbonementText>
-            Дата початку: {formatDate(learnerAbonement.startDate)}
+            Дата початку: {formatDate(locale, learnerAbonement.startDate)}
           </AbonementText>
           <AbonementText>
             Тренувань лишилось: {learnerAbonement.trainingsLeft || '∞'}
@@ -32,7 +34,8 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
             Днів лишилось: {learnerAbonement.daysLeft || '∞'}
           </AbonementText>
           <AbonementText>
-            Дата закінчення: {formatDate(learnerAbonement.endDate) || '∞'}
+            Дата закінчення:{' '}
+            {formatDate(locale, learnerAbonement.endDate) || '∞'}
           </AbonementText>
         </CardContent>
       </CardActionArea>

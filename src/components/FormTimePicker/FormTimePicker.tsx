@@ -8,7 +8,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 
-import { useFormLocalization } from 'shared-files/hooks'
+import { useLocale } from 'shared-files/hooks'
 
 export interface FormAutocompleteProps extends Partial<StandardTextFieldProps> {
   name: string
@@ -29,7 +29,7 @@ const FormTimePicker: React.FC<FormAutocompleteProps> = ({
   id,
 }): React.ReactElement => {
   const { control } = useFormContext()
-  const { locale } = useFormLocalization()
+  const { locale } = useLocale()
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={locale}>
       <Controller

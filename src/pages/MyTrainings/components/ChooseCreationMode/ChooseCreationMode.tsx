@@ -14,11 +14,15 @@ import {
   selectMyTrainings,
   setSelectedCreationType,
 } from 'redux/slices/myTrainingsSlice'
+import { useTranslation } from 'react-i18next'
 
 const ChooseCreationMode: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const { selectedGymId } = useAppSelector(selectMyTrainings)
+
+  const {t} = useTranslation(['myTrainings'])
   const dispatch = useAppDispatch()
+
   const { handleNext } = useContext(CreateTrainingsContext)
   const createOneTrainingUrl = `${RouteNames.MY_TRAININGS}/${user?.id || '-'}/${
     MyTrainingsRoutes.CREATE_TRAININGS
@@ -49,7 +53,7 @@ const ChooseCreationMode: React.FC = (): React.ReactElement => {
           variant="outlined"
           onClick={() => handleClick(setSelectedCreationType(CreationType.One))}
         >
-          Створити тренування
+          {t('myTrainings:createTraining.createOneTraining')}
         </Button>
       </Grid>
       <Grid item xs={3}>
@@ -61,7 +65,7 @@ const ChooseCreationMode: React.FC = (): React.ReactElement => {
             handleClick(setSelectedCreationType(CreationType.Many))
           }
         >
-          Запланувати тренування
+          {t('myTrainings:createTraining.createManyTrainings')}
         </Button>
       </Grid>
     </Grid>

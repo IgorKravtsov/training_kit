@@ -13,10 +13,13 @@ import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 
 import GymSection from 'pages/MyTrainings/components/GymSection/GymSection'
 import { Alert, Container } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 const Recent: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
-  const { trainings, errors } = useAppSelector(selectTraining)
+  const { trainings } = useAppSelector(selectTraining)
+
+  const { t } = useTranslation(['myTrainings'])
   const dispatch = useAppDispatch()
 
   const trainingsExist = trainings && trainings?.length > 0
@@ -67,9 +70,9 @@ const Recent: React.FC = (): React.ReactElement => {
         <Container>
           <Alert severity="info" sx={{ ta: 'center' }}>
             {user?.trainers && user?.trainers.length > 1
-              ? 'Ваші тренери не створили'
-              : 'Ваш тренер не створив'}{' '}
-            жодних тренувань в діапазоні {daysOffset} днів.
+              ? t('myTrainings:nearest.yourTrainersPlural')
+              : t('myTrainings:nearest.yourTrainersSingular')}{' '}
+            {t('myTrainings:nearest.noTrainings', { days: daysOffset })}
           </Alert>
         </Container>
       )}

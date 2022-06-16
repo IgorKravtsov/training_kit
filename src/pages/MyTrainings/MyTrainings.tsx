@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './MyTrainings.styles'
 
+import { useTranslation } from 'react-i18next'
+
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 import Tabs from '@mui/material/Tabs'
@@ -19,8 +21,9 @@ enum MyTrainingsPageTabs {
 
 const MyTrainings: React.FC = (): React.ReactElement => {
   const classes = useStyles()
-
   const { user, role } = useAuthContext()
+
+  const { t } = useTranslation(['myTrainings'])
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -78,12 +81,12 @@ const MyTrainings: React.FC = (): React.ReactElement => {
         {hasTrainers && (
           <>
             <Tab
-              label={'Ближчі тренування'}
+              label={t('myTrainings:tabs.nearest')}
               component={Link}
               to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.NEAREST}`}
             />
             <Tab
-              label={'Історія тренувань'}
+              label={t('myTrainings:tabs.history')}
               component={Link}
               to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.TRAINING_HISTORY}`}
             />
@@ -91,7 +94,7 @@ const MyTrainings: React.FC = (): React.ReactElement => {
         )}
         {(user.role === UserRoles.TRAINER || user.role === UserRoles.ADMIN) && (
           <Tab
-            label={'Створити тренування'}
+            label={t('myTrainings:tabs.createTraining')}
             component={Link}
             to={`${RouteNames.MY_TRAININGS}/${user.id}/${MyTrainingsRoutes.CREATE_TRAININGS}`}
           />

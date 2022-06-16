@@ -16,6 +16,7 @@ import { useAppDispatch } from 'redux/hooks'
 import { setSelectedGym } from 'redux/slices/myTrainingsSlice'
 
 import { Gym } from 'api/gym/types'
+import { useTranslation } from 'react-i18next'
 
 interface GymListItemProps {
   gym: Gym
@@ -24,6 +25,8 @@ interface GymListItemProps {
 const GymListItem: React.FC<GymListItemProps> = ({
   gym,
 }): React.ReactElement => {
+  const { t } = useTranslation(['myTrainings'])
+
   const { handleNext } = useContext(CreateTrainingsContext)
   const { user } = useAuthContext()
   const [isHovered, setIsHovered] = useState(false)
@@ -70,7 +73,7 @@ const GymListItem: React.FC<GymListItemProps> = ({
           component={Link}
           onClick={handleClick}
         >
-          Обрати
+          {t('myTrainings:createTraining.btnLabel')}
         </Button>
       </CardActions>
     </Card>

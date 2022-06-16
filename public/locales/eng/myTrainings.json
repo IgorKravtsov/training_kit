@@ -1,0 +1,141 @@
+{
+  "tabs": {
+    "nearest": "Nearest trainings",
+    "history": "Training history",
+    "createTraining": "Create training"
+  },
+  "nearest": {
+    "yourTrainersSingular": "Your trainer didn't created",
+    "yourTrainersPlural": "Your trainers didn't created",
+    "noTrainings": "any trainings in a range of {{days}} days",
+    "markVisiting": "Mark visiting",
+    "wrongTime": "Wrong time",
+    "markedAlready": "Marked already"
+  },
+  "trainingHistory": {
+    "gridTitle": "Training title",
+    "gridGym": "Gym",
+    "gridTrainingDate": "Training date",
+    "gridTrainers": "Trainers",
+    "gridLocalization": {
+      "noRowsLabel": "No data",
+      "noResultsOverlayLabel": "No results found",
+      "errorOverlayDefaultLabel": "An error occured",
+
+      "toolbarDensity": "Size",
+      "toolbarDensityLabel": "Size",
+      "toolbarDensityCompact": "Compact",
+      "toolbarDensityStandard": "Standart",
+      "toolbarDensityComfortable": "Comfort",
+
+      "toolbarColumns": "Columns",
+      "toolbarColumnsLabel": "Choose columns",
+
+      "toolbarFilters": "Filters",
+      "toolbarFiltersLabel": "Show filters",
+      "toolbarFiltersTooltipHide": "Hide filters",
+      "toolbarFiltersTooltipShow": "Show filters",
+
+      "toolbarExport": "Download",
+      "toolbarExportLabel": "Download",
+      "toolbarExportCSV": "Download as CSV",
+      "toolbarExportPrint": "Print",
+
+      "columnsPanelTextFieldLabel": "Find columns",
+      "columnsPanelTextFieldPlaceholder": "Column name",
+      "columnsPanelDragIconLabel": "Reorder column",
+      "columnsPanelShowAllButton": "Show all",
+      "columnsPanelHideAllButton": "Hide all",
+
+      "filterPanelAddFilter": "Add filter",
+      "filterPanelDeleteIconLabel": "Delete",
+      "filterPanelLinkOperator": "Logical operator",
+      "filterPanelOperators": "Operator",
+      "filterPanelOperatorAnd": "And",
+      "filterPanelOperatorOr": "Or",
+      "filterPanelColumns": "Columns",
+      "filterPanelInputLabel": "Values",
+      "filterPanelInputPlaceholder": "Filter values",
+
+      "filterOperatorContains": "Contains",
+      "filterOperatorEquals": "Equals",
+      "filterOperatorStartsWith": "Starts with",
+      "filterOperatorEndsWith": "Ends with",
+      "filterOperatorIs": "Is",
+      "filterOperatorNot": "Not is",
+      "filterOperatorAfter": "is after",
+      "filterOperatorOnOrAfter": "is on or after",
+      "filterOperatorBefore": "is before",
+      "filterOperatorOnOrBefore": "is on or before",
+      "filterOperatorIsEmpty": "Not contains",
+      "filterOperatorIsNotEmpty": "Contains any",
+      "filterOperatorIsAnyOf": "Don't press",
+
+      "filterValueAny": "any",
+
+      "columnMenuLabel": "Menu",
+      "columnMenuShowColumns": "Show columns",
+      "columnMenuFilter": "Filter",
+      "columnMenuHideColumn": "Hide",
+      "columnMenuUnsort": "Deny sort",
+      "columnMenuSortAsc": "From less to greater",
+      "columnMenuSortDesc": "Form greater to less",
+
+      "columnHeaderFiltersLabel": "Show filters",
+      "columnHeaderSortIconLabel": "Sort",
+
+      "footerTotalRows": "Total Rows:",
+
+      "checkboxSelectionHeaderName": "Checkbox selection",
+      "checkboxSelectionSelectAllRows": "Select all rows",
+      "checkboxSelectionUnselectAllRows": "Unselect all rows",
+      "checkboxSelectionSelectRow": "Select row",
+      "checkboxSelectionUnselectRow": "Unselect row",
+
+      "booleanCellTrueLabel": "yes",
+      "booleanCellFalseLabel": "no",
+
+      "actionsCellMore": "more",
+
+      "pinToLeft": "Pin to left",
+      "pinToRight": "Pin to right",
+      "unpin": "Unpin",
+
+      "treeDataGroupingHeaderName": "Group",
+      "treeDataExpand": "see children",
+      "treeDataCollapse": "hide children",
+
+      "groupingColumnHeaderName": "Group",
+
+      "expandDetailPanel": "Expand",
+      "collapseDetailPanel": "Collapse",
+
+      "rowReorderingHeaderName": "Row reordering"
+    }
+  },
+  "createTraining": {
+    "step1": "Choose Your gym",
+    "step2": "How do You want to create training",
+    "step3": "Enter training data",
+    "btnLabel": "Choose",
+    "createOneTraining": "Create One training",
+    "createManyTrainings": "Scheldule trainings",
+    "titleField": {
+      "label": "Training title",
+      "placeholder": "Enter title (with a group helpfully)..."
+    },
+    "descriptionField": {
+      "label": "Training description (optional)",
+      "placeholder": "Description..."
+    },
+    "trainingDateField": {
+      "label": "Training date",
+      "placeholder": "Training date..."
+    },
+    "trainingTimeField": {
+      "label": "Training time",
+      "placeholder": "Training time..."
+    },
+    "submitBtnLabel": "Create training"
+  }
+}

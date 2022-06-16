@@ -1,0 +1,141 @@
+{
+  "tabs": {
+    "nearest": "Ближчі тренування",
+    "history": "Історія тренувань",
+    "createTraining": "Створити тренування"
+  },
+  "nearest": {
+    "yourTrainersSingular": "Ваш тренер не створив",
+    "yourTrainersPlural": "Ваші тренери не створили",
+    "noTrainings": "жодних тренувань в діапазоні {{days}} днів",
+    "markVisiting": "Відмітити присутність",
+    "wrongTime": "Непідходящий час",
+    "markedAlready": "Ви вже відмічені"
+  },
+  "trainingHistory": {
+    "gridTitle": "Назва тренування",
+    "gridGym": "Зал",
+    "gridTrainingDate": "Дата тренування",
+    "gridTrainers": "Тренери",
+    "gridLocalization": {
+      "noRowsLabel": "Даних немає",
+      "noResultsOverlayLabel": "Не знайдено результатів",
+      "errorOverlayDefaultLabel": "Трапилась помилка",
+
+      "toolbarDensity": "Розмір",
+      "toolbarDensityLabel": "Розмір",
+      "toolbarDensityCompact": "Компакт",
+      "toolbarDensityStandard": "Стандарт",
+      "toolbarDensityComfortable": "Комфорт",
+
+      "toolbarColumns": "Колонки",
+      "toolbarColumnsLabel": "Оберіть колонки",
+
+      "toolbarFilters": "Фільтри",
+      "toolbarFiltersLabel": "Показати фільтри",
+      "toolbarFiltersTooltipHide": "Hide filters",
+      "toolbarFiltersTooltipShow": "Показати фільтри",
+
+      "toolbarExport": "Завантажити",
+      "toolbarExportLabel": "Завантажити",
+      "toolbarExportCSV": "Заватажити як CSV",
+      "toolbarExportPrint": "Друк",
+
+      "columnsPanelTextFieldLabel": "Знайти колонку",
+      "columnsPanelTextFieldPlaceholder": "Назва колонки",
+      "columnsPanelDragIconLabel": "Reorder column",
+      "columnsPanelShowAllButton": "Показати всі",
+      "columnsPanelHideAllButton": "Скрити всі",
+
+      "filterPanelAddFilter": "Додати фільтр",
+      "filterPanelDeleteIconLabel": "Видалити",
+      "filterPanelLinkOperator": "Логічний оператор",
+      "filterPanelOperators": "Оператор",
+      "filterPanelOperatorAnd": "Та",
+      "filterPanelOperatorOr": "Або",
+      "filterPanelColumns": "Колонки",
+      "filterPanelInputLabel": "Значення",
+      "filterPanelInputPlaceholder": "Значення фільтру",
+
+      "filterOperatorContains": "Містить",
+      "filterOperatorEquals": "Дорівнює",
+      "filterOperatorStartsWith": "Починається з",
+      "filterOperatorEndsWith": "Закінчується на",
+      "filterOperatorIs": "Є",
+      "filterOperatorNot": "Не є",
+      "filterOperatorAfter": "is after",
+      "filterOperatorOnOrAfter": "is on or after",
+      "filterOperatorBefore": "is before",
+      "filterOperatorOnOrBefore": "is on or before",
+      "filterOperatorIsEmpty": "Нічого не містить",
+      "filterOperatorIsNotEmpty": "Містить щось",
+      "filterOperatorIsAnyOf": "Не нажимати",
+
+      "filterValueAny": "any",
+
+      "columnMenuLabel": "Меню",
+      "columnMenuShowColumns": "Показати колонки",
+      "columnMenuFilter": "Фільтр",
+      "columnMenuHideColumn": "Скрити",
+      "columnMenuUnsort": "Відмінити сортування",
+      "columnMenuSortAsc": "Від меньшого до більшого",
+      "columnMenuSortDesc": "Від більшого до меньшого",
+
+      "columnHeaderFiltersLabel": "Показати фільтри",
+      "columnHeaderSortIconLabel": "Сортувати",
+
+      "footerTotalRows": "Total Rows:",
+
+      "checkboxSelectionHeaderName": "Checkbox selection",
+      "checkboxSelectionSelectAllRows": "Select all rows",
+      "checkboxSelectionUnselectAllRows": "Unselect all rows",
+      "checkboxSelectionSelectRow": "Select row",
+      "checkboxSelectionUnselectRow": "Unselect row",
+
+      "booleanCellTrueLabel": "yes",
+      "booleanCellFalseLabel": "no",
+
+      "actionsCellMore": "more",
+
+      "pinToLeft": "Pin to left",
+      "pinToRight": "Pin to right",
+      "unpin": "Unpin",
+
+      "treeDataGroupingHeaderName": "Group",
+      "treeDataExpand": "see children",
+      "treeDataCollapse": "hide children",
+
+      "groupingColumnHeaderName": "Group",
+
+      "expandDetailPanel": "Expand",
+      "collapseDetailPanel": "Collapse",
+
+      "rowReorderingHeaderName": "Row reordering"
+    }
+  },
+  "createTraining": {
+    "step1": "Оберіть зал",
+    "step2": "Як Ви хочете створити тренування",
+    "step3": "Введіть дані тренування",
+    "btnLabel": "Обрати",
+    "createOneTraining": "Створити тренування",
+    "createManyTrainings": "Запланувати тренування",
+    "titleField": {
+      "label": "Назва тренування",
+      "placeholder": "Уведіть назву (бажано комбінувати з групою)..."
+    },
+    "descriptionField": {
+      "label": "Опис тренування (не обов'язково)",
+      "placeholder": "Опис..."
+    },
+    "trainingDateField": {
+      "label": "Дата тренування",
+      "placeholder": "Дата тренування..."
+    },
+    "trainingTimeField": {
+      "label": "Час тренування",
+      "placeholder": "Час тренування..."
+    },
+    "submitBtnLabel": "Створити тренування"
+  }
+}

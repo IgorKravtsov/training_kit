@@ -12,11 +12,14 @@ import {
   CannotVisitTraining,
   CannotVisitTrainingType,
 } from 'api/training/types/training.type'
+
 import { formatDate, formatTime } from 'utils'
 
 import noPhoto from 'assets/images/no-image.png'
 import { Id } from 'shared-files/types'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useTranslation } from 'react-i18next'
+import { useLocale } from 'shared-files/hooks'
 
 interface TrainingListProps {
   training: Training
@@ -30,34 +33,35 @@ const TrainingListItem: React.FC<TrainingListProps> = ({
   onClick,
 }): React.ReactElement => {
   const { user } = useAuthContext()
+  const { t } = useTranslation(['myTrainings'])
+
+  const { locale } = useLocale()
+
   const [isHovered, setIsHovered] = useState(false)
-  const [buttonText, setButtonText] = useState('Відмітити присутність')
 
   const getBtnText = (training: Training) => {
     const { canBeVisited } = training
 
     if (typeof canBeVisited === 'boolean') {
-      return 'Відмітити присутність'
+      return t('myTrainings:nearest.markVisiting')
     }
 
     switch (canBeVisited?.type) {
       case CannotVisitTrainingType.Time:
-        return 'Непідходящий час'
+        return t('myTrainings:nearest.wrongTime')
 
       case CannotVisitTrainingType.AlreadyMarked:
-        return 'Ви вже відмічені'
+        return t('myTrainings:nearest.markedAlready')
 
       default:
-        return 'Відмітити присутність'
+        return t('myTrainings:nearest.markVisiting')
     }
   }
 
   const isDisabledButton = (canBeVisited: boolean | CannotVisitTraining) => {
-    // return true
     if (typeof canBeVisited === 'boolean') {
       return canBeVisited
     } else {
-      //   setButtonText(getBtnText(canBeVisited.type))
       return canBeVisited.canBeVisited
     }
   }
@@ -72,15 +76,15 @@ const TrainingListItem: React.FC<TrainingListProps> = ({
         component="img"
         height="180"
         image={gymImg || noPhoto}
-        alt="green iguana"
+        alt="gym image"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h4">
           {training.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {formatDate(training.trainingDateTime)} {' - '}
-          {formatTime(training.trainingDateTime)}
+          {formatDate(locale, training.trainingDateTime)} {' - '}
+          {formatTime(locale, training.trainingDateTime)}
         </Typography>
       </CardContent>
       <CardActions>

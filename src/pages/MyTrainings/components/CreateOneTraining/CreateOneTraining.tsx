@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslation } from 'react-i18next'
 
 import LoadingButton from '@mui/lab/LoadingButton'
 import SendIcon from '@mui/icons-material/Send'
@@ -20,17 +21,15 @@ import { error, success } from 'redux/slices/snackbarSlice'
 import { CreateTrainingsContext } from 'pages/MyTrainings/pages/CreateTrainings/CreateTrainingsContext'
 import { useParams } from 'react-router-dom'
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useOneTrainingValidation } from './useOneTrainingValidation'
 
 const CreateOneTraining: React.FC = (): React.ReactElement => {
   const { handleReset } = useContext(CreateTrainingsContext)
   const { user } = useAuthContext()
-  const validationSchema = yup.object({
-    title: yup.string().trim().required('Це поле має бути заповнено'),
-    description: yup.string().trim(),
-    trainingDate: yup.date().required('Це поле має бути заповнено'),
-    trainingTime: yup.date().required('Це поле має бути обрано'),
-  })
+
+  const { validationSchema } = useOneTrainingValidation()
   type SubmitData = yup.InferType<typeof validationSchema>
+
   const formFeatures = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -38,13 +37,14 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
       trainingTime: new Date(),
     },
   })
+
+  const { t } = useTranslation(['myTrainings'])
   const dispatch = useAppDispatch()
 
   const [isLoading, setIsLoading] = useState(false)
   const { gymId } = useParams<{ gymId: string }>()
 
   const {
-    control,
     formState: { errors },
   } = formFeatures
 
@@ -86,8 +86,8 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
             name="title"
             fullWidth
             errors={errors}
-            label="Назва тренування"
-            placeholder="Уведіть назву (бажано комбінувати з групою)..."
+            label={t('myTrainings:createTraining.titleField.label')}
+            placeholder={t('myTrainings:createTraining.titleField.placeholder')}
           />
         </Grid>
 
@@ -98,8 +98,10 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
             fullWidth
             rows={4}
             errors={errors}
-            label="Опис тренування (не обов'язково)"
-            placeholder="Опис..."
+            label={t('myTrainings:createTraining.descriptionField.label')}
+            placeholder={t(
+              'myTrainings:createTraining.descriptionField.placeholder',
+            )}
           />
         </Grid>
 
@@ -114,8 +116,10 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
               <FormDatePicker
                 name="trainingDate"
                 errors={errors}
-                label="Дата тренування"
-                placeholder="Дата тренування..."
+                label={t('myTrainings:createTraining.trainingDateField.label')}
+                placeholder={t(
+                  'myTrainings:createTraining.trainingDateField.placeholder',
+                )}
               />
             </Grid>
 
@@ -123,8 +127,10 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
               <FormTimePicker
                 name="trainingTime"
                 errors={errors}
-                label="Час тренування"
-                placeholder="Час тренування..."
+                label={t('myTrainings:createTraining.trainingTimeField.label')}
+                placeholder={t(
+                  'myTrainings:createTraining.trainingTimeField.placeholder',
+                )}
               />
             </Grid>
           </Grid>
@@ -141,7 +147,7 @@ const CreateOneTraining: React.FC = (): React.ReactElement => {
           fullWidth
           endIcon={<SendIcon />}
         >
-          Створити тренування
+          {t('myTrainings:createTraining.submitBtnLabel')}
         </LoadingButton>
       </FormWrapper>
     </Grid>
