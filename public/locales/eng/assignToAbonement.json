@@ -1,0 +1,10 @@
+{
+  "title": "Assign to abonement",
+  "warningMessage": "You are cannot assign to this abonement while another abonement is active",
+  "successMessage": "You have successfully assigned to this abonement",
+  "trainingQuantity": "Trainings quantity: {{num}}",
+  "daysQuantity": "Days quantity: {{num}}",
+  "price": "Price: {{price}}",
+  "creator": "Abonement creator: {{creator}}",
+  "choose": "Choose"
+}

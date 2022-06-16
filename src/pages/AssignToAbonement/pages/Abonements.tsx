@@ -1,41 +1,44 @@
 import React, { useCallback, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+
 import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
 import { selectAbonement, setAbonements } from 'redux/slices/abonementSlice'
-import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { PublicAppUserDto } from 'api/user/types'
-import AbonementListItem from '../components/AbonementList/AbonementListItem'
-import { Container, Grid } from '@mui/material'
-import { Id } from 'shared-files/types'
-import {
-  AssignUserToAbonement,
-  GetGymAbonements,
-  GetLearnerAbonements,
-  GetTrainersAbonements,
-} from 'api/abonements/abonements'
-import { informational, success, warning } from 'redux/slices/snackbarSlice'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useHttpRequest } from 'shared-files/hooks'
-import { Abonement } from 'api/abonements/types'
+import { success, warning } from 'redux/slices/snackbarSlice'
 import {
   selectLearnerAbonement,
   setLearnerAbonements,
 } from 'redux/slices/learnerAbonementSlice'
 import { selectMyTrainings } from 'redux/slices/myTrainingsSlice'
 
+import { Container, Grid } from '@mui/material'
+
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { Id } from 'shared-files/types'
+import { useHttpRequest } from 'shared-files/hooks'
+
+import AbonementListItem from '../components/AbonementList/AbonementListItem'
+
+import {
+  AssignUserToAbonement,
+  GetGymAbonements,
+  GetLearnerAbonements,
+} from 'api/abonements/abonements'
+
 const Abonements: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
+
   const { abonements } = useAppSelector(selectAbonement)
   const { learnerAbonements } = useAppSelector(selectLearnerAbonement)
   const { selectedGymId } = useAppSelector(selectMyTrainings)
+
+  const { t } = useTranslation(['assignToAbonement'])
 
   const { gymId } = useParams<{ gymId: string }>()
   const gymID = gymId || 0
 
   const dispatch = useAppDispatch()
 
-  // const [getTrainersAbonements] = useHttpRequest(GetTrainersAbonements, {
-  //   action: setAbonements,
-  // })
   const [assignUserToAbonement] = useHttpRequest(AssignUserToAbonement)
   const [getLearnerAbonements] = useHttpRequest(GetLearnerAbonements, {
     action: setLearnerAbonements,
@@ -43,12 +46,6 @@ const Abonements: React.FC = (): React.ReactElement => {
   const [getGymAbonements] = useHttpRequest(GetGymAbonements, {
     action: setAbonements,
   })
-
-  // const getAbonements = async (trainers: PublicAppUserDto[]) => {
-  //   await getTrainersAbonements({
-  //     trainers: trainers.map((trainer) => trainer.id),
-  //   })
-  // }
 
   const getAbonements = async (gymId: Id) => {
     await getGymAbonements({ gymId: +gymId })
@@ -66,8 +63,7 @@ const Abonements: React.FC = (): React.ReactElement => {
     if (isSubscribed) {
       dispatch(
         warning({
-          message:
-            'Не можна підписатися ще раз на цей абонімент поки не закінчилася дія цього абоніменту!',
+          message: t('assignToAbonement:warningMessage'),
         }),
       )
     } else {
@@ -76,7 +72,7 @@ const Abonements: React.FC = (): React.ReactElement => {
         learner: learnerId,
       })
       if (response) {
-        dispatch(success({ message: 'Ви успішно підписалися на абонемент!' }))
+        dispatch(success({ message: t('assignToAbonement:successMessage') }))
         await getCurrUserLearnerAbonements(user?.id || 0)
         await getAbonements(selectedGymId || gymID)
       }

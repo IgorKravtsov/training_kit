@@ -13,12 +13,13 @@ import ChartSection from './components/ChartSection'
 import Container from '@mui/material/Container'
 import { error } from 'redux/slices/snackbarSlice'
 import { SERVER_DELAY_TIME } from 'shared-files/constants'
+import { useHttpRequest } from 'shared-files/hooks'
 
 const Characteristics: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const { characteristicId } = useParams<{ characteristicId: string }>()
 
-  const dispatch = useAppDispatch()
+  const [getCharacteristicById] = useHttpRequest(GetCharacteristicById)
 
   const [characteristic, setCharacteristic] = useState<Characteristic | null>(
     null,
@@ -29,20 +30,8 @@ const Characteristics: React.FC = (): React.ReactElement => {
     characteristicId: Id | undefined,
   ) => {
     if (!userId || !characteristicId) return
-    dispatch(showLoading())
-    setTimeout(async () => {
-      try {
-        const { characteristic } = await GetCharacteristicById({
-          characteristicId,
-          userId,
-        })
-        setCharacteristic(characteristic)
-      } catch (err: any) {
-        dispatch(error({ message: err.message }))
-      } finally {
-        dispatch(hideLoading())
-      }
-    }, SERVER_DELAY_TIME)
+    const response = await getCharacteristicById({ characteristicId, userId })
+    response && setCharacteristic(response.characteristic)
   }
 
   useEffect(() => {

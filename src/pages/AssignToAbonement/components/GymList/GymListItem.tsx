@@ -17,6 +17,7 @@ import { setSelectedGym } from 'redux/slices/myTrainingsSlice'
 
 import { Gym } from 'api/gym/types'
 import { Id } from 'shared-files/types'
+import { useTranslation } from 'react-i18next'
 
 interface GymListItemProps {
   gym: Gym
@@ -27,10 +28,13 @@ const GymListItem: React.FC<GymListItemProps> = ({
   gym,
   onSelectGym,
 }): React.ReactElement => {
-  const { handleNext } = useContext(CreateTrainingsContext)
   const { user } = useAuthContext()
-  const [isHovered, setIsHovered] = useState(false)
+
+  const { handleNext } = useContext(CreateTrainingsContext)
   const dispatch = useAppDispatch()
+  const { t } = useTranslation(['assignToAbonement'])
+
+  const [isHovered, setIsHovered] = useState(false)
 
   const url = useMemo(
     () =>
@@ -74,7 +78,7 @@ const GymListItem: React.FC<GymListItemProps> = ({
           component={Link}
           onClick={handleClick}
         >
-          Обрати
+          {t('assignToAbonement:choose')}
         </Button>
       </CardActions>
     </Card>

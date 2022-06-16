@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import { useTranslation } from 'react-i18next'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -15,19 +16,17 @@ import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 import { AutocompleteOption } from 'shared-files/interfaces'
 
 import { useAppDispatch } from 'redux/hooks/typedHooks'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
 
 import { GetAllCharacteristics } from 'api/characteristic/characteristic'
 import { Characteristic } from 'api/characteristic/types'
 import { AppUser } from 'api/user/types'
-import { useThemeColor } from 'shared-files/hooks'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
-import { useTranslation } from 'react-i18next'
+import { useHttpRequest, useThemeColor } from 'shared-files/hooks'
 
 const AddCharacteristic: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
-  const dispatch = useAppDispatch()
   const { t } = useTranslation(['addCharacteristic'])
+
+  const [getAllCharacteristics] = useHttpRequest(GetAllCharacteristics)
 
   const [isSearching, setIsSearching] = useState(false)
   const [characteristicList, setCharacteristicList] = useState<
@@ -62,24 +61,22 @@ const AddCharacteristic: React.FC = (): React.ReactElement => {
     console.log(data)
   }
 
-  const getCharacteristicList = async (user: Partial<AppUser> | null) => {
+  const getCharacteristicList = async (user: Partial<AppUser>) => {
     if (!user) return
 
-    dispatch(showLoading())
-    setTimeout(async () => {
-      const response = await GetAllCharacteristics({ userId: user.id || 0 })
-      dispatch(hideLoading())
+    const response = await getAllCharacteristics({ userId: user.id || 0 })
+    if (response) {
       const result = user.characteristics
         ? arrDiff(response.characteristics, user.characteristics)
         : response.characteristics
       setCharacteristicList(
         result.map((item) => ({ label: item.title, ...item })),
       )
-    }, SERVER_DELAY_TIME)
+    }
   }
 
   useEffect(() => {
-    getCharacteristicList(user)
+    user && getCharacteristicList(user)
   }, [])
 
   return (

@@ -1,15 +1,18 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import Title from 'components/Title/Title'
 
-const AddAbonement: React.FC = (): React.ReactElement => {
+const AssignToAbonement: React.FC = (): React.ReactElement => {
+  const { t } = useTranslation(['assignToAbonement'])
+
   return (
     <>
-      <Title>Підписатися на абонімент</Title>
+      <Title>{t('assignToAbonement:title')}</Title>
       <Outlet />
     </>
   )
 }
 
-export default AddAbonement
+export default AssignToAbonement

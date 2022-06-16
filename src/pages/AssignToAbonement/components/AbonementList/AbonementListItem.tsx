@@ -1,4 +1,6 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 import {
   Card,
   CardActionArea,
@@ -6,7 +8,9 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
+
 import Chip from '@mui/material/Chip'
+
 import { Abonement } from 'api/abonements/types'
 import AbonementText from 'components/Text/AbonementText'
 import { Id } from 'shared-files/types'
@@ -22,6 +26,8 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
   onClick,
   isSubscribed,
 }): React.ReactElement => {
+  const { t } = useTranslation(['assignToAbonement'])
+
   return (
     <Card sx={{ maxWidth: 550 }} elevation={6}>
       <CardActionArea onClick={onClick}>
@@ -33,15 +39,29 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
             Дата початку: {formatDate(learnerAbonement.startDate)}
           </AbonementText> */}
           <AbonementText>
-            Кількість тренувань: {abonement.amountTrainings || '∞'}
+            {t('assignToAbonement:trainingQuantity', {
+              num: abonement.amountTrainings || '∞',
+            })}
+            {/* Кількість тренувань: {abonement.amountTrainings || '∞'} */}
           </AbonementText>
           <AbonementText>
-            Кількість днів: {abonement.amountDays || '∞'}
+            {t('assignToAbonement:daysQuantity', {
+              num: abonement.amountDays || '∞',
+            })}
+            {/* Кількість днів: {abonement.amountDays || '∞'} */}
           </AbonementText>
-          <AbonementText>Ціна: {abonement.price || '∞'}</AbonementText>
+          {/* <AbonementText>Ціна: {abonement.price || '∞'}</AbonementText> */}
+          <AbonementText>
+            {t('assignToAbonement:price', {
+              price: abonement.price || '∞',
+            })}
+          </AbonementText>
           {/* <AbonementText>Зал: {abonement.}</AbonementText> */}
           <AbonementText>
-            Тренер, що створив: {abonement.creator?.displayName || 'Невідомо'}
+            {t('assignToAbonement:creator', {
+              creator: abonement.creator?.displayName || 'Невідомо',
+            })}
+            {/* Тренер, що створив: {abonement.creator?.displayName || 'Невідомо'} */}
           </AbonementText>
           {isSubscribed(abonement.id) && (
             <Grid container justifyContent="flex-end">
