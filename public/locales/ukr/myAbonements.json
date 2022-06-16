@@ -1,0 +1,11 @@
+{
+  "title": "Мої абонементи",
+  "trainingQuantity": "Всього тренувань: {{num}}",
+  "daysQuantity": "Всього днів: {{num}}",
+  "price": "Ціна: {{price}}",
+  "creator": "Тренер, що створив: {{creator}}",
+  "startDate": "Дата початку: {{startDate}}",
+  "daysLeft": "Лишилось днів: {{num}}",
+  "endDate": "Дата закінчення: {{endDate}}",
+  "trainingsLeft": "Лишилось тренувань: {{num}}"
+}

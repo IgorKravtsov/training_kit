@@ -1,0 +1,11 @@
+{
+  "title": "My abonements",
+  "trainingQuantity": "Total trainings: {{num}}",
+  "daysQuantity": "Total days: {{num}}",
+  "price": "Price: {{price}}",
+  "creator": "Creator: {{creator}}",
+  "startDate": "Date of subscription: {{startDate}}",
+  "daysLeft": "Days left: {{num}}",
+  "endDate": "End date: {{endDate}}",
+  "trainingsLeft": "Trainings left: {{num}}"
+}

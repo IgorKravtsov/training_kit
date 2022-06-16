@@ -6,6 +6,7 @@ import AbonementText from 'components/Text/AbonementText'
 import { LearnerAbonement } from 'api/abonements/types'
 import { formatDate } from 'utils'
 import { useLocale } from 'shared-files/hooks'
+import { useTranslation } from 'react-i18next'
 
 interface AbonementListItemProps {
   learnerAbonement: LearnerAbonement
@@ -16,6 +17,7 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
   learnerAbonement,
   onClick,
 }): React.ReactElement => {
+  const { t } = useTranslation(['myAbonements'])
   const { locale } = useLocale()
   return (
     <Card sx={{ maxWidth: 550 }} elevation={6}>
@@ -25,17 +27,29 @@ const AbonementListItem: React.FC<AbonementListItemProps> = ({
             {learnerAbonement.abonement?.title || '-'}
           </Typography>
           <AbonementText>
-            Дата початку: {formatDate(locale, learnerAbonement.startDate)}
+            {t('myAbonements:startDate', {
+              startDate: formatDate(locale, learnerAbonement.startDate),
+            })}
+            {/* Дата початку: {formatDate(locale, learnerAbonement.startDate)} */}
           </AbonementText>
           <AbonementText>
-            Тренувань лишилось: {learnerAbonement.trainingsLeft || '∞'}
+            {t('myAbonements:trainingsLeft', {
+              num: learnerAbonement.trainingsLeft || '∞',
+            })}
+            {/* Тренувань лишилось: {learnerAbonement.trainingsLeft || '∞'} */}
           </AbonementText>
           <AbonementText>
-            Днів лишилось: {learnerAbonement.daysLeft || '∞'}
+            {t('myAbonements:daysLeft', {
+              num: learnerAbonement.daysLeft || '∞',
+            })}
+            {/* Днів лишилось: {learnerAbonement.daysLeft || '∞'} */}
           </AbonementText>
           <AbonementText>
-            Дата закінчення:{' '}
-            {formatDate(locale, learnerAbonement.endDate) || '∞'}
+            {t('myAbonements:endDate', {
+              endDate: formatDate(locale, learnerAbonement.endDate),
+            })}
+            {/* Дата закінчення:{' '}
+            {formatDate(locale, learnerAbonement.endDate) || '∞'} */}
           </AbonementText>
         </CardContent>
       </CardActionArea>

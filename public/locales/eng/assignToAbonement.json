@@ -1,5 +1,6 @@
 {
   "title": "Assign to abonement",
+  "subtitle": "Choose Your gym",
   "warningMessage": "You are cannot assign to this abonement while another abonement is active",
   "successMessage": "You have successfully assigned to this abonement",
   "trainingQuantity": "Trainings quantity: {{num}}",

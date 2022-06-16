@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useStyles } from './myAbonement.styles'
 
+import { useTranslation } from 'react-i18next'
+
 import { Card, Container, Fade, Grid, Modal } from '@mui/material'
 import Title from 'components/Title/Title'
 
@@ -12,7 +14,6 @@ import {
   GetLearnerAbonements,
   GetOneLearnerAbonement,
 } from 'api/abonements/abonements'
-import { LearnerAbonement } from 'api/abonements/types'
 
 import AbonementListItem from './components/AbonementList/AbonementListItem'
 import SelectedAbonement from './components/SelectedAbonement/SelectedAbonement'
@@ -27,6 +28,7 @@ const MyAbonement: React.FC = (): React.ReactElement => {
   const classes = useStyles()
   const { user } = useAuthContext()
 
+  const { t } = useTranslation(['myAbonements'])
   const { learnerAbonements } = useAppSelector(selectLearnerAbonement)
 
   const [getOneLearnerAbonement, _, isLoading] = useHttpRequest(
@@ -39,8 +41,6 @@ const MyAbonement: React.FC = (): React.ReactElement => {
   })
 
   const [open, setOpen] = useState(false)
-  // const [selectedAbonement, setSelectedAbonement] =
-  // useState<LearnerAbonement | null>(null)
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => {
@@ -68,7 +68,7 @@ const MyAbonement: React.FC = (): React.ReactElement => {
   }, [])
   return (
     <>
-      <Title>Мої абонементи</Title>
+      <Title>{t('myAbonements:title')}</Title>
       <Container component="section" sx={{ pb: 2 }}>
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           {learnerAbonements &&

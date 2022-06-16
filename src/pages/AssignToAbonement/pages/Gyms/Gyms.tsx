@@ -14,14 +14,14 @@ import MainSection from '../../components/SectionTitle/SectionTitle'
 import GymList from '../../components/GymList/GymList'
 import { GetLearnerGyms } from 'api/gym/gym'
 import { useHttpRequest } from 'shared-files/hooks'
-import { GetGymAbonements } from 'api/abonements/abonements'
-import { setAbonements } from 'redux/slices/abonementSlice'
-import { Id } from 'shared-files/types'
+import { useTranslation } from 'react-i18next'
 
 const Gyms: React.FC = (): React.ReactElement => {
   const classes = useStyles()
   const { user } = useAuthContext()
   const { gyms } = useAppSelector(selectGym)
+
+  const { t } = useTranslation(['assignToAbonement'])
 
   const [getLearnerGyms] = useHttpRequest(GetLearnerGyms, {
     action: setLearnerGyms,
@@ -37,14 +37,8 @@ const Gyms: React.FC = (): React.ReactElement => {
 
   return (
     <Container className={classes.container}>
-      <MainSection>Оберіть зал</MainSection>
+      <MainSection>{t('assignToAbonement:subtitle')}</MainSection>
       <GymList gyms={gyms} />
-      {/* {gyms?.map(gym => (
-        <>
-          <Link to={`${RouteNames.ASSIGN_TO_ABONEMENT}/${user?.uid}/${gym.id}/${MyAbonementRoutes.ABONEMENTS}`}>{gym.title}</Link>
-          <br />
-        </>
-      ))} */}
     </Container>
   )
 }

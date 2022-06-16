@@ -1,17 +1,20 @@
 import React from 'react'
 import { useStyles } from './selectedAbonement.styles'
 
+import { useTranslation } from 'react-i18next'
+
 import CircularProgress from '@mui/material/CircularProgress'
 import Avatar from '@mui/material/Avatar'
 import { Divider, Grid, Typography } from '@mui/material'
-import { LearnerAbonement } from 'api/abonements/types'
+
 import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+import { useLocale } from 'shared-files/hooks'
 import { formatDate } from 'utils'
 
-import OptionText from '../OptionText/OptionText'
 import { selectLearnerAbonement } from 'redux/slices/learnerAbonementSlice'
 import { useAppSelector } from 'redux/hooks'
-import { useLocale } from 'shared-files/hooks'
+
+import OptionText from '../OptionText/OptionText'
 
 interface SelectedAbonementProps {
   isLoading: boolean
@@ -23,6 +26,7 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
   const classes = useStyles()
   const { user } = useAuthContext()
 
+  const { t } = useTranslation(['myAbonements'])
   const { locale } = useLocale()
   const { selectedLearnerAbonement } = useAppSelector(selectLearnerAbonement)
 
@@ -64,7 +68,9 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Ціна: {selectedLearnerAbonement?.abonement?.price || 0}
+                    {t('myAbonements:price', {
+                      price: selectedLearnerAbonement?.abonement?.price || 0,
+                    })}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -73,8 +79,10 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Всього днів:{' '}
-                    {selectedLearnerAbonement.abonement?.amountDays || '∞'}
+                    {t('myAbonements:daysQuantity', {
+                      num:
+                        selectedLearnerAbonement.abonement?.amountDays || '∞',
+                    })}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -83,33 +91,42 @@ const SelectedAbonement: React.FC<SelectedAbonementProps> = ({
                     id="modal-modal-description"
                     sx={{ marginTop: '2px' }}
                   >
-                    Всього тренувань:{' '}
-                    {selectedLearnerAbonement.abonement?.amountTrainings || '∞'}
+                    {t('myAbonements:trainingQuantity', {
+                      num:
+                        selectedLearnerAbonement.abonement?.amountTrainings ||
+                        '∞',
+                    })}
                   </Typography>
                 </Grid>
               </section>
               <Divider sx={{ mt: 2 }} />
               <section style={{ marginTop: '50px' }}>
                 <Typography id="modal-modal-start-date">
-                  Дата початку:{' '}
-                  {formatDate(locale, selectedLearnerAbonement.startDate)}
+                  {t('myAbonements:startDate', {
+                    startDate: formatDate(
+                      locale,
+                      selectedLearnerAbonement.startDate,
+                    ),
+                  })}
                 </Typography>
-                {/* <OptionText>
-                  Дата закінчення:{' '}
-                  {formatDate(selectedLearnerAbonement.endDate) || '∞'}
-                </OptionText> */}
 
                 <OptionText>
-                  Лишилось днів: {selectedLearnerAbonement.daysLeft || '∞'}{' '}
-                  {selectedLearnerAbonement.daysLeft &&
-                    `(Дата закінчення: ${formatDate(
+                  {t('myAbonements:daysLeft', {
+                    num: selectedLearnerAbonement.daysLeft || '∞',
+                  })}{' '}
+                  (
+                  {t('myAbonements:endDate', {
+                    endDate: formatDate(
                       locale,
                       selectedLearnerAbonement.endDate,
-                    )})`}
+                    ),
+                  })}
+                  )
                 </OptionText>
                 <OptionText>
-                  Лишилось тренувань:{' '}
-                  {selectedLearnerAbonement.trainingsLeft || '∞'}
+                  {t('myAbonements:trainingsLeft', {
+                    num: selectedLearnerAbonement.trainingsLeft || '∞',
+                  })}
                 </OptionText>
               </section>
             </>
