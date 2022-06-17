@@ -1,18 +1,20 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Login, Logout, Register } from 'api/auth/auth'
 import { LoginRequest, RegisterRequest } from 'api/auth/types'
-import { AppUser } from 'api/user/types'
+import { AppUser, PublicAppUserDto } from 'api/user/types'
 import { ApiKnownError } from 'api/_config'
 import { RootState } from 'redux/store'
 
 interface UserSlice {
   user: AppUser | null
   error: any
+  learnerList: PublicAppUserDto[] | null
 }
 
 const initialState: UserSlice = {
   user: null,
   error: null,
+  learnerList: null,
 }
 
 export const register = createAsyncThunk<
@@ -47,6 +49,9 @@ const userSlice = createSlice({
     setError(state, action: PayloadAction<any>) {
       state.error = action.payload
     },
+    setLearnerList(state, action: PayloadAction<PublicAppUserDto[] | null>) {
+      state.learnerList = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,6 +78,7 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUser, logOutUser, setError } = userSlice.actions
+export const { setUser, logOutUser, setError, setLearnerList } =
+  userSlice.actions
 export const userReducer = userSlice.reducer
 export const selectUser = (state: RootState) => state.user

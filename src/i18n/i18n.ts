@@ -34,6 +34,7 @@ i18next
       'createAbonement',
       'addCharacteristic',
       'assignToAbonement',
+      'assignLearners',
     ],
     defaultNS: 'common',
     fallbackNS: 'common',

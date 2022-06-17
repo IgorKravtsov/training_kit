@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react'
 import { useStyles } from './gyms.styles'
+import { useTranslation } from 'react-i18next'
 
-import { useAppDispatch, useAppSelector } from 'redux/hooks/typedHooks'
-import { selectGym, setLearnerGyms } from 'redux/slices/gymSlice'
-import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
-import { hideLoading, showLoading } from 'redux/slices/loadingIndicatorSlice'
-import { Link } from 'react-router-dom'
-import { AssignToAbonementRoutes, RouteNames } from 'routes'
-import { AppUser, PublicAppUserDto } from 'api/user/types'
-import { SERVER_DELAY_TIME } from 'shared-files/constants'
 import { Container } from '@mui/material'
+
+import { useAppSelector } from 'redux/hooks/typedHooks'
+import { selectGym, setLearnerGyms } from 'redux/slices/gymSlice'
+
+import { useHttpRequest } from 'shared-files/hooks'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
+
+import { PublicAppUserDto } from 'api/user/types'
+import { GetLearnerGyms } from 'api/gym/gym'
+
 import MainSection from '../../components/SectionTitle/SectionTitle'
 import GymList from '../../components/GymList/GymList'
-import { GetLearnerGyms } from 'api/gym/gym'
-import { useHttpRequest } from 'shared-files/hooks'
-import { useTranslation } from 'react-i18next'
 
 const Gyms: React.FC = (): React.ReactElement => {
   const classes = useStyles()

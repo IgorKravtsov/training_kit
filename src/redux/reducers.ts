@@ -12,6 +12,7 @@ import { trainingReducer } from 'redux/slices/trainingSlice'
 import { myTrainingReducer } from 'redux/slices/myTrainingsSlice'
 import { assignTrainersReducer } from './slices/assignTrainersSlice'
 import { learnerAbonementReducer } from './slices/learnerAbonementSlice'
+import { assignLearnersReducer } from './slices/assignLearnersSlice'
 
 const reducer = combineReducers({
   user: userReducer,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   myTrainings: myTrainingReducer,
   assignTrainers: assignTrainersReducer,
   learnerAbonement: learnerAbonementReducer,
+  assignLearners: assignLearnersReducer,
 })
 
 export default reducer
