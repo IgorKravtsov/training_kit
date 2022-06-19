@@ -50,17 +50,6 @@ export const useAuthProvider = (): AuthContextState => {
 
   const setUserLanguage = (lang: LanguageType) => {
     i18next.changeLanguage(lang || LanguageType.Ukrainian)
-    // switch (lang) {
-    //   case LanguageType.Ukrainian:
-    //     i18next.changeLanguage('en-us')
-    //     break
-    //   case LanguageType.Russian:
-    //     i18next.changeLanguage('en-ca')
-    //     break
-    //   case LanguageType.English:
-    //     i18next.changeLanguage('fr-ca')
-    //     break
-    // }
   }
 
   useEffect(() => {
