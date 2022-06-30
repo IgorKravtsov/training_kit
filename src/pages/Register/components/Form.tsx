@@ -82,8 +82,8 @@ const Form: React.FC = (): React.ReactElement => {
       <FormLoadingAutocomplete
         name="organization"
         errors={errors}
-        label={t('register:passwordField.label')}
-        placeholder={t('register:passwordField.placeholder')}
+        label={t('register:organizationField.label')}
+        placeholder={t('register:organizationField.placeholder')}
         loadingText={`${t('common:loading')}...`}
         getFunc={GetOrganizations}
         responseKey={'organizations'}

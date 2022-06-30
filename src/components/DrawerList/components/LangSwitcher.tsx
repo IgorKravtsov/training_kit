@@ -41,14 +41,14 @@ const LangSwitcher: React.FC = (): React.ReactElement => {
           updateLanguage(LanguageType.English)
         },
       },
-      {
-        id: generateId(),
-        name: t('sidebar:rus'),
-        onClick() {
-          i18n.changeLanguage(LanguageType.Russian)
-          updateLanguage(LanguageType.Russian)
-        },
-      },
+      // {
+      //   id: generateId(),
+      //   name: t('sidebar:rus'),
+      //   onClick() {
+      //     i18n.changeLanguage(LanguageType.Russian)
+      //     updateLanguage(LanguageType.Russian)
+      //   },
+      // },
     ],
   }
 
