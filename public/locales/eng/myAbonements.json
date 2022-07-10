@@ -7,5 +7,6 @@
   "startDate": "Date of subscription: {{startDate}}",
   "daysLeft": "Days left: {{num}}",
   "endDate": "End date: {{endDate}}",
-  "trainingsLeft": "Trainings left: {{num}}"
+  "trainingsLeft": "Trainings left: {{num}}",
+  "noData": "Seems like we don't have data"
 }

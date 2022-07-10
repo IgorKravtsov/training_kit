@@ -7,5 +7,6 @@
   "startDate": "Дата початку: {{startDate}}",
   "daysLeft": "Лишилось днів: {{num}}",
   "endDate": "Дата закінчення: {{endDate}}",
-  "trainingsLeft": "Лишилось тренувань: {{num}}"
+  "trainingsLeft": "Лишилось тренувань: {{num}}",
+  "noData": "Схоже, що даних немає"
 }

@@ -15,15 +15,17 @@ import {
 import { AssignToTrainers } from 'api/user/user'
 
 import TrainerListItem from './TrainerListItem'
+import { useTranslation } from 'react-i18next'
 
 const TrainerList: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const { appTrainerList: trainerList } = useAppSelector(selectAssignTrainers) //Add skeleton while loading
 
-  const [assignToTrainers] = useHttpRequest(
-    AssignToTrainers,
-    { action: setUser },
-  )
+  const { t } = useTranslation(['assignTrainers'])
+
+  const [assignToTrainers] = useHttpRequest(AssignToTrainers, {
+    action: setUser,
+  })
 
   const handleClick = async (trainer: PublicAppUserDto) => {
     const nowTrainerList = user?.trainers
@@ -37,13 +39,17 @@ const TrainerList: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      {trainerList.map((trainer) => (
-        <TrainerListItem
-          onClick={handleClick}
-          key={trainer.id}
-          trainer={trainer}
-        />
-      ))}
+      {trainerList.length > 0 ? (
+        trainerList.map((trainer) => (
+          <TrainerListItem
+            onClick={handleClick}
+            key={trainer.id}
+            trainer={trainer}
+          />
+        ))
+      ) : (
+        <h1>{t('assignTrainers:noData')}</h1>
+      )}
     </>
   )
 }

@@ -2,5 +2,6 @@
   "title": "Додати тренера",
   "searchFieldLabel": "Уведіть пошту або ім'я тренера",
   "assignedLabel": "Ваш тренер",
-  "notAssignedLabel": "Записатися"
+  "notAssignedLabel": "Записатися",
+  "noData": "Схоже, у нас немає таких тренерів"
 }

@@ -31,6 +31,8 @@ const MyAbonement: React.FC = (): React.ReactElement => {
   const { t } = useTranslation(['myAbonements'])
   const { learnerAbonements } = useAppSelector(selectLearnerAbonement)
 
+  const noAbonementsFound = learnerAbonements && learnerAbonements.length > 0
+
   const [getOneLearnerAbonement, _, isLoading] = useHttpRequest(
     GetOneLearnerAbonement,
     { shouldShowLoading: false, action: setSelectedLearnerAbonement },
@@ -71,7 +73,7 @@ const MyAbonement: React.FC = (): React.ReactElement => {
       <Title>{t('myAbonements:title')}</Title>
       <Container component="section" sx={{ pb: 2 }}>
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
-          {learnerAbonements &&
+          {noAbonementsFound ? (
             learnerAbonements.map((la) => (
               <Grid key={la.id} item xs={12} sm={6} md={4}>
                 <AbonementListItem
@@ -79,7 +81,10 @@ const MyAbonement: React.FC = (): React.ReactElement => {
                   onClick={() => openAbonement(la.abonement?.id || 0)}
                 />
               </Grid>
-            ))}
+            ))
+          ) : (
+            <h1>{t('myAbonements:noData')}</h1>
+          )}
         </Grid>
       </Container>
 

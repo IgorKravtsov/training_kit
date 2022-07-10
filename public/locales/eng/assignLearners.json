@@ -2,5 +2,6 @@
   "title": "Assign learners",
   "searchFieldLabel": "Enter email or name of the learner",
   "assignedLabel": "Your learner",
-  "notAssignedLabel": "Assign learner"
+  "notAssignedLabel": "Assign learner",
+  "noData": "Seems like we don't have such learners"
 }

@@ -52,8 +52,9 @@ const AssignLearners: React.FC = (): React.ReactElement => {
       setLearnerList(
         requestLearnerList.filter(
           (learner) =>
-            learner.displayName?.includes(data.learner) ||
-            learner.email?.includes(data.learner),
+            learner.id !== user?.id &&
+            (learner.displayName?.includes(data.learner) ||
+              learner.email?.includes(data.learner)),
         ),
       ),
     )

@@ -2,5 +2,6 @@
   "title": "Знайти учнів",
   "searchFieldLabel": "Уведіть пошту або ім'я учня",
   "assignedLabel": "Ваш учень",
-  "notAssignedLabel": "Зробити учнем"
+  "notAssignedLabel": "Зробити учнем",
+  "noData": "Схоже, у нас немає таких учнів"
 }

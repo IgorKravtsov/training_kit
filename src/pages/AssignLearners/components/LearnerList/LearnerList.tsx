@@ -11,11 +11,14 @@ import { AssignLearners, GetTrainerLearners } from 'api/user/user'
 
 import LearnerListItem from './LearnerListItem'
 import { selectAssignLearners } from 'redux/slices/assignLearnersSlice'
+import { useTranslation } from 'react-i18next'
 
 const LearnerList: React.FC = (): React.ReactElement => {
   const { user } = useAuthContext()
   const { appLearnerList } = useAppSelector(selectAssignLearners) //Add skeleton while loading
   const { learnerList } = useAppSelector(selectUser)
+
+  const { t } = useTranslation(['assignLearners'])
 
   const [assignLearners] = useHttpRequest(AssignLearners)
   const [getTrainerLearners] = useHttpRequest(GetTrainerLearners, {
@@ -33,13 +36,17 @@ const LearnerList: React.FC = (): React.ReactElement => {
 
   return (
     <>
-      {appLearnerList.map((learner) => (
-        <LearnerListItem
-          onClick={handleClick}
-          key={learner.id}
-          learner={learner}
-        />
-      ))}
+      {appLearnerList.length > 0 ? (
+        appLearnerList.map((learner) => (
+          <LearnerListItem
+            onClick={handleClick}
+            key={learner.id}
+            learner={learner}
+          />
+        ))
+      ) : (
+        <h1>{t('assignLearners:noData')}</h1>
+      )}
     </>
   )
 }

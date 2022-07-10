@@ -23,8 +23,10 @@ import Search from './components/Search/Search'
 import TrainerList from './components/TrainerList/TrainerList'
 
 import { SearchTrainerForm } from './interfaces'
+import { useAuthContext } from 'shared-files/AuthProvider/AuthProvider'
 
 const AddTrainers: React.FC = (): React.ReactElement => {
+  const { user } = useAuthContext()
   const classes = useStyles()
 
   const { requestTrainerList } = useAppSelector(selectAssignTrainers)
@@ -42,7 +44,8 @@ const AddTrainers: React.FC = (): React.ReactElement => {
       setTrainerList(
         requestTrainerList.filter(
           (trainer) =>
-            trainer.displayName?.includes(data.trainer) ||
+            (trainer.id !== user?.id &&
+              trainer.displayName?.includes(data.trainer)) ||
             trainer.email?.includes(data.trainer),
         ),
       ),

@@ -16,6 +16,10 @@ export const formatTime = (
   formatString = 'H:mm',
 ): string => {
   if (!date) return ''
+  if (locale.code === 'en-GB') {
+    formatString = 'K:mm bbb'
+  }
+  // console.log(locale.code)
 
   if (typeof date === 'string') date = new Date(date)
   return format(date, formatString, { locale })
