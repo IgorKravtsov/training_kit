@@ -17,7 +17,7 @@ export const formatTime = (
 ): string => {
   if (!date) return ''
   if (locale.code === 'en-GB') {
-    formatString = 'K:mm bbb'
+    formatString = 'K.mm bbb'
   }
   // console.log(locale.code)
 

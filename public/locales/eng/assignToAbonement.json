@@ -7,5 +7,6 @@
   "daysQuantity": "Days quantity: {{num}}",
   "price": "Price: {{price}}",
   "creator": "Abonement creator: {{creator}}",
-  "choose": "Choose"
+  "choose": "Choose",
+  "noData": "Seems like your trainer didn't create abonements for this gym yet"
 }

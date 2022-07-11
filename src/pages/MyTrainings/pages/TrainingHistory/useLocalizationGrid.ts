@@ -123,8 +123,9 @@ export const useLocalizationGrid = () => {
     filterOperatorEquals: t(
       'myTrainings:trainingHistory.gridLocalization.filterOperatorEquals',
     ),
-    filterOperatorStartsWith:
+    filterOperatorStartsWith: t(
       'myTrainings:trainingHistory.gridLocalization.filterOperatorStartsWith',
+    ),
     filterOperatorEndsWith: t(
       'myTrainings:trainingHistory.gridLocalization.filterOperatorEndsWith',
     ),

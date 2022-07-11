@@ -34,6 +34,8 @@ const Abonements: React.FC = (): React.ReactElement => {
 
   const { t } = useTranslation(['assignToAbonement'])
 
+  const isAbonements = abonements && abonements.length > 0
+
   const { gymId } = useParams<{ gymId: string }>()
   const gymID = gymId || 0
 
@@ -98,21 +100,27 @@ const Abonements: React.FC = (): React.ReactElement => {
   return (
     <Container>
       <Grid container spacing={2} justifyContent="center">
-        {abonements?.map((abonement) => (
-          <Grid item xs={8} md={4} key={abonement.id}>
-            <AbonementListItem
-              onClick={() =>
-                assignToAbonement(
-                  user?.id || 0,
-                  abonement.id,
-                  isSubscribed(abonement.id),
-                )
-              }
-              abonement={abonement}
-              isSubscribed={isSubscribed}
-            />
-          </Grid>
-        ))}
+        {isAbonements ? (
+          abonements?.map((abonement) => (
+            <Grid item xs={8} md={4} key={abonement.id}>
+              <AbonementListItem
+                onClick={() =>
+                  assignToAbonement(
+                    user?.id || 0,
+                    abonement.id,
+                    isSubscribed(abonement.id),
+                  )
+                }
+                abonement={abonement}
+                isSubscribed={isSubscribed}
+              />
+            </Grid>
+          ))
+        ) : (
+          <h1 style={{ textAlign: 'center' }}>
+            {t('assignToAbonement:noData')}
+          </h1>
+        )}
       </Grid>
     </Container>
   )
